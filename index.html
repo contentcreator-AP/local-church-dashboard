@@ -1,0 +1,1878 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Local Church · Plan de Contenidos 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+/* ══════════════════════════════════════════
+   TOKENS & RESET
+══════════════════════════════════════════ */
+:root{
+  --v:#6B21D6; --vl:#8B45E8; --vd:#1E0950; --vp:#EDE9FE;
+  --y:#F5C842; --yd:#C49A10;
+  --dark:#08021A; --card:#120528; --card2:#1A0840;
+  --brd:rgba(139,69,232,.22); --brd2:rgba(139,69,232,.40);
+  --w:#F0EAFF; --gray:#B8A8D8; --gd:#6B5890;
+  --grn:#34D399; --org:#F97316; --red:#F87171; --sky:#38BDF8;
+  --nav-h:54px; --sub-h:42px;
+}
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--dark);color:var(--w);min-height:100vh;overflow-x:hidden;}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:var(--dark);}
+::-webkit-scrollbar-thumb{background:var(--vd);border-radius:2px;}
+
+/* ══════════════════════════════════════════
+   TOP NAV
+══════════════════════════════════════════ */
+.topnav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  height:var(--nav-h);background:rgba(8,2,26,.97);
+  border-bottom:1px solid var(--brd);backdrop-filter:blur(16px);
+  display:flex;align-items:center;gap:8px;padding:0 16px;
+}
+/* Logo */
+.nav-logo{display:flex;align-items:center;gap:8px;cursor:pointer;
+  font-weight:900;font-size:.95rem;color:var(--y);white-space:nowrap;
+  text-decoration:none;flex-shrink:0;margin-right:4px;}
+.nav-logo-mark{width:26px;height:26px;border-radius:6px;background:var(--v);
+  display:grid;place-items:center;flex-shrink:0;}
+.nav-logo-mark svg{width:14px;height:14px;fill:white;}
+/* Nav link buttons — shared base */
+.nav-link{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:5px 11px;border-radius:7px;font-size:.68rem;font-weight:700;
+  text-decoration:none;white-space:nowrap;flex-shrink:0;
+  transition:opacity .18s;border:1px solid transparent;
+  font-family:'Nunito',sans-serif;cursor:pointer;
+}
+.nav-link svg{width:12px;height:12px;fill:currentColor;flex-shrink:0;}
+.nav-link:hover{opacity:.8;}
+/* Per-service colors */
+.nl-sheet {background:rgba(52,211,153,.15);color:#6ee7b7;border-color:rgba(52,211,153,.3);}
+.nl-trello{background:rgba(0,121,191,.18);color:#7dd3fc;border-color:rgba(0,121,191,.4);}
+.nl-drive {background:rgba(251,188,5,.14);color:#fde047;border-color:rgba(251,188,5,.35);}
+.nl-grab    {background:var(--v);color:#fff;border-color:var(--vl);}
+.nl-metrics {background:rgba(52,211,153,.12);color:#6ee7b7;border-color:rgba(52,211,153,.3);}
+/* Right-side sync pill */
+.sync-pill{display:flex;align-items:center;gap:5px;
+  font-size:.62rem;font-family:'DM Mono',monospace;color:var(--gd);
+  flex-shrink:0;margin-left:auto;}
+.sync-dot{width:5px;height:5px;border-radius:50%;background:var(--y);animation:blink 1.5s infinite;}
+.sync-dot.ok {background:var(--grn);animation:none;box-shadow:0 0 5px var(--grn);}
+.sync-dot.err{background:var(--red);animation:none;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+/* Hamburger */
+.ham{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:5px;flex-shrink:0;}
+.ham span{width:19px;height:2px;background:var(--gray);border-radius:1px;}
+
+/* ══════════════════════════════════════════
+   MONTH SUBNAV
+══════════════════════════════════════════ */
+.subnav{
+  position:fixed;top:var(--nav-h);left:0;right:0;z-index:400;
+  height:var(--sub-h);background:rgba(18,5,40,.97);
+  border-bottom:1px solid var(--brd);backdrop-filter:blur(12px);
+  display:flex;align-items:center;padding:0 14px;gap:2px;
+  overflow-x:auto;scrollbar-width:none;
+}
+.subnav::-webkit-scrollbar{display:none;}
+.mtab{padding:4px 12px;border-radius:20px;font-size:.68rem;font-weight:700;
+  cursor:pointer;border:1px solid transparent;color:var(--gd);
+  white-space:nowrap;flex-shrink:0;transition:all .18s;text-decoration:none;}
+.mtab:hover{color:var(--w);border-color:var(--brd2);}
+.mtab.on{background:var(--v);color:#fff;border-color:var(--vl);}
+
+/* ══════════════════════════════════════════
+   MOBILE DRAWER
+══════════════════════════════════════════ */
+.drawer{display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
+  background:rgba(8,2,26,.98);z-index:450;padding:18px;
+  overflow-y:auto;flex-direction:column;gap:5px;}
+.drawer.open{display:flex;}
+.dr-sec{font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gd);font-family:'DM Mono',monospace;margin:12px 0 5px;}
+.dr-link{padding:11px 15px;border-radius:9px;background:var(--card);border:1px solid var(--brd);
+  color:var(--w);text-decoration:none;font-size:.82rem;font-weight:600;transition:all .18s;}
+.dr-link:hover,.dr-link.on{border-color:var(--vl);background:rgba(107,33,214,.15);}
+
+/* ══════════════════════════════════════════
+   MAIN + MONTH VIEW
+══════════════════════════════════════════ */
+main{padding-top:calc(var(--nav-h) + var(--sub-h));}
+.month-view{display:none;}
+.month-view.on{display:block;}
+.divider{height:1px;background:var(--brd);}
+
+/* ══════════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════════ */
+.btn{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;
+  border-radius:8px;font-size:.68rem;font-weight:700;cursor:pointer;
+  text-decoration:none;transition:all .18s;border:1px solid transparent;
+  white-space:nowrap;font-family:'Nunito',sans-serif;}
+.btn svg{width:11px;height:11px;fill:currentColor;}
+.btn-v   {background:var(--v);color:#fff;border-color:var(--vl);}
+.btn-v:hover{background:var(--vl);}
+.btn-g   {background:transparent;color:var(--gray);border-color:var(--brd);}
+.btn-g:hover{color:var(--w);border-color:var(--vl);}
+.btn-drive{background:rgba(52,211,153,.1);color:var(--grn);border:1px solid rgba(52,211,153,.3);}
+.btn-drive:hover{background:rgba(52,211,153,.2);}
+.btn-gcal{background:rgba(56,189,248,.1);color:var(--sky);border:1px solid rgba(56,189,248,.3);}
+.btn-gcal:hover{background:rgba(56,189,248,.2);}
+
+/* ══════════════════════════════════════════
+   LABELS / TYPOGRAPHY
+══════════════════════════════════════════ */
+.label{font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gd);}
+.label.y{color:var(--y);}
+.label.v{color:var(--vl);}
+.sec-title{font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gd);font-family:'DM Mono',monospace;
+  border-bottom:1px solid var(--brd);padding-bottom:7px;}
+.sec-hdr{display:flex;align-items:flex-start;justify-content:space-between;
+  margin-bottom:22px;gap:14px;flex-wrap:wrap;}
+.sec-big{font-size:1.35rem;font-weight:800;margin-top:3px;}
+.hdr-btns{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
+
+/* ══════════════════════════════════════════
+   PORTADA DEL MES
+══════════════════════════════════════════ */
+.portada{display:grid;grid-template-columns:1fr 1fr;min-height:90vh;
+  border-bottom:1px solid var(--brd);}
+.portada-l{padding:52px 48px;display:flex;flex-direction:column;
+  justify-content:space-between;border-right:1px solid var(--brd);
+  position:relative;overflow:hidden;}
+.portada-l::after{content:'';position:absolute;bottom:-80px;left:-80px;
+  width:360px;height:360px;border-radius:50%;
+  background:radial-gradient(circle,rgba(107,33,214,.22) 0%,transparent 68%);
+  pointer-events:none;}
+.portada-tag{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.portada-tag::before{content:'';width:20px;height:2px;background:var(--y);border-radius:1px;}
+/* Month name — SINGLE LINE */
+.month-name{font-size:clamp(3.2rem,9vw,6.5rem);font-weight:900;
+  line-height:.88;letter-spacing:-.05em;color:var(--w);
+  white-space:nowrap;}
+.month-year{font-size:.75rem;font-weight:700;color:var(--vl);
+  margin-top:10px;letter-spacing:.18em;text-transform:uppercase;
+  font-family:'DM Mono',monospace;}
+.month-serie{display:none;}
+/* Stats grid */
+.portada-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--brd);border:1px solid var(--brd);border-radius:12px;
+  overflow:hidden;margin-top:28px;}
+.pstat{padding:14px 18px;background:var(--card);}
+.pstat-n{font-size:1.9rem;font-weight:900;color:var(--y);
+  font-family:'DM Mono',monospace;line-height:1;}
+.pstat-l{font-size:.56rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gd);margin-top:3px;}
+/* Right panel */
+.portada-r{padding:52px 48px;display:flex;flex-direction:column;gap:20px;}
+/* Ciclo nav buttons */
+.ciclo-nav-list{display:flex;flex-direction:column;gap:3px;}
+.ciclo-nav-btn{display:grid;grid-template-columns:62px 1fr auto;align-items:center;
+  gap:10px;padding:10px 13px;border-radius:9px;background:var(--card);
+  border:1px solid var(--brd);text-decoration:none;color:inherit;
+  cursor:pointer;transition:all .18s;}
+.ciclo-nav-btn:hover{border-color:var(--vl);background:var(--card2);}
+.cn-num{font-size:.62rem;font-weight:700;color:var(--vl);font-family:'DM Mono',monospace;}
+.cn-name{font-size:.78rem;font-weight:700;color:var(--w);}
+.cn-dates{font-size:.58rem;color:var(--gd);font-family:'DM Mono',monospace;}
+/* Pills */
+.tag-pills{display:flex;flex-wrap:wrap;gap:5px;}
+.tpill{padding:3px 9px;border-radius:20px;font-size:.62rem;font-weight:700;
+  background:rgba(107,33,214,.2);border:1px solid var(--v);color:var(--gray);}
+.tpill.y{background:rgba(245,200,66,.12);border-color:var(--yd);color:var(--y);}
+
+/* ══════════════════════════════════════════
+   CALENDARIO
+══════════════════════════════════════════ */
+.cal-section{display:grid;grid-template-columns:1fr 210px;
+  border-bottom:1px solid var(--brd);}
+.cal-main{padding:38px 30px;border-right:1px solid var(--brd);}
+/* Calendar grid: 8 cols (week label + 7 days) */
+.cal{display:grid;grid-template-columns:88px repeat(7,1fr);gap:1px;
+  background:var(--brd);border:1px solid var(--brd);border-radius:11px;overflow:hidden;}
+.cal-dh{background:var(--vd);padding:6px 5px;font-size:.53rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--gray);
+  font-family:'DM Mono',monospace;text-align:center;}
+/* Week label cell */
+.cal-wk-lbl{background:rgba(107,33,214,.16);border-right:1px solid var(--brd);
+  padding:7px 8px;display:flex;flex-direction:column;justify-content:center;gap:3px;
+  cursor:pointer;text-decoration:none;color:inherit;transition:background .18s;min-height:70px;}
+.cal-wk-lbl:hover{background:rgba(107,33,214,.26);}
+.wkl-num{font-size:.56rem;font-weight:800;color:var(--vl);font-family:'DM Mono',monospace;}
+.wkl-fase{font-size:.5rem;color:var(--gd);font-weight:600;}
+.wkl-name{font-size:.6rem;font-weight:700;color:var(--gray);line-height:1.3;word-break:break-word;}
+/* Day cells */
+.cal-day{background:var(--card);padding:6px 5px;min-height:70px;}
+.cal-day.other-month{background:rgba(8,2,26,.5);}
+.cal-dn{font-size:.6rem;font-family:'DM Mono',monospace;color:var(--gd);
+  margin-bottom:3px;display:block;}
+/* Pills in calendar */
+.cal-pill{display:block;padding:1px 4px;border-radius:3px;font-size:.52rem;
+  font-weight:700;margin-bottom:2px;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis;max-width:100%;}
+/* ── CANAL COLORS — sólidos, máximo contraste ── */
+.cp-ig {background:#C13584;color:#fff;}   /* Instagram  — fucsia      */
+.cp-fb {background:#1877F2;color:#fff;}   /* Facebook   — azul        */
+.cp-yt {background:#CC0000;color:#fff;}   /* YouTube    — rojo        */
+.cp-tk {background:#161617;color:#69C9D0;outline:1px solid #69C9D0;} /* TikTok */
+.cp-sp {background:#1DB954;color:#fff;}   /* Spotify    — verde       */
+.cp-wa {background:#128C7E;color:#fff;}   /* WhatsApp   — verde oscuro*/
+.cp-ml {background:#4F46E5;color:#fff;}   /* Mail       — índigo      */
+.cp-ex {background:#0E7490;color:#fff;}   /* Experiencia— teal        */
+.cp-or {background:#EA580C;color:#fff;}   /* Local Casa — naranja     */
+.cp-pan{background:#7C3AED;color:#fff;}   /* Pantallas  — violeta     */
+/* Calendar legend */
+.cal-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;align-items:center;}
+.cl-item{display:none;}
+/* Sidebar */
+.cal-sidebar{padding:28px 18px;display:flex;flex-direction:column;gap:7px;}
+.cal-sidebar .sec-title{font-size:.54rem;}
+.ciclo-side-btn{padding:9px 11px;border-radius:8px;background:var(--card);
+  border:1px solid var(--brd);cursor:pointer;text-decoration:none;
+  color:inherit;transition:all .18s;display:block;}
+.ciclo-side-btn:hover{border-color:var(--vl);background:var(--card2);}
+.csb-num{font-size:.56rem;font-weight:700;color:var(--vl);font-family:'DM Mono',monospace;}
+.csb-name{font-size:.7rem;font-weight:700;color:var(--w);margin-top:2px;}
+.csb-fase{font-size:.58rem;color:var(--gd);margin-top:1px;}
+
+/* ══════════════════════════════════════════
+   CICLO SLIDE (portadilla)
+══════════════════════════════════════════ */
+.ciclo-slide{display:grid;grid-template-columns:1fr 2fr;
+  min-height:72vh;border-bottom:1px solid var(--brd);}
+.ciclo-left{padding:48px 42px;border-right:1px solid var(--brd);
+  display:flex;flex-direction:column;justify-content:space-between;}
+.ciclo-big{font-size:clamp(4rem,11vw,8.5rem);font-weight:900;line-height:.82;
+  color:rgba(139,69,232,.16);letter-spacing:-.08em;font-family:'DM Mono',monospace;}
+.ciclo-title{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:900;line-height:1.1;margin-top:10px;}
+.ciclo-title span{color:var(--y);}
+.ciclo-meta{margin-top:14px;display:flex;flex-direction:column;gap:5px;}
+.ciclo-meta-row{display:flex;align-items:flex-start;gap:7px;font-size:.78rem;color:var(--gd);}
+.ciclo-meta-row strong{color:var(--gray);font-weight:600;}
+.ciclo-btns-row{margin-top:18px;display:flex;gap:6px;flex-wrap:wrap;}
+.ciclo-right{padding:38px 34px;}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+  gap:9px;margin-top:16px;}
+.product-card{background:var(--card);border:1px solid var(--brd);border-radius:9px;
+  padding:13px;cursor:pointer;transition:all .18s;text-decoration:none;color:inherit;}
+.product-card:hover{border-color:var(--vl);background:var(--card2);transform:translateY(-1px);}
+.pc-id{font-size:.6rem;font-weight:700;color:var(--vl);font-family:'DM Mono',monospace;}
+.pc-tema{font-size:.72rem;font-weight:700;color:var(--w);margin-top:3px;line-height:1.3;}
+.pc-meta{display:flex;align-items:center;gap:5px;margin-top:7px;flex-wrap:wrap;}
+.pc-date{font-size:.56rem;color:var(--gd);font-family:'DM Mono',monospace;}
+.pc-estado{display:flex;align-items:center;gap:3px;margin-top:5px;}
+.estado-bar{display:flex;gap:2px;}
+.eb{width:13px;height:3px;border-radius:2px;background:rgba(107,33,214,.22);}
+.eb.done{background:var(--vl);}
+.eb.now{background:var(--y);}
+
+/* ══════════════════════════════════════════
+   FORMATO TAGS
+══════════════════════════════════════════ */
+.fmt-tag{padding:2px 8px;border-radius:20px;font-size:.58rem;font-weight:800;text-transform:uppercase;}
+.fmt-post    {background:rgba(107,33,214,.5);color:#c4a8ff;border:1px solid rgba(139,69,232,.6);}
+.fmt-reel    {background:rgba(245,200,66,.2);color:var(--y);border:1px solid rgba(245,200,66,.5);}
+.fmt-historia{background:rgba(52,211,153,.15);color:#6ee7b7;border:1px solid rgba(52,211,153,.4);}
+.fmt-cinta,.fmt-banner{background:rgba(192,132,252,.16);color:#e9d5ff;border:1px solid rgba(192,132,252,.4);}
+.fmt-carrete {background:rgba(249,115,22,.15);color:#fdba74;border:1px solid rgba(249,115,22,.4);}
+.fmt-mail    {background:rgba(99,102,241,.16);color:#c4b5fd;border:1px solid rgba(99,102,241,.4);}
+.fmt-audio   {background:rgba(244,114,182,.16);color:#fbcfe8;border:1px solid rgba(244,114,182,.4);}
+.fmt-video   {background:rgba(253,224,71,.15);color:#fde047;border:1px solid rgba(253,224,71,.4);}
+.fmt-impreso {background:rgba(167,243,208,.15);color:#a7f3d0;border:1px solid rgba(167,243,208,.4);}
+
+/* ══════════════════════════════════════════
+   CANAL TAGS (fichas)
+══════════════════════════════════════════ */
+.canal-tag{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;
+  border-radius:20px;font-size:11px;font-weight:500;
+  background:rgba(107,33,214,0.18);border:1px solid var(--brd);color:var(--gray);}
+.ct-ig {background:#C13584;color:#fff;}
+.ct-fb {background:#1877F2;color:#fff;}
+.ct-yt {background:#CC0000;color:#fff;}
+.ct-tk {background:#161617;color:#69C9D0;outline:1px solid #69C9D0;}
+.ct-sp {background:#1DB954;color:#fff;}
+.ct-wa {background:#128C7E;color:#fff;}
+.ct-ml {background:#4F46E5;color:#fff;}
+.ct-pa {background:#7C3AED;color:#fff;}
+.ct-wb {background:#0284C7;color:#fff;}
+.canales-wrap{display:flex;gap:4px;flex-wrap:wrap;}
+
+/* ══════════════════════════════════════════
+   FICHA SLIDE
+══════════════════════════════════════════ */
+.ficha-slide{min-height:100vh;padding:60px;border-top:1px solid var(--brd);
+  display:flex;flex-direction:column;}
+.ficha-slide-hdr{display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:14px;flex-wrap:wrap;gap:9px;}
+.ficha-slide-lbl{font-size:.58rem;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--vl);font-family:'DM Mono',monospace;}
+.ficha-count{font-size:.62rem;color:var(--gd);font-family:'DM Mono',monospace;}
+/* GRP banner */
+.grp-bar{display:flex;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:8px;}
+.grp-id-badge{background:var(--y);color:var(--dark);font-family:'DM Mono',monospace;
+  font-size:11px;font-weight:700;letter-spacing:.1em;padding:6px 14px;border-radius:6px 0 0 6px;}
+.grp-name-badge{background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.35);border-left:none;
+  color:var(--y);font-size:12px;font-weight:600;padding:6px 16px;border-radius:0 6px 6px 0;letter-spacing:.04em;}
+.grp-pips{display:flex;gap:5px;align-items:center;margin-left:6px;}
+.gpip{width:8px;height:8px;border-radius:50%;background:var(--gd);border:1px solid var(--brd);}
+.gpip.on{background:var(--y);border-color:var(--y);}
+.gpip.here{background:var(--vl);border-color:var(--vl);box-shadow:0 0 6px var(--vl);}
+.gpip-lbl{font-size:10px;color:var(--gd);margin-left:8px;font-family:'DM Mono',monospace;}
+/* Two-col layout */
+.ficha-layout{display:grid;grid-template-columns:1fr 320px;gap:18px;flex:1;}
+/* Main card */
+.ficha-card{background:var(--card);border:1px solid var(--brd);border-radius:13px;
+  overflow:hidden;display:flex;flex-direction:column;}
+.ficha-topbar{padding:11px 16px;background:rgba(107,33,214,.2);
+  border-bottom:1px solid var(--brd);display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:7px;}
+.ficha-np{font-family:'DM Mono',monospace;font-size:.82rem;font-weight:700;
+  color:var(--w);letter-spacing:.06em;}
+/* Body grid */
+.ficha-body{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--brd);flex:1;}
+.fc{background:var(--card);padding:14px 18px;}
+.fc.wide{grid-column:1/-1;}
+.fc-lbl{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gd);font-family:'DM Mono',monospace;margin-bottom:7px;}
+.fc-val{font-size:13px;color:var(--w);line-height:1.5;}
+.fc-val.date{color:var(--y);font-family:'DM Mono',monospace;font-size:.72rem;}
+.fc-val.copy{font-size:12px;color:var(--gray);line-height:1.6;
+  background:rgba(255,255,255,0.03);padding:10px 12px;border-radius:6px;
+  border-left:2px solid var(--v);white-space:pre-wrap;}
+.fc-val.cap{font-size:.74rem;color:var(--gray);line-height:1.6;
+  background:rgba(245,200,66,.04);padding:9px 11px;border-radius:5px;
+  border-left:2px solid var(--yd);}
+.fc-val.ajuste{font-size:.73rem;color:var(--org);
+  background:rgba(249,115,22,.06);padding:7px 10px;border-radius:5px;
+  border-left:2px solid var(--org);}
+/* Image zone */
+.img-zone{width:100%;aspect-ratio:16/9;max-height:160px;
+  background:rgba(107,33,214,.07);border:2px dashed rgba(139,69,232,.35);
+  border-radius:8px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:6px;cursor:pointer;transition:all .18s;
+  color:var(--gd);font-size:.62rem;text-align:center;}
+.img-zone:hover{background:rgba(107,33,214,.13);border-color:var(--vl);color:var(--gray);}
+.img-zone svg{width:22px;height:22px;opacity:.4;fill:currentColor;}
+/* Sidebar */
+.ficha-side{display:flex;flex-direction:column;gap:10px;}
+.scard{background:var(--card2);border:1px solid var(--brd);border-radius:12px;padding:16px 18px;}
+.scard-t{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gd);font-family:'DM Mono',monospace;
+  margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--brd);}
+/* Proceso */
+.proceso{display:flex;flex-direction:column;gap:4px;}
+.ps{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:7px;}
+.ps.done{background:rgba(74,222,128,0.09);border:1px solid rgba(74,222,128,0.15);}
+.ps.now{background:rgba(245,200,66,0.10);border:1px solid rgba(245,200,66,0.25);}
+.ps.pend{opacity:.35;}
+.ps-icon{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:10px;flex-shrink:0;}
+.ps-icon.done{background:var(--grn);color:var(--dark);}
+.ps-icon.now{background:var(--y);color:var(--dark);}
+.ps-icon.pend{background:rgba(107,33,214,.2);border:1px solid var(--brd);color:var(--gd);}
+.ps-txt{font-size:11px;color:var(--gray);font-weight:500;}
+.ps-txt.now{color:var(--y);font-weight:600;}
+/* Adaptaciones */
+.adapt-list{display:flex;flex-direction:column;gap:4px;}
+.adapt-row{display:flex;align-items:center;justify-content:space-between;
+  padding:7px 10px;border-radius:6px;background:rgba(107,33,214,.1);
+  border:1px solid var(--brd);font-size:11px;text-decoration:none;
+  color:inherit;cursor:pointer;transition:all .18s;}
+.adapt-row:hover:not(.here){border-color:var(--vl);background:rgba(107,33,214,.18);}
+.adapt-row.here{background:rgba(139,69,232,.2);border-color:var(--vl);}
+.a-fmt{color:var(--gray);}
+.a-id{font-family:'DM Mono',monospace;font-size:.56rem;color:var(--gd);}
+.adapt-row.here .a-fmt{color:var(--w);font-weight:700;}
+.adapt-row.here .a-id{color:var(--vl);}
+/* Meta rows */
+.meta-rows{display:flex;flex-direction:column;gap:6px;}
+.meta-row{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
+.meta-k{font-size:9px;color:var(--gd);text-transform:uppercase;
+  letter-spacing:.12em;font-family:'DM Mono',monospace;flex-shrink:0;}
+.meta-v{font-size:13px;color:var(--w);font-weight:500;}
+.meta-v.y{color:var(--y);font-family:'DM Mono',monospace;font-weight:700;}
+
+/* ══════════════════════════════════════════
+   GRABACIONES
+══════════════════════════════════════════ */
+.grab-section{padding:38px 30px;border-bottom:1px solid var(--brd);}
+.grab-table{width:100%;border-collapse:collapse;margin-top:16px;}
+.grab-table th{padding:8px 12px;background:var(--vd);text-align:left;
+  font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gray);font-family:'DM Mono',monospace;}
+.grab-table th:first-child{border-radius:8px 0 0 0;}
+.grab-table th:last-child{border-radius:0 8px 0 0;}
+.grab-table td{padding:10px 12px;border-bottom:1px solid var(--brd);
+  background:var(--card);font-size:.74rem;vertical-align:top;}
+.grab-table tr:hover td{background:var(--card2);}
+.grab-table td:first-child{font-family:'DM Mono',monospace;font-size:.68rem;
+  color:var(--y);font-weight:700;}
+.resp-badge{display:inline-block;padding:2px 7px;border-radius:5px;font-size:.62rem;
+  font-weight:700;background:rgba(107,33,214,.2);border:1px solid var(--brd);color:var(--gray);}
+.gcal-btn{display:inline-flex;align-items:center;gap:4px;padding:4px 9px;
+  border-radius:5px;font-size:.6rem;font-weight:700;
+  background:rgba(56,189,248,.1);color:var(--sky);
+  border:1px solid rgba(56,189,248,.3);cursor:pointer;
+  text-decoration:none;transition:all .18s;white-space:nowrap;}
+.gcal-btn:hover{background:rgba(56,189,248,.2);}
+.gcal-btn svg{width:10px;height:10px;fill:currentColor;}
+.prod-tipo{display:inline-block;padding:2px 7px;border-radius:4px;font-size:.58rem;font-weight:700;}
+.tipo-grab{background:rgba(107,33,214,.3);color:#c4a8ff;}
+.tipo-vivo{background:rgba(249,115,22,.2);color:#fdba74;}
+.tipo-pre{background:rgba(56,189,248,.15);color:#7dd3fc;}
+.tipo-edit{background:rgba(52,211,153,.15);color:#6ee7b7;}
+.tipo-estado{font-size:.63rem;font-weight:700;}
+.tipo-estado.listo{color:var(--grn);}
+.tipo-estado.proceso{color:var(--y);}
+.tipo-estado.pendiente{color:var(--gd);}
+
+/* ══════════════════════════════════════════
+   MÉTRICAS
+══════════════════════════════════════════ */
+.metrics-section{padding:38px 30px;border-bottom:1px solid var(--brd);}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px;}
+.kpi-card{background:var(--card);border:1px solid var(--brd);border-radius:11px;padding:16px;}
+.kpi-num{font-size:1.7rem;font-weight:900;color:var(--y);
+  font-family:'DM Mono',monospace;line-height:1;}
+.kpi-label{font-size:.58rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gd);margin-top:4px;}
+.kpi-change{font-size:.65rem;margin-top:5px;font-weight:600;}
+.kpi-change.up{color:var(--grn);}
+.kpi-change.dn{color:var(--red);}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+.chart-card{background:var(--card);border:1px solid var(--brd);border-radius:11px;padding:18px;}
+.chart-card.wide{grid-column:1/-1;}
+.chart-title{font-size:.78rem;font-weight:700;margin-bottom:12px;color:var(--w);}
+.chart-wrap{position:relative;height:195px;}
+/* Canal metrics cards */
+.canal-tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:18px;}
+.canal-tab{padding:5px 14px;border-radius:20px;font-size:.65rem;font-weight:700;
+  cursor:pointer;border:1px solid var(--brd);color:var(--gd);background:var(--card);
+  transition:all .18s;}
+.canal-tab:hover{color:var(--w);border-color:var(--vl);}
+.canal-tab.on{color:#fff;}
+.canal-tab.on.ct-ig{background:#C13584;border-color:#C13584;}
+.canal-tab.on.ct-fb{background:#1877F2;border-color:#1877F2;}
+.canal-tab.on.ct-yt{background:#CC0000;border-color:#CC0000;}
+.canal-tab.on.ct-wa{background:#128C7E;border-color:#128C7E;}
+.canal-tab.on.ct-ml{background:#4F46E5;border-color:#4F46E5;}
+.canal-tab.on.ct-all{background:var(--v);border-color:var(--vl);}
+.canal-panel{display:none;}
+.canal-panel.on{display:block;}
+.canal-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:16px;}
+.cstat{background:var(--card2);border:1px solid var(--brd);border-radius:10px;padding:14px;}
+.cstat-n{font-size:1.4rem;font-weight:900;font-family:'DM Mono',monospace;line-height:1;}
+.cstat-l{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gd);margin-top:4px;}
+.cstat-note{font-size:.58rem;color:var(--gd);margin-top:12px;font-style:italic;line-height:1.5;}
+.metrics-update-tip{font-size:.68rem;color:var(--gd);margin-top:10px;
+  background:var(--card);border:1px solid var(--brd);border-radius:8px;
+  padding:10px 14px;display:flex;align-items:flex-start;gap:8px;}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media(max-width:960px){
+  .portada{grid-template-columns:1fr;}
+  .portada-l{border-right:none;border-bottom:1px solid var(--brd);padding:38px 24px;}
+  .portada-r{padding:30px 24px;}
+  .cal-section{grid-template-columns:1fr;}
+  .cal-sidebar{display:none;}
+  .ciclo-slide{grid-template-columns:1fr;}
+  .ciclo-left{border-right:none;border-bottom:1px solid var(--brd);padding:34px 22px;}
+  .ciclo-right{padding:26px 22px;}
+  .ficha-layout{grid-template-columns:1fr;}
+  .ficha-side{margin-top:16px;}
+  .ficha-layout{grid-template-columns:1fr;}
+  .metrics-grid{grid-template-columns:1fr 1fr;}
+  .charts-grid{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  :root{--nav-h:48px;--sub-h:38px;}
+  .ham{display:flex;}
+  .nav-link,.nl-metrics,.sync-pill{display:none;}
+  .portada-l,.portada-r,.ficha-slide,.cal-main,
+  .grab-section,.metrics-section,.ciclo-right{padding:22px 16px;}
+  .ciclo-left{padding:26px 18px;}
+  .ficha-body{grid-template-columns:1fr;}
+  .products-grid{grid-template-columns:1fr 1fr;}
+  .metrics-grid{grid-template-columns:1fr 1fr;}
+  .month-name{font-size:clamp(2.4rem,13vw,3.5rem);}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ TOP NAV ═══════════════════════════════════ -->
+<nav class="topnav">
+  <div class="nav-logo" onclick="goHome()">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    Local Church
+  </div>
+
+  <!-- Herramientas externas -->
+  <a href="https://docs.google.com/spreadsheets/d/1Lf0qEoSk6UaqVajaXKs8z_RDtQ6KKbOZjH3_svcvY3U/edit"
+     target="_blank" class="nav-link nl-sheet">
+    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+    Sheet
+  </a>
+
+  <a id="nav-trello" href="https://trello.com" target="_blank"
+     class="nav-link nl-trello" title="Clic derecho para cambiar la URL">
+    <svg viewBox="0 0 24 24"><path d="M21 3H3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM10.5 17h-6V7h6v10zm9-5h-6V7h6v5z"/></svg>
+    Trello
+  </a>
+
+  <a id="nav-drive" href="https://drive.google.com" target="_blank"
+     class="nav-link nl-drive" title="Clic derecho para cambiar la URL">
+    <svg viewBox="0 0 24 24"><path d="M7.71 3.5 1.15 15l3.43 6 6.56-11.5zm1.13 0h7.02L22.85 15h-7.02zm-5.01 13 2.68 4.5h13.97L17.81 16.5z"/></svg>
+    Drive
+  </a>
+
+  <button class="nav-link nl-grab" onclick="goGrab()">📹 Grabaciones</button>
+  <button class="nav-link nl-metrics" onclick="goMetrics()">📈 Métricas</button>
+
+  <div class="sync-pill">
+    <div class="sync-dot" id="sdot"></div>
+    <span id="slbl">Cargando…</span>
+  </div>
+
+  <div class="ham" id="ham" onclick="toggleDrawer()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ═══ MONTH TABS ═══════════════════════════════ -->
+<nav class="subnav">
+  <a class="mtab on"  onclick="showMonth('abril');return false;"      href="#">Abril</a>
+  <a class="mtab"     onclick="showMonth('mayo');return false;"       href="#">Mayo</a>
+  <a class="mtab"     onclick="showMonth('junio');return false;"      href="#">Junio</a>
+  <a class="mtab"     onclick="showMonth('julio');return false;"      href="#">Julio</a>
+  <a class="mtab"     onclick="showMonth('agosto');return false;"     href="#">Agosto</a>
+  <a class="mtab"     onclick="showMonth('septiembre');return false;" href="#">Sep</a>
+  <a class="mtab"     onclick="showMonth('octubre');return false;"    href="#">Oct</a>
+  <a class="mtab"     onclick="showMonth('noviembre');return false;"  href="#">Nov</a>
+  <a class="mtab"     onclick="showMonth('diciembre');return false;"  href="#">Dic</a>
+</nav>
+
+<!-- ═══ MOBILE DRAWER ════════════════════════════ -->
+<div class="drawer" id="drawer">
+  <div class="dr-sec">Meses 2026</div>
+  <a class="dr-link on" onclick="showMonth('abril');toggleDrawer()"      href="#">Abril 2026</a>
+  <a class="dr-link"    onclick="showMonth('mayo');toggleDrawer()"       href="#">Mayo 2026</a>
+  <a class="dr-link"    onclick="showMonth('junio');toggleDrawer()"      href="#">Junio 2026</a>
+  <a class="dr-link"    onclick="showMonth('julio');toggleDrawer()"      href="#">Julio 2026</a>
+  <a class="dr-link"    onclick="showMonth('agosto');toggleDrawer()"     href="#">Agosto 2026</a>
+  <a class="dr-link"    onclick="showMonth('septiembre');toggleDrawer()" href="#">Septiembre 2026</a>
+  <a class="dr-link"    onclick="showMonth('octubre');toggleDrawer()"    href="#">Octubre 2026</a>
+  <a class="dr-link"    onclick="showMonth('noviembre');toggleDrawer()"  href="#">Noviembre 2026</a>
+  <a class="dr-link"    onclick="showMonth('diciembre');toggleDrawer()"  href="#">Diciembre 2026</a>
+  <div class="dr-sec" style="margin-top:10px">Herramientas</div>
+  <a class="dr-link" href="https://docs.google.com/spreadsheets/d/1Lf0qEoSk6UaqVajaXKs8z_RDtQ6KKbOZjH3_svcvY3U/edit" target="_blank">📊 Google Sheet</a>
+  <a class="dr-link" id="drawer-trello" href="https://trello.com" target="_blank">🗂 Trello</a>
+  <a class="dr-link" id="drawer-drive"  href="https://drive.google.com" target="_blank">📁 Google Drive</a>
+  <a class="dr-link" onclick="goGrab();toggleDrawer()"   href="#">📹 Plan de Grabación</a>
+  <a class="dr-link" onclick="goMetrics();toggleDrawer()" href="#">📈 Métricas</a>
+</div>
+
+<main id="main"></main>
+<script>
+
+// ════════════════════════════════════════════════════════
+// CONFIGURACIÓN — PEGA AQUÍ LA URL DEL APPS SCRIPT
+// ════════════════════════════════════════════════════════
+// 1. Abre tu Google Sheet
+// 2. Extensiones → Apps Script → pega Apps_Script_API.js → guarda
+// 3. Implementar → Nueva implementación → Aplicación web
+//    Quién tiene acceso: "Cualquier persona" → copiar URL
+// 4. Pega esa URL entre las comillas de abajo:
+const API_URL = "https://script.google.com/macros/s/AKfycbxhI41MJBYIApD2VDaHmv-fCJu0RfUkxSJocs1ujTBFHBasrFKFdvnQVpAyWJIT3l8E-w/exec";
+// ════════════════════════════════════════════════════════
+
+const SHEET_ID   = "1Lf0qEoSk6UaqVajaXKs8z_RDtQ6KKbOZjH3_svcvY3U";
+const SHEET_URL  = "https://docs.google.com/spreadsheets/d/1Lf0qEoSk6UaqVajaXKs8z_RDtQ6KKbOZjH3_svcvY3U/edit#gid=0";
+const SHEET_NAMES = { parrilla:"Parrilla de Contenidos", grabaciones:"Plan de Grabación", metricas:"Métricas" };
+const PARRILLA_COLS = ["id","grupo","tema","mes","ciclo","fase","fecha","hora","canal","formato","audiencia","objetivo","copy","caption","cta","estado","ajustes","responsable","linkDrive","notas"];
+// SHEET_URL points to the "Parrilla de Contenidos" tab (gid=0) of the matriz document.
+// When you install the API (Apps_Script_API.js) in THIS document, the dashboard
+// will auto-populate all ciclo product cards from the "Parrilla de Contenidos" sheet.
+const ESTADO_STEPS = ["Pendiente","En revisión","Revisado","Ajustado","Aprobado"];
+
+// Fases estratégicas Local Church 2026
+const FASES_LC = [
+  {id:"vitrina",    label:"Vitrina / Experiencias",     color:"rgba(139,69,232,.85)", icon:"🏛"},
+  {id:"quienes",    label:"¿Quiénes Somos?",            color:"rgba(245,200,66,.85)", icon:"🌟"},
+  {id:"academia",   label:"Crecer en tu fe / Academia",  color:"rgba(56,189,248,.85)", icon:"🎓"},
+  {id:"conecta",    label:"Local Conecta",               color:"rgba(52,211,153,.85)", icon:"🤝"},
+  {id:"casa",       label:"Local en Casa",               color:"rgba(249,115,22,.85)", icon:"🏠"},
+  {id:"voluntarios",label:"Voluntarios",                 color:"rgba(244,114,182,.85)",icon:"🙌"},
+];
+function faseMeta(faseStr){
+  const s = (faseStr||"").toLowerCase();
+  if(s.includes("vitrina")||s.includes("experiencia")) return FASES_LC[0];
+  if(s.includes("quién")||s.includes("somos"))          return FASES_LC[1];
+  if(s.includes("academ")||s.includes("crecer"))         return FASES_LC[2];
+  if(s.includes("conecta"))                              return FASES_LC[3];
+  if(s.includes("casa"))                                 return FASES_LC[4];
+  if(s.includes("voluntar"))                             return FASES_LC[5];
+  return {id:"vitrina",label:faseStr,color:"rgba(139,69,232,.85)",icon:"📌"};
+}
+
+// CANAL → CSS class map ──────────────────────────
+const CANAL_CLASS = {
+  "instagram":"ct-ig","facebook":"ct-fb","youtube":"ct-yt","tiktok":"ct-tk",
+  "spotify":"ct-sp","whatsapp":"ct-wa","mail":"ct-ml","pantallas":"ct-pa","web":"ct-wb",
+  "app":"ct-wb",
+};
+const CANAL_CAL_CLASS = {
+  "instagram":"cp-ig","facebook":"cp-fb","youtube":"cp-yt","tiktok":"cp-tk",
+  "spotify":"cp-sp","whatsapp":"cp-wa","mail":"cp-ml","pantallas":"cp-or",
+  "experiencia":"cp-ex","local en casa":"cp-or",
+};
+const CANAL_COLOR = {
+  "Instagram":"#E4405F","Facebook":"#1877F2","YouTube":"#FF0000","TikTok":"#69C9D0",
+  "Spotify":"#1DB954","WhatsApp":"#25D366","Mail":"#6366F1","Pantallas":"#8B5CF6",
+};
+
+function canalClass(canal){
+  const k = (canal||"").toLowerCase().split("·")[0].split(",")[0].split(" ")[0].trim();
+  return CANAL_CLASS[k] || "ct-wb";
+}
+const CANAL_ICON = {
+  "instagram":"📸","facebook":"👤","youtube":"▶️","tiktok":"🎵",
+  "spotify":"🎧","whatsapp":"💬","mail":"✉️","pantallas":"🖥",
+  "web":"🌐","app":"📱",
+};
+function canalIcon(canal){
+  const k = (canal||"").toLowerCase().split("·")[0].split(",")[0].split(" ")[0].trim();
+  return CANAL_ICON[k] || "📡";
+}
+function calClass(canal){
+  const k = (canal||"").toLowerCase().split("·")[0].split(",")[0].split(" ")[0].trim();
+  return CANAL_CAL_CLASS[k] || "cp-ex";
+}
+
+// FORMAT CLASS ───────────────────────────────────
+function fmtClass(f){
+  const s = (f||"").toLowerCase().trim();
+  if(s.includes("post"))     return "fmt-post";
+  if(s.includes("reel"))     return "fmt-reel";
+  if(s.includes("historia")) return "fmt-historia";
+  if(s.includes("cinta")||s.includes("banner")) return "fmt-cinta";
+  if(s.includes("carrete"))  return "fmt-carrete";
+  if(s.includes("mail"))     return "fmt-mail";
+  if(s.includes("audio"))    return "fmt-audio";
+  if(s.includes("video"))    return "fmt-video";
+  if(s.includes("impreso"))  return "fmt-impreso";
+  return "fmt-post";
+}
+function fmtIcon(f){
+  const m={"post":"🖼","reel":"🎬","historia":"📱","cinta":"🎞","banner":"🎞","carrete":"📷","mail":"✉️","audio":"🎙️","video":"📹","impreso":"🖨️"};
+  const k = (f||"").toLowerCase().split(" ")[0].split("/")[0].split("·")[0].trim();
+  return m[k]||"📄";
+}
+function tipoGrabClass(t){
+  const m={"Grabación":"tipo-grab","En Vivo":"tipo-vivo","Pre-producción":"tipo-pre","Edición":"tipo-edit"};
+  return m[t]||"tipo-grab";
+}
+
+// ESTADO HELPERS
+function estadoIdx(e){ return Math.max(0,ESTADO_STEPS.indexOf(e)); }
+function renderProceso(estado){
+  const idx=estadoIdx(estado);
+  const LABELS=["Pendiente","En revisión","Revisado","Ajustado","Aprobado"];
+  const parts=[];
+  for(let i=0;i<LABELS.length;i++){
+    const cls=i<idx?"done":i===idx?"now":"pend";
+    const icon=i<idx?"✓":i===idx?"→":"○";
+    const nc=i===idx?" now":"";
+    parts.push('<div class="ps '+cls+'"><div class="ps-icon '+cls+'">'+icon+'</div><div class="ps-txt'+nc+'">'+LABELS[i]+'</div></div>');
+  }
+  return parts.join("");
+}
+function renderEstadoBar(estado,total){total=total||4;const idx=estadoIdx(estado);const parts=[];for(let i=0;i<total;i++){const c=i<idx?"done":i===idx?"now":"";parts.push('<div class="eb '+c+'"></div>');}return parts.join("");
+}
+
+// GCAL LINK
+function gcalLink(title, dateStr){
+  const clean = encodeURIComponent(title);
+  return `https://calendar.google.com/calendar/r/eventedit?text=${clean}&dates=${dateStr}&location=Teatro+Libre+Bogot%C3%A1&sf=true&output=xml`;
+}
+
+// GROUP BY GRP
+function groupByGRP(piezas){
+  const g = {};
+  piezas.forEach(p=>{ const k = p.grupo||("_"+p.id); if(!g[k])g[k]=[]; g[k].push(p); });
+  return g;
+}
+
+// ══════════════════════════════════════════════════
+// EMBEDDED DATA — ABRIL 2026
+// ══════════════════════════════════════════════════
+const MONTHS_META = {
+  abril:{
+    label:"Abril", num:"04", year:2026,
+    serie:"Semana de Pasión / Resurrección",
+    fases:["Vitrina","Experiencias"],
+    predicadores:["Andrey Molina","Yury Garcia","Isabel de Arcila"],
+    startDay:3, totalDays:30,
+    ciclos:[
+      {num:1,sem:"31 MAR–05 ABR",fase:"Vitrina / Experiencias",tema:"Semana Santa",               audiencia:"Campus Bogotá"},
+      {num:2,sem:"06–12 ABR",    fase:"Vitrina / Experiencias",tema:"Domingo Resurrección",        audiencia:"Bogotá · Nuevos"},
+      {num:3,sem:"13–19 ABR",    fase:"Vitrina / Experiencias",tema:"PCE · Bautizos",              audiencia:"Comunidad activa"},
+      {num:4,sem:"20–26 ABR",    fase:"Local en Casa",          tema:"Local en Casa · Invitación", audiencia:"Campus Bogotá"},
+    ],
+    actividades:{
+      "2":[{e:"Jueves Santo",c:"Experiencia"}],
+      "3":[{e:"Viernes Santo",c:"Experiencia"}],
+      "5":[{e:"Dom. Resurrección · Online",c:"YouTube"}],
+      "6":[{e:"Lunes Oración",c:"WhatsApp"}],
+      "7":[{e:"Inicio Academia",c:"Experiencia"}],
+      "8":[{e:"Mujeres 8:00 PM",c:"WhatsApp"}],
+      "10":[{e:"Mujeres 9:30 AM",c:"WhatsApp"}],
+      "12":[{e:"Online · Isabel de Arcila",c:"YouTube"}],
+      "13":[{e:"Lunes Oración",c:"WhatsApp"}],
+      "19":[{e:"Exp. Presencial · Bautizos",c:"Experiencia"}],
+      "20":[{e:"Lunes Oración",c:"WhatsApp"}],
+      "22":[{e:"Mujeres 8:00 PM",c:"WhatsApp"}],
+      "24":[{e:"Mujeres 9:30 AM",c:"WhatsApp"}],
+      "26":[{e:"Local en Casa",c:"YouTube"}],
+      "27":[{e:"Lunes Oración",c:"WhatsApp"}],
+    },
+    grabaciones:[
+      {fecha:"05/04/2026",tema:"Grabación post-Resurrección",tipo:"Grabación",encargado:"Equipo Audiovisual",entrega:"06/04/2026",estado:"Pendiente",gcal:"20260405T090000/20260405T170000"},
+      {fecha:"12/04/2026",tema:"Grabación PCE Ep.1",tipo:"Grabación",encargado:"Andrey Molina",entrega:"14/04/2026",estado:"Pendiente",gcal:"20260412T090000/20260412T130000"},
+      {fecha:"17/04/2026",tema:"Pre-producción Reel Bautizos",tipo:"Pre-producción",encargado:"Equipo Audiovisual",entrega:"18/04/2026",estado:"Pendiente",gcal:"20260417T090000/20260417T170000"},
+      {fecha:"19/04/2026",tema:"En Vivo Bautizos · Experiencia Presencial",tipo:"En Vivo",encargado:"Equipo Audiovisual",entrega:"20/04/2026",estado:"Pendiente",gcal:"20260419T090000/20260419T200000"},
+      {fecha:"25/04/2026",tema:"Grabación Local en Casa Abril",tipo:"Grabación",encargado:"Equipo Audiovisual",entrega:"26/04/2026",estado:"Pendiente",gcal:"20260425T090000/20260425T170000"},
+    ],
+    metricas:{
+      kpis:[
+        {n:"5.350",l:"Seguidores IG",c:"▲ +3.2%",up:true},
+        {n:"2.000",l:"Alcance prom./post",c:"▲ +8%",up:true},
+        {n:"468",  l:"Seguidores FB",c:"▲ +1.1%",up:true},
+        {n:"1.240",l:"Subs YouTube",c:"▲ +4.5%",up:true},
+      ],
+      barData:{
+        labels:["C·01","C·02","C·03","C·04"],
+        aprobadas:[5,6,4,3],
+        revision:[1,2,1,2],
+        pendientes:[2,1,2,2],
+      },
+      lineData:{
+        labels:["Ene","Feb","Mar","Abr"],
+        alcance:[1200,1450,1800,2000],
+        engagement:[320,380,420,510],
+      },
+    },
+    piezas:[
+      {id:"NP 4-01",grupo:"GRP-01",tema:"Agenda Semana Santa",ciclo:"Ciclo 01",fase:"Vitrina",fecha:"30/03/2026",hora:"09:00",canal:"Instagram · Facebook",formato:"Post",audiencia:"Campus Bogotá",objetivo:"Informar agenda",copy:"Esta semana especial te esperamos. 📍 Teatro Libre · Bogotá\n🙏 Lun Oración 8PM · ✝️ Jue Santo 8:30PM · 🎉 Dom Resurrección 10:30AM",caption:"¡No te pierdas esta semana! #LocalChurch",cta:"Ver en bio",estado:"Aprobado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-02",grupo:"GRP-01",tema:"Agenda Semana Santa",ciclo:"Ciclo 01",fase:"Vitrina",fecha:"30/03/2026",hora:"09:00",canal:"Instagram",formato:"Historia",audiencia:"Campus Bogotá",objetivo:"Informar agenda",copy:"Swipe para ver toda la agenda de Semana Santa 👉",caption:"N/A",cta:"Swipe up",estado:"Aprobado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-03",grupo:"GRP-01",tema:"Agenda Semana Santa",ciclo:"Ciclo 01",fase:"Vitrina",fecha:"30/03/2026",hora:"08:00",canal:"WhatsApp · Pantallas",formato:"Cinta / Banner",audiencia:"Comunidad WSP",objetivo:"Recordatorio agenda",copy:"AGENDA SEMANA SANTA 2026\n📍 Teatro Libre – Bogotá\n🙏 Lun 30 Mar · Oración 8:30PM\n✝️ Jue 2 Abr · Jueves Santo 8:30PM\n🎉 Dom 5 Abr · Resurrección 10:30AM",caption:"N/A",cta:"Reenviar",estado:"Aprobado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-04",grupo:"",tema:"Lunes Oración C1",ciclo:"Ciclo 01",fase:"Vitrina",fecha:"30/03/2026",hora:"20:00",canal:"WhatsApp · Instagram",formato:"Historia",audiencia:"Campus Bogotá",objetivo:"Convocar oración",copy:"Esta noche nos reunimos a orar 🙏\n📍 Teatro Libre · 8:30 PM\n¡Te esperamos!",caption:"N/A",cta:"",estado:"Aprobado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-05",grupo:"GRP-02",tema:"Jueves Santo · Oración",ciclo:"Ciclo 01",fase:"Vitrina",fecha:"02/04/2026",hora:"19:00",canal:"Instagram · Facebook",formato:"Post",audiencia:"Campus Bogotá",objetivo:"Asistencia presencial",copy:"Hola 👋\nRecuerda que este domingo te esperamos en nuestra reunión presencial.\n📍 Teatro Libre – Bogotá · ⏰ 10:30 a.m.\n🐕 ¿Vienes con tu perrito? Tendremos paseador disponible.",caption:"¿Te nos unes esta noche? 🕊️ #LocalChurch #JuevesSanto",cta:"Swipe up · Link en bio",estado:"Revisado",ajustes:"Ajustar copy - quitar info parqueadero",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-06",grupo:"GRP-02",tema:"Jueves Santo · Oración",ciclo:"Ciclo 01",fase:"Vitrina",fecha:"02/04/2026",hora:"19:00",canal:"Instagram · Facebook",formato:"Historia",audiencia:"Campus Bogotá",objetivo:"Asistencia Jueves Santo",copy:"Esta noche nos reunimos a orar. Un espacio para preparar el corazón 🙏\n📍 Teatro Libre · 8:30 PM",caption:"N/A",cta:"Swipe up",estado:"Revisado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-07",grupo:"GRP-02",tema:"Jueves Santo · Oración",ciclo:"Ciclo 01",fase:"Vitrina",fecha:"02/04/2026",hora:"18:00",canal:"WhatsApp · Pantallas",formato:"Cinta / Banner",audiencia:"Comunidad WSP",objetivo:"Recordatorio Jueves Santo",copy:"✝️ Jueves Santo\nOración · Teatro Libre · 8:30 PM · Bogotá\nTe esperamos. Lleva a alguien contigo.",caption:"N/A",cta:"Reenviar",estado:"Pendiente",ajustes:"Confirmar horario",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-08",grupo:"",tema:"Viernes Santo",ciclo:"Ciclo 01",fase:"Vitrina",fecha:"03/04/2026",hora:"10:00",canal:"Instagram · Facebook",formato:"Historia",audiencia:"Campus Bogotá",objetivo:"Reflexión espiritual",copy:"Hoy es Viernes Santo.\nUn día para recordar, reflexionar y agradecer. ✝️",caption:"N/A",cta:"",estado:"Pendiente",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-09",grupo:"GRP-03",tema:"Domingo Resurrección",ciclo:"Ciclo 02",fase:"Vitrina",fecha:"05/04/2026",hora:"09:00",canal:"Instagram · Facebook · YouTube",formato:"Post",audiencia:"Campus Bogotá · Nuevos",objetivo:"Celebración y convocatoria",copy:"¡Él resucitó! 🎉 Este domingo celebramos juntos en Teatro Libre.\n¡Tráete a alguien especial!",caption:"¡Comparte esta buena noticia! #Resurrección #LocalChurch",cta:"Link en bio",estado:"Aprobado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-10",grupo:"GRP-03",tema:"Domingo Resurrección",ciclo:"Ciclo 02",fase:"Vitrina",fecha:"05/04/2026",hora:"09:00",canal:"Instagram · Facebook",formato:"Historia",audiencia:"Campus Bogotá",objetivo:"Anuncio conteo regresivo",copy:"¡Mañana es el mejor domingo del año!\n🎉 Dom. Resurrección · Teatro Libre · 10:30 AM\n¿Quién viene contigo?",caption:"N/A",cta:"Swipe up",estado:"Aprobado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-11",grupo:"GRP-03",tema:"Domingo Resurrección",ciclo:"Ciclo 02",fase:"Vitrina",fecha:"05/04/2026",hora:"09:00",canal:"WhatsApp",formato:"Cinta / Banner",audiencia:"Comunidad WSP",objetivo:"Invitación masiva",copy:"🎉 DOMINGO RESURRECCIÓN\nTe esperamos en Teatro Libre · 10:30 AM · Bogotá\nTrae a alguien especial",caption:"N/A",cta:"Compartir",estado:"Aprobado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-12",grupo:"GRP-03",tema:"Domingo Resurrección",ciclo:"Ciclo 02",fase:"Vitrina",fecha:"06/04/2026",hora:"18:00",canal:"Instagram",formato:"Reel",audiencia:"Campus Bogotá",objetivo:"Celebración post-evento",copy:"Video resumen Domingo Resurrección: highlights del servicio, testimonios y celebración.",caption:"El mejor domingo del año 🙌 #Resurrección #LocalChurch",cta:"",estado:"En revisión",ajustes:"Agregar música - mejorar cortes",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-13",grupo:"",tema:"Lunes Oración C2",ciclo:"Ciclo 02",fase:"Vitrina",fecha:"06/04/2026",hora:"20:00",canal:"WhatsApp · Instagram",formato:"Historia",audiencia:"Campus Bogotá",objetivo:"Convocar oración semanal",copy:"Esta noche · Oración 🙏\n📍 Teatro Libre · 8:30 PM\n¡Te esperamos!",caption:"N/A",cta:"",estado:"Aprobado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-14",grupo:"GRP-04",tema:"Mujeres Local · C2",ciclo:"Ciclo 02",fase:"Vitrina",fecha:"08/04/2026",hora:"20:00",canal:"WhatsApp · Instagram",formato:"Historia",audiencia:"Mujeres Campus",objetivo:"Convocatoria reunión mujeres",copy:"Hola hermosa 👋\nEsta semana te esperamos en nuestro espacio de mujeres.\n📍 Teatro Libre · Miércoles 8:00 PM",caption:"N/A",cta:"",estado:"Aprobado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-15",grupo:"GRP-04",tema:"Mujeres Local · C2",ciclo:"Ciclo 02",fase:"Vitrina",fecha:"10/04/2026",hora:"09:30",canal:"WhatsApp · Instagram",formato:"Historia",audiencia:"Mujeres Campus",objetivo:"Reunión mujeres viernes",copy:"Buenos días 🌸\nHoy nos encontramos en el espacio de mujeres.\n📍 Teatro Libre · Viernes 9:30 AM",caption:"N/A",cta:"",estado:"Aprobado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-16",grupo:"",tema:"Online · Isabel de Arcila",ciclo:"Ciclo 02",fase:"Vitrina",fecha:"12/04/2026",hora:"10:30",canal:"YouTube · Facebook",formato:"Video Horizontal",audiencia:"Campus Online",objetivo:"Experiencia digital",copy:"Servicio online del 12 de abril. Isabel de Arcila - Tema Libre.\nÚnete en línea desde donde estés.",caption:"Únete a nuestra experiencia online este domingo 🙏 #LocalChurch",cta:"Link en bio",estado:"Pendiente",ajustes:"Confirmar predicadora",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-17",grupo:"",tema:"Newsletter Semana 2",ciclo:"Ciclo 02",fase:"Vitrina",fecha:"11/04/2026",hora:"08:00",canal:"Mail",formato:"Mail",audiencia:"Lista suscriptores",objetivo:"Resumen + próximas actividades",copy:"Asunto: Lo que vivimos esta semana de Resurrección 🎉\n\nHola [nombre],\nEsta fue una semana especial. Aquí el resumen y las próximas actividades de abril.",caption:"N/A",cta:"Ver en web",estado:"Pendiente",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-18",grupo:"",tema:"Lunes Oración C3",ciclo:"Ciclo 03",fase:"Experiencias",fecha:"13/04/2026",hora:"20:00",canal:"WhatsApp · Instagram",formato:"Historia",audiencia:"Campus Bogotá",objetivo:"Convocar oración semanal",copy:"Esta noche · Oración 🙏\n📍 Teatro Libre · 8:30 PM",caption:"N/A",cta:"",estado:"Aprobado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-19",grupo:"GRP-05",tema:"PCE · Bautizos",ciclo:"Ciclo 03",fase:"Experiencias",fecha:"19/04/2026",hora:"10:30",canal:"Instagram · Facebook",formato:"Post",audiencia:"Campus Bogotá",objetivo:"Informar experiencia + Bautizos",copy:"¿Qué significa crecer espiritualmente?\nEste domingo lo exploramos juntos. Y además… ¡habrá BAUTIZOS! 💧\n📍 Teatro Libre · Bogotá · 10:30 AM\n*Inscripciones bautizo: 05 al 19 de abril",caption:"¿Listo para dar el paso? 💧 Inscríbete. Link en bio #LocalChurch #Bautizo",cta:"Link inscripción bautizo",estado:"Ajustado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-20",grupo:"GRP-05",tema:"PCE · Bautizos",ciclo:"Ciclo 03",fase:"Experiencias",fecha:"19/04/2026",hora:"10:30",canal:"Instagram",formato:"Reel",audiencia:"Campus Bogotá · Nuevos",objetivo:"Convocar bautizo",copy:"Guión: El crecimiento espiritual tiene etapas. En Local Church caminamos juntos.\nEste domingo: Experiencia + Bautizos.",caption:"Este domingo es especial 💧 ¿Te unes? #Bautizo #LocalChurch",cta:"",estado:"Pendiente",ajustes:"Pendiente grabación",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-21",grupo:"GRP-05",tema:"PCE · Bautizos",ciclo:"Ciclo 03",fase:"Experiencias",fecha:"14/04/2026",hora:"09:00",canal:"WhatsApp",formato:"Cinta / Banner",audiencia:"Comunidad WSP",objetivo:"Anuncio bautizos",copy:"🌊 ¡BAUTIZOS!\nDomingo 19 de Abril · Teatro Libre · 10:30 AM\nInscripciones abiertas: 05 - 19 Abril",caption:"N/A",cta:"Inscribirse",estado:"Ajustado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-22",grupo:"GRP-06",tema:"Mujeres Local · C3",ciclo:"Ciclo 03",fase:"Experiencias",fecha:"22/04/2026",hora:"20:00",canal:"WhatsApp · Instagram",formato:"Historia",audiencia:"Mujeres Campus",objetivo:"Reunión mujeres miércoles",copy:"Hola hermosa 👋 Esta noche te esperamos.\n📍 Teatro Libre · 8:00 PM",caption:"N/A",cta:"",estado:"Aprobado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-23",grupo:"GRP-06",tema:"Mujeres Local · C3",ciclo:"Ciclo 03",fase:"Experiencias",fecha:"24/04/2026",hora:"09:30",canal:"WhatsApp · Instagram",formato:"Historia",audiencia:"Mujeres Campus",objetivo:"Reunión mujeres viernes",copy:"Buenos días 🌸 Hoy nos encontramos.\n📍 Teatro Libre · 9:30 AM",caption:"N/A",cta:"",estado:"Aprobado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-24",grupo:"",tema:"Lunes Oración C4",ciclo:"Ciclo 04",fase:"Experiencias",fecha:"20/04/2026",hora:"20:00",canal:"WhatsApp · Instagram",formato:"Historia",audiencia:"Campus Bogotá",objetivo:"Convocar oración",copy:"Esta noche · Oración 🙏\n📍 Teatro Libre · 8:30 PM",caption:"N/A",cta:"",estado:"Aprobado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-25",grupo:"GRP-07",tema:"Local en Casa",ciclo:"Ciclo 04",fase:"Experiencias",fecha:"26/04/2026",hora:"10:30",canal:"YouTube · Facebook",formato:"Video Horizontal",audiencia:"Campus Online · Hogares",objetivo:"Experiencia local en casa",copy:"¡Hoy es domingo de Local en Casa! 🏠\nConéctate y vive la experiencia desde donde estés.\n📺 YouTube & Facebook Live · 10:30 AM",caption:"¡Local en Casa este domingo! 🏠 #LocalEnCasa #LocalChurch",cta:"Link en bio",estado:"Pendiente",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-26",grupo:"GRP-07",tema:"Local en Casa",ciclo:"Ciclo 04",fase:"Experiencias",fecha:"25/04/2026",hora:"09:00",canal:"Instagram · Facebook",formato:"Post",audiencia:"Campus Bogotá",objetivo:"Invitar Local en Casa",copy:"Este domingo es Local en Casa 🏠\n¿Ya le avisaste a tu familia?\n📺 YouTube & Facebook · 10:30 AM",caption:"¿Desde dónde verás el servicio? 👇 #LocalEnCasa",cta:"",estado:"Ajustado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-27",grupo:"GRP-07",tema:"Local en Casa",ciclo:"Ciclo 04",fase:"Experiencias",fecha:"25/04/2026",hora:"09:00",canal:"WhatsApp",formato:"Cinta / Banner",audiencia:"Comunidad WSP",objetivo:"Recordatorio Local en Casa",copy:"🏠 LOCAL EN CASA\nDomingo 26 de Abril · 10:30 AM\n📺 YouTube & Facebook · ¡Invita a alguien especial!",caption:"N/A",cta:"Compartir",estado:"Ajustado",ajustes:"",linkDrive:"https://drive.google.com/"},
+      {id:"NP 4-28",grupo:"",tema:"Lunes Oración C4 cierre",ciclo:"Ciclo 04",fase:"Experiencias",fecha:"27/04/2026",hora:"20:00",canal:"WhatsApp · Instagram",formato:"Historia",audiencia:"Campus Bogotá",objetivo:"Convocar oración semanal",copy:"Esta noche · Oración 🙏\n📍 Teatro Libre · 8:30 PM",caption:"N/A",cta:"",estado:"Pendiente",ajustes:"",linkDrive:"https://drive.google.com/"},
+    ],
+  },
+
+  // ── PLACEHOLDER MESES ─────────────────────────────
+  mayo:{label:"Mayo",num:"05",year:2026,serie:"Cómo sobrellevar momentos difíciles",fases:["Vitrina","Experiencias","Academia"],predicadores:["Paula Arcila","Isabel de Arcila","Andrey Molina"],startDay:5,totalDays:31,ciclos:[{num:1,sem:"27 ABR–03 MAY",fase:"Vitrina",tema:"Invitación · Bautizos",audiencia:"Campus Bogotá"},{num:2,sem:"04–10 MAY",fase:"Vitrina",tema:"Momentos difíciles",audiencia:"Bogotá · Nuevos"},{num:3,sem:"11–17 MAY",fase:"Experiencias",tema:"Sobrellevar · Dedicación",audiencia:"Comunidad"},{num:4,sem:"18–24 MAY",fase:"Experiencias",tema:"Local en Casa",audiencia:"Campus"}],actividades:{"3":[{e:"Exp. Presencial · Bautizos",c:"Experiencia"}],"4":[{e:"Lunes Oración",c:"WhatsApp"}],"5":[{e:"Inicio Academia",c:"Experiencia"}],"11":[{e:"Lunes Oración",c:"WhatsApp"}],"17":[{e:"Exp. Presencial",c:"Experiencia"}],"18":[{e:"Lunes Oración",c:"WhatsApp"}],"24":[{e:"Local en Casa",c:"YouTube"}]},grabaciones:[{fecha:"03/05/2026",tema:"Grabación Momentos difíciles Ep.1",tipo:"Grabación",encargado:"Paula Arcila",entrega:"05/05/2026",estado:"Pendiente",gcal:"20260503T090000/20260503T130000"},{fecha:"17/05/2026",tema:"En Vivo Bautizos Mayo",tipo:"En Vivo",encargado:"Equipo Audiovisual",entrega:"18/05/2026",estado:"Pendiente",gcal:"20260517T090000/20260517T200000"}],metricas:{kpis:[{n:"—",l:"Seguidores IG",c:"Por definir",up:true},{n:"—",l:"Alcance prom.",c:"Por definir",up:true},{n:"—",l:"Seguidores FB",c:"Por definir",up:true},{n:"—",l:"Subs YouTube",c:"Por definir",up:true}],barData:{labels:["C·01","C·02","C·03","C·04"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[3,3,3,3]},lineData:{labels:["Abr","May"],alcance:[2000,0],engagement:[510,0]}},piezas:[]},
+
+  junio:{label:"Junio",num:"06",year:2026,serie:"Integrar la fe",fases:["Vitrina","Experiencias","Local Conecta"],predicadores:["Andrey Molina","Yury Garcia"],startDay:1,totalDays:30,ciclos:[{num:1,sem:"01–07 JUN",fase:"Vitrina",tema:"Online · Elecciones",audiencia:"Campus Bogotá"},{num:2,sem:"08–14 JUN",fase:"Experiencias",tema:"Integrar la fe · Matrimonio",audiencia:"Comunidad"},{num:3,sem:"15–21 JUN",fase:"Experiencias",tema:"Local en Casa",audiencia:"Campus"},{num:4,sem:"22–28 JUN",fase:"Local Conecta",tema:"DEDICACIÓN",audiencia:"Comunidad activa"}],actividades:{"1":[{e:"Lunes Oración",c:"WhatsApp"}],"7":[{e:"Online · Elecciones",c:"YouTube"}],"8":[{e:"Lunes Oración",c:"WhatsApp"}],"14":[{e:"Exp. Presencial · Matrimonio",c:"Experiencia"}],"15":[{e:"Lunes Oración",c:"WhatsApp"}],"21":[{e:"Local en Casa",c:"YouTube"}],"28":[{e:"Exp. Presencial · DEDICACIÓN",c:"Experiencia"}]},grabaciones:[{fecha:"14/06/2026",tema:"En Vivo Matrimonio Felipe y Daniela",tipo:"En Vivo",encargado:"Equipo Audiovisual",entrega:"16/06/2026",estado:"Pendiente",gcal:"20260614T090000/20260614T200000"}],metricas:{kpis:[{n:"—",l:"Seguidores IG",c:"Por definir",up:true},{n:"—",l:"Alcance prom.",c:"Por definir",up:true},{n:"—",l:"Seguidores FB",c:"Por definir",up:true},{n:"—",l:"Subs YouTube",c:"Por definir",up:true}],barData:{labels:["C·01","C·02","C·03","C·04"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[3,3,3,3]},lineData:{labels:["Abr","May","Jun"],alcance:[2000,0,0],engagement:[510,0,0]}},piezas:[]},
+
+  julio:{label:"Julio",num:"07",year:2026,serie:"Necesidad de integrar la fe",fases:["Vitrina","Experiencias","Academia"],predicadores:["Andrey Molina","Yury García"],startDay:3,totalDays:31,ciclos:[{num:1,sem:"29 JUN–05 JUL",fase:"Vitrina",tema:"Online · Integrar la fe",audiencia:"Campus Bogotá"},{num:2,sem:"06–12 JUL",fase:"Experiencias",tema:"Necesidad de integrar fe",audiencia:"Campus"},{num:3,sem:"13–19 JUL",fase:"Experiencias",tema:"Local en Casa",audiencia:"Comunidad"},{num:4,sem:"20–26 JUL",fase:"Experiencias",tema:"En Vivo · Integrar fe",audiencia:"Campus Bogotá"}],actividades:{"5":[{e:"Online",c:"YouTube"}],"6":[{e:"Lunes Oración",c:"WhatsApp"}],"12":[{e:"Exp. Presencial",c:"Experiencia"}],"13":[{e:"Lunes Oración",c:"WhatsApp"}],"19":[{e:"Local en Casa",c:"YouTube"}],"26":[{e:"Exp. Presencial · En Vivo",c:"Experiencia"}]},grabaciones:[{fecha:"05/07/2026",tema:"Online Integrar la fe Ep.2",tipo:"Grabación",encargado:"Andrey Molina",entrega:"07/07/2026",estado:"Pendiente",gcal:"20260705T090000/20260705T130000"}],metricas:{kpis:[{n:"—",l:"Seguidores IG",c:"Por definir",up:true},{n:"—",l:"Alcance prom.",c:"Por definir",up:true},{n:"—",l:"Seguidores FB",c:"Por definir",up:true},{n:"—",l:"Subs YouTube",c:"Por definir",up:true}],barData:{labels:["C·01","C·02","C·03","C·04"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[3,3,3,3]},lineData:{labels:["Abr","May","Jun","Jul"],alcance:[2000,0,0,0],engagement:[510,0,0,0]}},piezas:[]},
+
+  agosto:{label:"Agosto",num:"08",year:2026,serie:"Hábitos",fases:["Vitrina","Academia","Voluntarios"],predicadores:["Andrey Molina","Daniel Campos"],startDay:6,totalDays:31,ciclos:[{num:1,sem:"27 JUL–02 AGO",fase:"Vitrina",tema:"Online · Integrar fe",audiencia:"Campus"},{num:2,sem:"03–09 AGO",fase:"Vitrina",tema:"Tema Libre · Daniel Campos",audiencia:"Campus Bogotá"},{num:3,sem:"10–16 AGO",fase:"Academia",tema:"Local en Casa · Tema Libre",audiencia:"Comunidad activa"},{num:4,sem:"17–23 AGO",fase:"Voluntarios",tema:"Hábitos · Exp. Presencial",audiencia:"Campus Bogotá"}],actividades:{"2":[{e:"Online",c:"YouTube"}],"3":[{e:"Lunes Oración",c:"WhatsApp"}],"9":[{e:"Exp. Presencial · Daniel Campos",c:"Experiencia"}],"16":[{e:"Local en Casa",c:"YouTube"}],"23":[{e:"Exp. Presencial · Hábitos",c:"Experiencia"}],"30":[{e:"Online · Hábitos",c:"YouTube"}]},grabaciones:[{fecha:"09/08/2026",tema:"Grabación Tema Libre Daniel Campos",tipo:"Grabación",encargado:"Equipo Audiovisual",entrega:"11/08/2026",estado:"Pendiente",gcal:"20260809T090000/20260809T170000"},{fecha:"23/08/2026",tema:"Grabación Hábitos Ep.1",tipo:"Grabación",encargado:"Andrey Molina",entrega:"25/08/2026",estado:"Pendiente",gcal:"20260823T090000/20260823T130000"}],metricas:{kpis:[{n:"—",l:"Seguidores IG",c:"Por definir",up:true},{n:"—",l:"Alcance prom.",c:"Por definir",up:true},{n:"—",l:"Seguidores FB",c:"Por definir",up:true},{n:"—",l:"Subs YouTube",c:"Por definir",up:true}],barData:{labels:["C·01","C·02","C·03","C·04"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[3,3,3,3]},lineData:{labels:["Abr","May","Jun","Jul","Ago"],alcance:[2000,0,0,0,0],engagement:[510,0,0,0,0]}},piezas:[]},
+
+  septiembre:{label:"Septiembre",num:"09",year:2026,serie:"Hábitos (cont.)",fases:["Academia","Voluntarios","Local Conecta"],predicadores:["Andrey Molina","Paula Arcila","Yury García"],startDay:2,totalDays:30,ciclos:[{num:1,sem:"31 AGO–06 SEP",fase:"Academia",tema:"Hábitos · Exp. Presencial",audiencia:"Campus"},{num:2,sem:"07–13 SEP",fase:"Academia",tema:"Local en Casa",audiencia:"Comunidad activa"},{num:3,sem:"14–20 SEP",fase:"Voluntarios",tema:"Tema Libre · Paula Arcila",audiencia:"Campus Bogotá"},{num:4,sem:"21–27 SEP",fase:"Local Conecta",tema:"Online · Tema Libre",audiencia:"Campus"}],actividades:{"6":[{e:"Exp. Presencial · En Vivo",c:"Experiencia"}],"13":[{e:"Local en Casa",c:"YouTube"}],"20":[{e:"Exp. Presencial · Paula Arcila",c:"Experiencia"}],"27":[{e:"Online · Tema Libre",c:"YouTube"}]},grabaciones:[{fecha:"06/09/2026",tema:"En Vivo Hábitos Exp. Presencial",tipo:"En Vivo",encargado:"Equipo Audiovisual",entrega:"08/09/2026",estado:"Pendiente",gcal:"20260906T090000/20260906T200000"}],metricas:{kpis:[{n:"—",l:"Seguidores IG",c:"Por definir",up:true},{n:"—",l:"Alcance prom.",c:"Por definir",up:true},{n:"—",l:"Seguidores FB",c:"Por definir",up:true},{n:"—",l:"Subs YouTube",c:"Por definir",up:true}],barData:{labels:["C·01","C·02","C·03","C·04"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[3,3,3,3]},lineData:{labels:["Abr","May","Jun","Jul","Ago","Sep"],alcance:[2000,0,0,0,0,0],engagement:[510,0,0,0,0,0]}},piezas:[]},
+
+  octubre:{label:"Octubre",num:"10",year:2026,serie:"Roles y Familia",fases:["Vitrina","Experiencias","Local Conecta"],predicadores:["Andrey y Paula","Yury y Fabian","Mario e Isabel"],startDay:4,totalDays:31,ciclos:[{num:1,sem:"28 SEP–04 OCT",fase:"Vitrina",tema:"Roles y Familia",audiencia:"Campus Bogotá"},{num:2,sem:"05–11 OCT",fase:"Experiencias",tema:"Local en Casa",audiencia:"Comunidad activa"},{num:3,sem:"12–18 OCT",fase:"Experiencias",tema:"Roles y Familia · DEDICACIÓN",audiencia:"Campus"},{num:4,sem:"19–25 OCT",fase:"Local Conecta",tema:"Online · Roles y Familia",audiencia:"Campus Bogotá"}],actividades:{"4":[{e:"Exp. Presencial",c:"Experiencia"}],"11":[{e:"Local en Casa",c:"YouTube"}],"18":[{e:"Exp. Presencial · DEDICACIÓN",c:"Experiencia"}],"25":[{e:"Online · Roles y Familia",c:"YouTube"}]},grabaciones:[{fecha:"04/10/2026",tema:"Grabación Roles y Familia Ep.1",tipo:"Grabación",encargado:"Andrey y Paula",entrega:"06/10/2026",estado:"Pendiente",gcal:"20261004T090000/20261004T130000"},{fecha:"18/10/2026",tema:"En Vivo Dedicación Octubre",tipo:"En Vivo",encargado:"Equipo Audiovisual",entrega:"20/10/2026",estado:"Pendiente",gcal:"20261018T090000/20261018T200000"}],metricas:{kpis:[{n:"—",l:"Seguidores IG",c:"Por definir",up:true},{n:"—",l:"Alcance prom.",c:"Por definir",up:true},{n:"—",l:"Seguidores FB",c:"Por definir",up:true},{n:"—",l:"Subs YouTube",c:"Por definir",up:true}],barData:{labels:["C·01","C·02","C·03","C·04"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[3,3,3,3]},lineData:{labels:["Abr","May","Jun","Jul","Ago","Sep","Oct"],alcance:[2000,0,0,0,0,0,0],engagement:[510,0,0,0,0,0,0]}},piezas:[]},
+
+  noviembre:{label:"Noviembre",num:"11",year:2026,serie:"Verdad grabada en la mente",fases:["Vitrina","Academia","Voluntarios"],predicadores:["Andrey Molina","Yury García"],startDay:0,totalDays:30,ciclos:[{num:1,sem:"26 OCT–01 NOV",fase:"Vitrina",tema:"Verdad grabada",audiencia:"Campus Bogotá"},{num:2,sem:"02–08 NOV",fase:"Academia",tema:"Local en Casa",audiencia:"Comunidad activa"},{num:3,sem:"09–15 NOV",fase:"Voluntarios",tema:"Verdad grabada · BAUTIZOS",audiencia:"Campus"},{num:4,sem:"16–22 NOV",fase:"Voluntarios",tema:"Online · Verdad grabada",audiencia:"Campus Bogotá"}],actividades:{"1":[{e:"Exp. Presencial",c:"Experiencia"}],"8":[{e:"Local en Casa",c:"YouTube"}],"15":[{e:"Exp. Presencial · BAUTIZOS · En Vivo",c:"Experiencia"}],"22":[{e:"Online · Verdad grabada",c:"YouTube"}]},grabaciones:[{fecha:"01/11/2026",tema:"Grabación Verdad grabada Ep.1",tipo:"Grabación",encargado:"Andrey Molina",entrega:"03/11/2026",estado:"Pendiente",gcal:"20261101T090000/20261101T130000"},{fecha:"15/11/2026",tema:"En Vivo Bautizos Noviembre",tipo:"En Vivo",encargado:"Equipo Audiovisual",entrega:"17/11/2026",estado:"Pendiente",gcal:"20261115T090000/20261115T200000"}],metricas:{kpis:[{n:"—",l:"Seguidores IG",c:"Por definir",up:true},{n:"—",l:"Alcance prom.",c:"Por definir",up:true},{n:"—",l:"Seguidores FB",c:"Por definir",up:true},{n:"—",l:"Subs YouTube",c:"Por definir",up:true}],barData:{labels:["C·01","C·02","C·03","C·04"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[3,3,3,3]},lineData:{labels:["Abr","May","Jun","Jul","Ago","Sep","Oct","Nov"],alcance:[2000,0,0,0,0,0,0,0],engagement:[510,0,0,0,0,0,0,0]}},piezas:[]},
+
+  diciembre:{label:"Diciembre",num:"12",year:2026,serie:"Navidad / Cierre de Año",fases:["Vitrina","Local Conecta"],predicadores:["Andrey Molina","Team Local"],startDay:2,totalDays:31,ciclos:[{num:1,sem:"30 NOV–06 DIC",fase:"Vitrina",tema:"Cierre año · Local en Casa",audiencia:"Campus Bogotá"},{num:2,sem:"07–13 DIC",fase:"Vitrina",tema:"Invitación Navidad",audiencia:"Comunidad · Nuevos"},{num:3,sem:"14–20 DIC",fase:"Local Conecta",tema:"Obra Navidad · Online",audiencia:"Campus + Online"},{num:4,sem:"21–27 DIC",fase:"Local Conecta",tema:"Cierre 2026",audiencia:"Campus Bogotá"}],actividades:{"6":[{e:"Local en Casa",c:"YouTube"}],"13":[{e:"Ensayo Obra Navidad",c:"Experiencia"}],"19":[{e:"Exp. Presencial · Obra Navidad · Online",c:"Experiencia"}],"27":[{e:"Lunes Oración · Cierre año",c:"WhatsApp"}]},grabaciones:[{fecha:"06/12/2026",tema:"Grabación Local en Casa Cierre año",tipo:"Grabación",encargado:"Equipo Audiovisual",entrega:"08/12/2026",estado:"Pendiente",gcal:"20261206T090000/20261206T170000"},{fecha:"19/12/2026",tema:"Transmisión Online Obra Navidad",tipo:"En Vivo",encargado:"Equipo Audiovisual",entrega:"20/12/2026",estado:"Pendiente",gcal:"20261219T090000/20261219T220000"}],metricas:{kpis:[{n:"—",l:"Seguidores IG",c:"Por definir",up:true},{n:"—",l:"Alcance prom.",c:"Por definir",up:true},{n:"—",l:"Seguidores FB",c:"Por definir",up:true},{n:"—",l:"Subs YouTube",c:"Por definir",up:true}],barData:{labels:["C·01","C·02","C·03","C·04"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[3,3,3,3]},lineData:{labels:["Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],alcance:[2000,0,0,0,0,0,0,0,0],engagement:[510,0,0,0,0,0,0,0,0]}},piezas:[]},
+};
+
+const MONTH_ORDER = ["abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+
+// ══════════════════════════════════════════════════
+// RENDER ENGINE
+// ══════════════════════════════════════════════════
+
+// ── PORTADA ────────────────────────────────────────
+function renderPortada(id, meta, piezas){
+  const prev = MONTH_ORDER[MONTH_ORDER.indexOf(id)-1];
+  const next = MONTH_ORDER[MONTH_ORDER.indexOf(id)+1];
+  const aprobadas = piezas.filter(p=>p.estado==="Aprobado").length;
+  const monthParts = meta.label.split("");
+  return `
+  <div class="portada" id="portada-${id}">
+    <div class="portada-l">
+      <div>
+        <div class="portada-tag"><span class="label y">Plan de Contenidos · Local Church</span></div>
+        <div class="month-name">
+          <div class="full"><span class="big">${meta.label}</span></div>
+          <div class="month-year">${meta.year}</div>
+        </div>
+      </div>
+      <div>
+        <div class="portada-stats">
+          <div class="pstat"><div class="pstat-n">${piezas.length||"—"}</div><div class="pstat-l">Piezas</div></div>
+          <div class="pstat"><div class="pstat-n">0${meta.ciclos.length}</div><div class="pstat-l">Ciclos</div></div>
+          <div class="pstat"><div class="pstat-n">${aprobadas||"—"}</div><div class="pstat-l">Aprobadas</div></div>
+          <div class="pstat"><div class="pstat-n">${piezas.filter(p=>p.estado==="Pendiente").length||"—"}</div><div class="pstat-l">Pendientes</div></div>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:7px;flex-wrap:wrap;">
+          <a href="#cal-${id}" class="btn btn-g" style="font-size:.68rem">↓ Calendario</a>
+          <button class="btn btn-g" style="font-size:.68rem" onclick="goGrab()">📹 Grabaciones</button>
+          <button class="btn btn-g" style="font-size:.68rem" onclick="goMetrics()">📈 Métricas</button>
+          ${prev?`<button class="btn btn-g" style="font-size:.68rem" onclick="showMonth('${prev}')">← ${MONTHS_META[prev].label}</button>`:""}
+          ${next?`<button class="btn btn-v" style="font-size:.68rem" onclick="showMonth('${next}')">${MONTHS_META[next].label} →</button>`:""}
+        </div>
+      </div>
+    </div>
+    <div class="portada-r">
+      <div class="sec-title">Ciclos del mes · clic para navegar</div>
+      <div class="ciclo-nav-list">
+        ${meta.ciclos.map(c=>`
+        <a href="#ciclo-${id}-${c.num}" class="ciclo-nav-btn">
+          <span class="cn-num">CICLO ${String(c.num).padStart(2,"0")}</span>
+          <span class="cn-name">${c.fase} · ${c.tema}</span>
+          <span class="cn-dates">${c.sem}</span>
+        </a>`).join("")}
+      </div>
+      <div class="sec-title" style="margin-top:4px">Fases del Ecosistema</div>
+      <div class="tag-pills">${FASES_LC.map(f=>`<span class="tpill" style="background:${f.color};border-color:transparent;color:#fff;font-size:.6rem">${f.icon} ${f.label}</span>`).join("")}</div>
+      <div class="sec-title">Predicadores</div>
+      <div class="tag-pills">${(meta.predicadores||[]).map(p=>`<span class="tpill y">${p}</span>`).join("")}</div>
+    </div>
+  </div>`;
+}
+
+// ── CALENDARIO ─────────────────────────────────────
+function renderCalendario(id, meta, piezas){
+  const {startDay, totalDays, ciclos} = meta;
+  const DAYS = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
+  const next = MONTH_ORDER[MONTH_ORDER.indexOf(id)+1];
+
+  // Map piezas by day
+  const pizMap = {};
+  piezas.forEach(p=>{
+    const d = parseInt((p.fecha||"").split("/")[0]);
+    if(d){ if(!pizMap[d])pizMap[d]=[]; pizMap[d].push(p); }
+  });
+  // Map activities by day
+  const actMap = meta.actividades||{};
+
+  // Determine ciclo per day
+  const cicloForDay = (day)=>{
+    const weekIdx = Math.floor((day + startDay - 1)/7);
+    return ciclos[Math.min(weekIdx, ciclos.length-1)];
+  };
+
+  // Week names — editable via global week name manager
+  const defaultWeekNames = ciclos.map(c=>`C${c.num} · ${c.tema}`);
+  const weekNames = (window.LC_WEEK_NAMES && window.LC_WEEK_NAMES[id]) || defaultWeekNames;
+
+  // New grid: 8 columns (week-label + 7 days), 4 week-rows + header row
+  // Use CSS grid with 8 cols
+  let calHtml = `<div class="cal" style="grid-template-columns:auto repeat(7,1fr)">`;
+  // Header row: blank + day names
+  calHtml += `<div class="cal-dh" style="border-radius:8px 0 0 0"></div>`;
+  DAYS.forEach((d,i)=>calHtml+=`<div class="cal-dh"${i===6?' style="border-radius:0 8px 0 0"':''}>${d}</div>`);
+
+  // 4 week rows
+  for(let w=0;w<4;w++){
+    const c = ciclos[w]||{num:w+1,fase:"",tema:""};
+    const wname = weekNames[w]||defaultWeekNames[w];
+    // Week label cell — editable
+    calHtml += `
+    <a href="#ciclo-${id}-${c.num}" class="cal-wk-lbl"
+       data-month="${id}" data-widx="${w}"
+       title="Doble clic para editar · Clic para ir al ciclo">
+      <span class="wkl-num">C·${String(c.num).padStart(2,"0")}</span>
+      <span class="wkl-fase">${c.fase}</span>
+      <span class="wkl-name">${wname}</span>
+    </a>`;
+    // 7 day cells for this week
+    for(let dd=0;dd<7;dd++){
+      const day = w*7 + dd - startDay + 1;
+      const isValid = day>=1&&day<=totalDays;
+      calHtml += `<div class="cal-day${!isValid?" other-month":""}">`;
+      if(isValid){
+        calHtml += `<span class="cal-dn">${day}</span>`;
+        (actMap[String(day)]||[]).forEach(a=>{
+          calHtml += `<span class="cal-pill ${calClass(a.c)}">${a.e.substring(0,20)}</span>`;
+        });
+        (pizMap[day]||[]).slice(0,2).forEach(p=>{
+          calHtml += `<span class="cal-pill ${calClass(p.canal)}">${(p.tema||"").split("·")[0].trim().substring(0,18)}</span>`;
+        });
+      }
+      calHtml += `</div>`;
+    }
+  }
+  calHtml += `</div>`;
+
+  // Script to make week labels editable (injected after render)
+
+
+  // Legend
+  const channels = [
+    {l:"Instagram",    cl:"cp-ig"},
+    {l:"Facebook",     cl:"cp-fb"},
+    {l:"YouTube",      cl:"cp-yt"},
+    {l:"TikTok",       cl:"cp-tk"},
+    {l:"Spotify",      cl:"cp-sp"},
+    {l:"WhatsApp",     cl:"cp-wa"},
+    {l:"Mail",         cl:"cp-ml"},
+    {l:"Experiencia",  cl:"cp-ex"},
+    {l:"Local en Casa",cl:"cp-or"},
+    {l:"Pantallas",    cl:"cp-pan"},
+  ];
+
+  return `
+  <section id="cal-${id}" class="cal-section">
+    <div class="cal-main">
+      <div class="sec-hdr">
+        <div><div class="label v">Calendario mensual</div><div class="sec-big">${meta.label} ${meta.year}</div></div>
+        <div class="hdr-btns">
+          <a href="#portada-${id}" class="btn btn-g">↑ Portada</a>
+          ${next?`<button class="btn btn-v" onclick="showMonth('${next}')">${MONTHS_META[next].label} →</button>`:""}
+        </div>
+      </div>
+      ${calHtml}
+      <div style="margin-top:6px;font-size:.6rem;color:var(--gd);text-align:right">💡 <strong style="color:var(--gray)">Doble clic</strong> en el nombre de la semana para editarlo · Clic para ir al ciclo</div>
+      <div class="cal-legend">
+        ${channels.map(ch=>`<span class="cal-pill ${ch.cl}" style="font-size:.58rem;padding:2px 8px;border-radius:4px;display:inline-flex;align-items:center;gap:4px">${ch.l}</span>`).join("")}
+      </div>
+    </div>
+    <!-- week editing handled globally -->
+    <div class="cal-sidebar">
+      <div class="sec-title">Ciclos</div>
+      ${ciclos.map(c=>`
+      <a href="#ciclo-${id}-${c.num}" class="ciclo-side-btn">
+        <div class="csb-num">CICLO ${String(c.num).padStart(2,"0")}</div>
+        <div class="csb-name">${c.tema}</div>
+        <div class="csb-fase">${c.fase} · ${c.sem}</div>
+      </a>`).join("")}
+      <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px;">
+        <button class="btn btn-g" style="font-size:.65rem;width:100%;justify-content:center" onclick="goGrab()">📹 Grabaciones</button>
+        <button class="btn btn-g" style="font-size:.65rem;width:100%;justify-content:center" onclick="goMetrics()">📈 Métricas</button>
+      </div>
+    </div>
+  </section>`;
+}
+
+// ── CICLO SLIDE ────────────────────────────────────
+function renderCicloSlide(id, meta, c, piezasDelCiclo, prev, next, isLastCiclo, nextMonthId){
+  const aprobadas = piezasDelCiclo.filter(p=>p.estado==="Aprobado").length;
+  const enProceso = piezasDelCiclo.filter(p=>["En revisión","Revisado","Ajustado"].includes(p.estado)).length;
+  const pendientes = piezasDelCiclo.filter(p=>p.estado==="Pendiente").length;
+
+  return `
+  <section id="ciclo-${id}-${c.num}" class="ciclo-slide">
+    <div class="ciclo-left">
+      <div>
+        <div class="label y">Ciclo ${String(c.num).padStart(2,"0")} · ${meta.label} 2026</div>
+        <div class="ciclo-big">${String(c.num).padStart(2,"0")}</div>
+        <div class="ciclo-title">${c.fase.split(" ")[0]}<br/><span>${c.tema}</span></div>
+        <div class="ciclo-meta">
+          <div class="ciclo-meta-row">📅 <strong>${c.sem}</strong></div>
+          <div class="ciclo-meta-row">🎯 <strong>Audiencia:</strong> ${c.audiencia}</div>
+          <div class="ciclo-meta-row">🔑 <strong>Fase:</strong> ${c.fase}</div>
+        </div>
+      </div>
+      <div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;">
+          <div style="background:var(--card);border:1px solid var(--brd);border-radius:8px;padding:12px;">
+            <div class="pstat-n" style="font-size:1.4rem">${piezasDelCiclo.length}</div>
+            <div class="pstat-l">Piezas</div>
+            <div style="height:3px;background:rgba(107,33,214,.25);border-radius:2px;margin-top:6px;overflow:hidden"><div style="height:100%;width:100%;background:var(--vl)"></div></div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--brd);border-radius:8px;padding:12px;">
+            <div class="pstat-n" style="font-size:1.4rem">${aprobadas}</div>
+            <div class="pstat-l">Aprobadas</div>
+            <div style="height:3px;background:rgba(52,211,153,.15);border-radius:2px;margin-top:6px;overflow:hidden"><div style="height:100%;width:${piezasDelCiclo.length?Math.round(aprobadas/piezasDelCiclo.length*100):0}%;background:var(--grn)"></div></div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--brd);border-radius:8px;padding:12px;">
+            <div class="pstat-n" style="font-size:1.4rem">${enProceso}</div>
+            <div class="pstat-l">En proceso</div>
+            <div style="height:3px;background:rgba(245,200,66,.15);border-radius:2px;margin-top:6px;overflow:hidden"><div style="height:100%;width:${piezasDelCiclo.length?Math.round(enProceso/piezasDelCiclo.length*100):0}%;background:var(--y)"></div></div>
+          </div>
+          <div style="background:var(--card);border:1px solid var(--brd);border-radius:8px;padding:12px;">
+            <div class="pstat-n" style="font-size:1.4rem">${pendientes}</div>
+            <div class="pstat-l">Pendientes</div>
+            <div style="height:3px;background:rgba(107,33,214,.2);border-radius:2px;margin-top:6px;overflow:hidden"><div style="height:100%;width:${piezasDelCiclo.length?Math.round(pendientes/piezasDelCiclo.length*100):0}%;background:var(--gd)"></div></div>
+          </div>
+        </div>
+        <div class="ciclo-btns-row">
+          <a href="#cal-${id}" class="btn btn-g">↑ Cal</a>
+          ${prev?`<a href="#ciclo-${id}-${prev.num}" class="btn btn-g">← C·${prev.num}</a>`:""}
+          ${next?`<a href="#ciclo-${id}-${next.num}" class="btn btn-v">C·${next.num} →</a>`:
+            nextMonthId?`<button class="btn btn-v" onclick="showMonth('${nextMonthId}')">${MONTHS_META[nextMonthId].label} →</button>`:""}
+        </div>
+      </div>
+    </div>
+    <div class="ciclo-right">
+      <div class="label v">Productos del ciclo</div>
+      <div class="products-grid">
+        ${piezasDelCiclo.length>0
+          ? piezasDelCiclo.map(p=>`
+          <a href="#pieza-${p.id.replace(/\s/g,"-")}" class="product-card">
+            <div class="pc-id">${p.id}</div>
+            <div class="pc-tema">${p.tema}</div>
+            <div class="pc-meta">
+              <span class="fmt-tag ${fmtClass(p.formato)}" style="font-size:.55rem;padding:2px 6px">${p.formato}</span>
+              <span class="pc-date">${p.fecha}</span>
+            </div>
+            <div class="pc-estado">
+              <div class="estado-bar">${renderEstadoBar(p.estado)}</div>
+              <span style="font-size:.58rem;color:var(--gd);margin-left:5px">${p.estado}</span>
+            </div>
+          </a>`).join("")
+          : `<div style="grid-column:1/-1;padding:28px 20px;text-align:center;">
+              <div style="font-size:1.6rem;margin-bottom:10px">📋</div>
+              <div style="font-size:.82rem;font-weight:700;color:var(--gray);margin-bottom:6px">Sin piezas en este ciclo</div>
+              <div style="font-size:.72rem;color:var(--gd);margin-bottom:14px;line-height:1.6">
+                Agrega las piezas de este ciclo en la hoja<br/>
+                <strong style="color:var(--vl)">Parrilla de Contenidos</strong> del documento matriz<br/>
+                con el <strong style="color:var(--y)">Ciclo</strong> correspondiente en la columna E.
+              </div>
+              <a href="https://docs.google.com/spreadsheets/d/1Lf0qEoSk6UaqVajaXKs8z_RDtQ6KKbOZjH3_svcvY3U/edit#gid=0" target="_blank"
+                 style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;
+                        background:var(--v);color:#fff;border-radius:8px;text-decoration:none;
+                        font-size:.72rem;font-weight:700;transition:opacity .18s;"
+                 onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
+                </svg>
+                Abrir documento matriz
+              </a>
+            </div>`
+        }
+      </div>
+    </div>
+  </section>`;
+}
+
+// ── FICHA SLIDE ────────────────────────────────────
+function renderFicha(p, grpPiezas, thisIdx, slideNum, totalSlides, id){
+  const step = estadoIdx(p.estado);
+  const isMulti = grpPiezas.length>1;
+  const canales = (p.canal||"").split("·").join(",").split(",").map(c=>c.trim()).filter(Boolean);
+  const pipsHtml = isMulti ? grpPiezas.map((_,k)=>`<div class="gpip ${k===thisIdx?"here":"on"}"></div>`).join("")+
+    `<span class="gpip-lbl">${grpPiezas.length} adaptaciones · ${thisIdx+1}/${grpPiezas.length}</span>` : "";
+  const adaptHtml = isMulti ? grpPiezas.map((ap,k)=>
+    k===thisIdx
+      ?`<div class="adapt-row here"><span class="a-fmt">${fmtIcon(ap.formato)} ${ap.formato}</span><span class="a-id">${ap.id} ← esta</span></div>`
+      :`<a href="#pieza-${ap.id.replace(/\s/g,"-")}" class="adapt-row"><span class="a-fmt">${fmtIcon(ap.formato)} ${ap.formato}</span><span class="a-id">${ap.id} →</span></a>`
+  ).join("") : "";
+  const driveHref = (p.linkDrive && p.linkDrive.length>2) ? p.linkDrive : "https://drive.google.com";
+  const driveEl = `<a href="${driveHref}" target="_blank" style="
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      width:100%;padding:11px 16px;border-radius:8px;
+      background:rgba(74,222,128,0.12);color:#86efac;
+      border:1px solid rgba(74,222,128,0.35);
+      font-size:13px;font-weight:600;text-decoration:none;
+      transition:background .2s;letter-spacing:.02em;"
+    onmouseover="this.style.background='rgba(74,222,128,0.22)'"
+    onmouseout="this.style.background='rgba(74,222,128,0.12)'">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M6.28 2l5.72 9.9L3.13 20H1L9.86 4.5 6.28 2zm11.44 0L24 12H12.57L6.28 2h11.44zM12 13.9l3.72 6.1H8.28L12 13.9z"/>
+      </svg>
+      Abrir carpeta en Drive
+    </a>`;
+
+  return `
+  <section id="pieza-${p.id.replace(/\s/g,"-")}" class="ficha-slide">
+    <div class="ficha-slide-hdr" style="margin-bottom:16px">
+      <div>
+        <div class="ficha-slide-lbl">Ficha · ${p.ciclo}</div>
+      </div>
+      <div class="hdr-btns">
+        <a href="#cal-${id}" class="btn btn-g" style="font-size:11px">↑ Calendario</a>
+        <a href="#ciclo-${id}-${parseInt((p.ciclo||"0").replace(/\D/g,""),10)}" class="btn btn-g" style="font-size:11px">↑ ${p.ciclo}</a>
+      </div>
+      <div class="ficha-count">${slideNum} / ${totalSlides}</div>
+    </div>
+
+    ${isMulti?`<div class="grp-bar"><div class="grp-id-badge">${p.grupo}</div><div class="grp-name-badge">${p.tema}</div><div class="grp-pips">${pipsHtml}</div></div>`:""}
+
+    <div class="ficha-layout">
+      <div class="ficha-card">
+        <div class="ficha-topbar">
+          <span class="ficha-np">${p.id}</span>
+          <div class="ficha-topbar-r">
+            <span class="fmt-tag ${fmtClass(p.formato)}">${p.formato}</span>
+          </div>
+        </div>
+        <div class="ficha-body">
+          <div class="fc">
+            <div class="fc-lbl">Canal</div>
+            <div class="canales-wrap">${canales.map(c=>`<span class="canal-tag ${canalClass(c)}">${canalIcon(c)} ${c}</span>`).join("")}</div>
+          </div>
+          <div class="fc">
+            <div class="fc-lbl">Fecha Salida</div>
+            <div class="fc-val date">${p.fecha}${p.hora?" · "+p.hora:""}</div>
+          </div>
+          <div class="fc">
+            <div class="fc-lbl">Audiencia</div>
+            <div class="fc-val">${p.audiencia||"—"}</div>
+          </div>
+          <div class="fc">
+            <div class="fc-lbl">Objetivo</div>
+            <div class="fc-val">${p.objetivo||"—"}</div>
+          </div>
+          <div class="fc wide">
+            <div class="fc-lbl">Copy / Guión</div>
+            <div class="fc-val copy">${p.copy||"—"}</div>
+          </div>
+          <div class="fc wide">
+            <div class="fc-lbl">Caption</div>
+            <div class="fc-val cap">${p.caption||"N/A"}</div>
+          </div>
+          <div class="fc">
+            <div class="fc-lbl">Fase</div>
+            <div class="fc-val">${p.fase||"—"}</div>
+          </div>
+          <div class="fc">
+            <div class="fc-lbl">CTA</div>
+            <div class="fc-val">${p.cta||"—"}</div>
+          </div>
+          ${p.ajustes?`<div class="fc wide"><div class="fc-lbl">⚠️ Ajustes solicitados</div><div class="fc-val ajuste">${p.ajustes}</div></div>`:""}
+          <div class="fc wide">
+            <div class="fc-lbl">Imagen / Pieza</div>
+          </div>
+        </div>
+        <div class="img-zone">
+          <svg viewBox="0 0 24 24"><path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+          <span>Arrastra la imagen o abre Drive para ver el archivo</span>
+        </div>
+      </div>
+
+      <div class="ficha-side">
+        <div class="scard">
+          <div class="scard-t">Estado del proceso</div>
+          <div class="proceso">${renderProceso(p.estado)}</div>
+        </div>
+        ${isMulti?`<div class="scard"><div class="scard-t">Adaptaciones · ${p.grupo}</div><div class="adapt-list">${adaptHtml}</div></div>`:""}
+        <div class="scard">
+          <div class="scard-t">Contexto</div>
+          <div class="meta-rows">
+            <div class="meta-row"><span class="meta-k">Ciclo</span><span class="meta-v">${p.ciclo}</span></div>
+            <div class="meta-row"><span class="meta-k">Fase</span><span class="meta-v">${p.fase||"—"}</span></div>
+            <div class="meta-row"><span class="meta-k">Salida</span><span class="meta-v y">${(()=>{ const d=p.fecha.split("/"); return d.length===3?d[0]+" / "+["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"][parseInt(d[1])-1]+" "+d[2]:p.fecha; })()}</span></div>
+          </div>
+        </div>
+        <div class="scard">
+          <div class="scard-t">Archivo</div>
+          <div class="drive-btn-wrap">${driveEl}</div>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+// ── GRABACIONES ────────────────────────────────────
+function renderGrabaciones(id, meta){
+  const { grabaciones, label } = meta;
+  return `
+  <section id="grab-${id}" class="grab-section">
+    <div class="sec-hdr">
+      <div><div class="label v">Plan de Grabación y Pre-producción</div><div class="sec-big">${label} 2026</div></div>
+      <div class="hdr-btns">
+        <a href="#portada-${id}" class="btn btn-g">↑ Portada</a>
+        <a href="${SHEET_URL}" target="_blank" class="btn btn-drive">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+          Ver Sheet
+        </a>
+      </div>
+    </div>
+    <table class="grab-table">
+      <thead>
+        <tr>
+          <th>Fecha</th><th>Tema / Sesión</th><th>Tipo</th>
+          <th>Encargado</th><th>Fecha Entrega</th><th>Estado</th><th>Google Calendar</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${grabaciones.map(g=>`
+        <tr>
+          <td>${g.fecha}</td>
+          <td>${g.tema}</td>
+          <td><span class="prod-tipo ${tipoGrabClass(g.tipo)}">${g.tipo}</span></td>
+          <td><span class="resp-badge">${g.encargado}</span></td>
+          <td style="color:var(--y);font-family:'DM Mono',monospace;font-size:.7rem">${g.entrega}</td>
+          <td><span class="tipo-estado ${g.estado==="Listo"?"listo":g.estado==="En proceso"?"proceso":"pendiente"}">${g.estado}</span></td>
+          <td>
+            <a href="${gcalLink(g.tema, g.gcal)}" target="_blank" class="gcal-btn">
+              <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.11-.9-2-2-2zm0 16H5V9h14v10zM7 11h5v5H7z"/></svg>
+              + Agregar
+            </a>
+          </td>
+        </tr>`).join("")}
+      </tbody>
+    </table>
+    <div style="margin-top:12px;padding:10px 14px;background:var(--card);border:1px solid var(--brd);border-radius:8px;font-size:.72rem;color:var(--gd);">
+      💡 Clic en <strong style="color:var(--sky)">+ Agregar</strong> abre Google Calendar con los datos pre-llenados. Cada persona guarda el evento en su propio calendario.
+    </div>
+  </section>`;
+}
+
+// ── MÉTRICAS ───────────────────────────────────────
+let chartsInited = {};
+// Métricas data by canal from API (filled by buildAll when API available)
+window.LC_METRICAS = {};
+
+function renderMetricas(id, meta){
+  const m = meta.metricas;
+  const CANALES = [
+    {id:"all",      icon:"📊", label:"Resumen",    cls:"ct-all"},
+    {id:"instagram",icon:"📸", label:"Instagram",  cls:"ct-ig"},
+    {id:"facebook", icon:"👤", label:"Facebook",   cls:"ct-fb"},
+    {id:"youtube",  icon:"▶️", label:"YouTube",    cls:"ct-yt"},
+    {id:"whatsapp", icon:"💬", label:"WhatsApp",   cls:"ct-wa"},
+    {id:"mail",     icon:"✉️", label:"Mail",       cls:"ct-ml"},
+  ];
+
+  const tabsHtml = CANALES.map((c,i)=>
+    `<button class="canal-tab ${c.cls}${i===0?" on":""}" onclick="switchCanalTab('${id}','${c.id}',this)">${c.icon} ${c.label}</button>`
+  ).join("");
+
+  // Panel: Resumen
+  const resumenPanel = `
+  <div id="cp-${id}-all" class="canal-panel on">
+    <div class="canal-stats">
+      <div class="cstat"><div class="cstat-n" id="cs-${id}-ig-seg" style="color:#C13584">—</div><div class="cstat-l">Seguidores IG</div></div>
+      <div class="cstat"><div class="cstat-n" id="cs-${id}-ig-alc" style="color:#C13584">—</div><div class="cstat-l">Alcance IG</div></div>
+      <div class="cstat"><div class="cstat-n" id="cs-${id}-fb-seg" style="color:#1877F2">—</div><div class="cstat-l">Seguidores FB</div></div>
+      <div class="cstat"><div class="cstat-n" id="cs-${id}-yt-sub" style="color:#CC0000">—</div><div class="cstat-l">Subs YouTube</div></div>
+      <div class="cstat"><div class="cstat-n" id="cs-${id}-wa-con" style="color:#128C7E">—</div><div class="cstat-l">Contactos WA</div></div>
+      <div class="cstat"><div class="cstat-n" id="cs-${id}-ml-sub" style="color:#4F46E5">—</div><div class="cstat-l">Suscriptores Mail</div></div>
+    </div>
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-title">Estado de piezas por ciclo</div>
+        <div class="chart-wrap"><canvas id="chart-bar-${id}"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Crecimiento de audiencia</div>
+        <div class="chart-wrap"><canvas id="chart-line-${id}"></canvas></div>
+      </div>
+      <div class="chart-card wide">
+        <div class="chart-title">Distribución de formatos · ${meta.label}</div>
+        <div style="display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:center">
+          <div class="chart-wrap" style="height:180px"><canvas id="chart-pie-${id}"></canvas></div>
+          <div id="chart-pie-legend-${id}" style="display:flex;flex-wrap:wrap;gap:8px;font-size:.7rem"></div>
+        </div>
+      </div>
+    </div>
+    <div class="metrics-update-tip">
+      💡 <span>Actualiza los números en la hoja <strong style="color:var(--vl)">Métricas</strong> del documento al cierre de cada mes. El dashboard los mostrará automáticamente.</span>
+    </div>
+  </div>`;
+
+  // Panel: Instagram
+  const igPanel = `<div id="cp-${id}-instagram" class="canal-panel">
+    <div class="canal-stats">
+      <div class="cstat" style="border-color:rgba(193,53,132,.35)"><div class="cstat-n" id="cs-${id}-ig-s" style="color:#C13584">—</div><div class="cstat-l">Seguidores</div></div>
+      <div class="cstat" style="border-color:rgba(193,53,132,.35)"><div class="cstat-n" id="cs-${id}-ig-a" style="color:#C13584">—</div><div class="cstat-l">Alcance</div></div>
+      <div class="cstat" style="border-color:rgba(193,53,132,.35)"><div class="cstat-n" id="cs-${id}-ig-i" style="color:#C13584">—</div><div class="cstat-l">Impresiones</div></div>
+      <div class="cstat" style="border-color:rgba(193,53,132,.35)"><div class="cstat-n" id="cs-${id}-ig-e" style="color:#C13584">—</div><div class="cstat-l">Engagement %</div></div>
+    </div>
+    <div class="chart-card wide"><div class="chart-title" style="color:#C13584">📸 Evolución Instagram</div><div class="chart-wrap"><canvas id="chart-ig-${id}"></canvas></div></div>
+    <p class="cstat-note">Fuente: Meta Business Suite → Insights → Audiencia · Actualiza al cierre del mes en la hoja <strong>Métricas</strong></p>
+  </div>`;
+
+  // Panel: Facebook
+  const fbPanel = `<div id="cp-${id}-facebook" class="canal-panel">
+    <div class="canal-stats">
+      <div class="cstat" style="border-color:rgba(24,119,242,.35)"><div class="cstat-n" id="cs-${id}-fb-s" style="color:#1877F2">—</div><div class="cstat-l">Seguidores</div></div>
+      <div class="cstat" style="border-color:rgba(24,119,242,.35)"><div class="cstat-n" id="cs-${id}-fb-a" style="color:#1877F2">—</div><div class="cstat-l">Alcance</div></div>
+      <div class="cstat" style="border-color:rgba(24,119,242,.35)"><div class="cstat-n" id="cs-${id}-fb-i" style="color:#1877F2">—</div><div class="cstat-l">Impresiones</div></div>
+      <div class="cstat" style="border-color:rgba(24,119,242,.35)"><div class="cstat-n" id="cs-${id}-fb-e" style="color:#1877F2">—</div><div class="cstat-l">Engagement %</div></div>
+    </div>
+    <div class="chart-card wide"><div class="chart-title" style="color:#1877F2">👤 Evolución Facebook</div><div class="chart-wrap"><canvas id="chart-fb-${id}"></canvas></div></div>
+    <p class="cstat-note">Fuente: Meta Business Suite → Insights · Actualiza al cierre del mes en la hoja <strong>Métricas</strong></p>
+  </div>`;
+
+  // Panel: YouTube
+  const ytPanel = `<div id="cp-${id}-youtube" class="canal-panel">
+    <div class="canal-stats">
+      <div class="cstat" style="border-color:rgba(204,0,0,.35)"><div class="cstat-n" id="cs-${id}-yt-s" style="color:#CC0000">—</div><div class="cstat-l">Suscriptores</div></div>
+      <div class="cstat" style="border-color:rgba(204,0,0,.35)"><div class="cstat-n" id="cs-${id}-yt-v" style="color:#CC0000">—</div><div class="cstat-l">Vistas</div></div>
+      <div class="cstat" style="border-color:rgba(204,0,0,.35)"><div class="cstat-n" id="cs-${id}-yt-h" style="color:#CC0000">—</div><div class="cstat-l">Horas vistas</div></div>
+      <div class="cstat" style="border-color:rgba(204,0,0,.35)"><div class="cstat-n" id="cs-${id}-yt-w" style="color:#CC0000">—</div><div class="cstat-l">Watch time avg.</div></div>
+    </div>
+    <div class="chart-card wide"><div class="chart-title" style="color:#CC0000">▶️ Evolución YouTube</div><div class="chart-wrap"><canvas id="chart-yt-${id}"></canvas></div></div>
+    <p class="cstat-note">Fuente: YouTube Studio → Análisis → Descripción general · Actualiza al cierre del mes en la hoja <strong>Métricas</strong></p>
+  </div>`;
+
+  // Panel: WhatsApp
+  const waPanel = `<div id="cp-${id}-whatsapp" class="canal-panel">
+    <div class="canal-stats">
+      <div class="cstat" style="border-color:rgba(18,140,126,.35)"><div class="cstat-n" id="cs-${id}-wa-c" style="color:#128C7E">—</div><div class="cstat-l">Contactos</div></div>
+      <div class="cstat" style="border-color:rgba(18,140,126,.35)"><div class="cstat-n" id="cs-${id}-wa-m" style="color:#128C7E">—</div><div class="cstat-l">Mensajes enviados</div></div>
+      <div class="cstat" style="border-color:rgba(18,140,126,.35)"><div class="cstat-n" id="cs-${id}-wa-t" style="color:#128C7E">—</div><div class="cstat-l">Tasa apertura</div></div>
+      <div class="cstat" style="border-color:rgba(18,140,126,.35)"><div class="cstat-n" id="cs-${id}-wa-r" style="color:#128C7E">—</div><div class="cstat-l">Respuestas</div></div>
+    </div>
+    <p class="cstat-note" style="margin-top:0">Fuente: WhatsApp Business → Herramientas para la empresa → Estadísticas · Actualiza al cierre del mes en la hoja <strong>Métricas</strong></p>
+  </div>`;
+
+  // Panel: Mail
+  const mlPanel = `<div id="cp-${id}-mail" class="canal-panel">
+    <div class="canal-stats">
+      <div class="cstat" style="border-color:rgba(79,70,229,.35)"><div class="cstat-n" id="cs-${id}-ml-s" style="color:#4F46E5">—</div><div class="cstat-l">Suscriptores</div></div>
+      <div class="cstat" style="border-color:rgba(79,70,229,.35)"><div class="cstat-n" id="cs-${id}-ml-e" style="color:#4F46E5">—</div><div class="cstat-l">Enviados</div></div>
+      <div class="cstat" style="border-color:rgba(79,70,229,.35)"><div class="cstat-n" id="cs-${id}-ml-a" style="color:#4F46E5">—</div><div class="cstat-l">Tasa apertura</div></div>
+      <div class="cstat" style="border-color:rgba(79,70,229,.35)"><div class="cstat-n" id="cs-${id}-ml-c" style="color:#4F46E5">—</div><div class="cstat-l">Tasa de clics</div></div>
+    </div>
+    <p class="cstat-note" style="margin-top:0">Fuente: Mailchimp / plataforma email → Informes de campaña · Actualiza al cierre del mes en la hoja <strong>Métricas</strong></p>
+  </div>`;
+
+  return `
+  <section id="metrics-${id}" class="metrics-section">
+    <div class="sec-hdr">
+      <div><div class="label v">Métricas y KPIs por Canal</div><div class="sec-big">${meta.label} 2026</div></div>
+      <div class="hdr-btns">
+        <a href="#portada-${id}" class="btn btn-g">↑ Portada</a>
+        <a href="${SHEET_URL}#gid=0" target="_blank" class="btn btn-drive">📊 Sheet · Métricas</a>
+      </div>
+    </div>
+    <div class="canal-tabs">${tabsHtml}</div>
+    ${resumenPanel}
+    ${igPanel}
+    ${fbPanel}
+    ${ytPanel}
+    ${waPanel}
+    ${mlPanel}
+  </section>`;
+}
+
+function switchCanalTab(monthId, canalId, el){
+  // Hide all panels for this month
+  document.querySelectorAll(`[id^="cp-${monthId}-"]`).forEach(p=>p.classList.remove("on"));
+  // Deactivate all tabs
+  el.closest(".canal-tabs").querySelectorAll(".canal-tab").forEach(t=>t.classList.remove("on"));
+  // Show target panel
+  const panel = document.getElementById(`cp-${monthId}-${canalId}`);
+  if(panel) panel.classList.add("on");
+  el.classList.add("on");
+}
+
+// Populate canal metrics from API data
+function populateMetricas(monthId, metricasData){
+  if(!metricasData) return;
+  const mes = MONTHS_META[monthId]?.label;
+  if(!mes) return;
+
+  const fmt = v => v ? (typeof v === "number" ? v.toLocaleString("es-CO") : v) : "—";
+
+  // Instagram
+  const ig = (metricasData.instagram||[]).find(r=>r.mes===mes)||{};
+  const set = (id, val) => { const el=document.getElementById(id); if(el) el.textContent=fmt(val); };
+
+  set(`cs-${monthId}-ig-seg`, ig.seguidores);
+  set(`cs-${monthId}-ig-alc`, ig.alcance);
+  set(`cs-${monthId}-ig-s`,   ig.seguidores);
+  set(`cs-${monthId}-ig-a`,   ig.alcance);
+  set(`cs-${monthId}-ig-i`,   ig.impresiones);
+  set(`cs-${monthId}-ig-e`,   ig.engagement);
+
+  // Facebook
+  const fb = (metricasData.facebook||[]).find(r=>r.mes===mes)||{};
+  set(`cs-${monthId}-fb-seg`, fb.seguidores);
+  set(`cs-${monthId}-fb-s`,   fb.seguidores);
+  set(`cs-${monthId}-fb-a`,   fb.alcance);
+  set(`cs-${monthId}-fb-i`,   fb.impresiones);
+  set(`cs-${monthId}-fb-e`,   fb.engagement);
+
+  // YouTube
+  const yt = (metricasData.youtube||[]).find(r=>r.mes===mes)||{};
+  set(`cs-${monthId}-yt-sub`, yt.suscriptores);
+  set(`cs-${monthId}-yt-s`,   yt.suscriptores);
+  set(`cs-${monthId}-yt-v`,   yt.vistas);
+  set(`cs-${monthId}-yt-h`,   yt.horas_vistas);
+  set(`cs-${monthId}-yt-w`,   yt.watch_time);
+
+  // WhatsApp
+  const wa = (metricasData.whatsapp||[]).find(r=>r.mes===mes)||{};
+  set(`cs-${monthId}-wa-con`, wa.contactos);
+  set(`cs-${monthId}-wa-c`,   wa.contactos);
+  set(`cs-${monthId}-wa-m`,   wa.mensajes_enviados);
+  set(`cs-${monthId}-wa-t`,   wa.tasa_apertura);
+  set(`cs-${monthId}-wa-r`,   wa.respuestas);
+
+  // Mail
+  const ml = (metricasData.mail||[]).find(r=>r.mes===mes)||{};
+  set(`cs-${monthId}-ml-sub`, ml.suscriptores);
+  set(`cs-${monthId}-ml-s`,   ml.suscriptores);
+  set(`cs-${monthId}-ml-e`,   ml.enviados);
+  set(`cs-${monthId}-ml-a`,   ml.abiertos);
+  set(`cs-${monthId}-ml-c`,   ml.clics);
+}
+
+function initCharts(id, meta, piezas){
+  if(chartsInited[id]) return;
+  chartsInited[id] = true;
+  const m = meta.metricas;
+
+  const CHART_DEFAULTS = {
+    color:"rgba(240,234,255,.7)",
+    font:{family:"'Nunito',sans-serif",size:10},
+  };
+  Chart.defaults.color = CHART_DEFAULTS.color;
+  Chart.defaults.font  = CHART_DEFAULTS.font;
+
+  // Bar chart
+  const bCtx = document.getElementById(`chart-bar-${id}`);
+  if(bCtx) new Chart(bCtx,{
+    type:"bar",
+    data:{
+      labels:m.barData.labels,
+      datasets:[
+        {label:"Aprobadas",data:m.barData.aprobadas,backgroundColor:"rgba(52,211,153,.7)",borderRadius:4},
+        {label:"En proceso",data:m.barData.revision,backgroundColor:"rgba(245,200,66,.7)",borderRadius:4},
+        {label:"Pendientes",data:m.barData.pendientes,backgroundColor:"rgba(107,33,214,.5)",borderRadius:4},
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"top"}},
+      scales:{x:{grid:{color:"rgba(139,69,232,.1)"},ticks:{color:"rgba(240,234,255,.5)"}},
+              y:{grid:{color:"rgba(139,69,232,.1)"},ticks:{color:"rgba(240,234,255,.5)",stepSize:1}}}}
+  });
+
+  // Line chart
+  const lCtx = document.getElementById(`chart-line-${id}`);
+  if(lCtx) new Chart(lCtx,{
+    type:"line",
+    data:{
+      labels:m.lineData.labels,
+      datasets:[
+        {label:"Alcance promedio",data:m.lineData.alcance,borderColor:"rgba(139,69,232,1)",backgroundColor:"rgba(139,69,232,.1)",tension:.4,fill:true,pointBackgroundColor:"rgba(139,69,232,1)"},
+        {label:"Engagement",data:m.lineData.engagement,borderColor:"rgba(245,200,66,1)",backgroundColor:"rgba(245,200,66,.08)",tension:.4,fill:true,pointBackgroundColor:"rgba(245,200,66,1)"},
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"top"}},
+      scales:{x:{grid:{color:"rgba(139,69,232,.1)"},ticks:{color:"rgba(240,234,255,.5)"}},
+              y:{grid:{color:"rgba(139,69,232,.1)"},ticks:{color:"rgba(240,234,255,.5)"}}}}
+  });
+
+  // Pie chart — count piezas by formato
+  const fmtCount = {};
+  piezas.forEach(p=>{ const f=p.formato||"Otro"; fmtCount[f]=(fmtCount[f]||0)+1; });
+  const pieLabels = Object.keys(fmtCount);
+  const pieData   = pieLabels.map(k=>fmtCount[k]);
+  const PIE_COLORS = ["#6B21D6","#F5C842","#34D399","#F97316","#38BDF8","#F472B6","#818CF8","#A78BFA","#FCD34D"];
+
+  const pCtx = document.getElementById(`chart-pie-${id}`);
+  if(pCtx) new Chart(pCtx,{
+    type:"doughnut",
+    data:{labels:pieLabels,datasets:[{data:pieData,backgroundColor:PIE_COLORS.slice(0,pieLabels.length),borderWidth:0,hoverOffset:6}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},cutout:"68%"}
+  });
+  const legend = document.getElementById(`chart-pie-legend-${id}`);
+  if(legend){
+    legend.innerHTML = pieLabels.map((l,i)=>`
+    <div style="display:flex;align-items:center;gap:5px;">
+      <div style="width:8px;height:8px;border-radius:2px;background:${PIE_COLORS[i]};flex-shrink:0"></div>
+      <span>${l} (${fmtCount[l]})</span>
+    </div>`).join("");
+  }
+}
+
+// ══════════════════════════════════════════════════
+// BUILD MONTH
+// ══════════════════════════════════════════════════
+function buildMonth(id, apiPiezas){
+  const meta   = MONTHS_META[id];
+  const prev   = MONTH_ORDER[MONTH_ORDER.indexOf(id)-1];
+  const next   = MONTH_ORDER[MONTH_ORDER.indexOf(id)+1];
+
+  // Use API data if available, else embedded
+  let piezas = [];
+  if(apiPiezas && apiPiezas.length>0){
+    piezas = apiPiezas.filter(p=>{ const m=(p.fecha||"").split("/")[1]; return m&&parseInt(m)===parseInt(meta.num); });
+  }
+  if(piezas.length===0 && meta.piezas && meta.piezas.length>0){
+    piezas = meta.piezas;
+  }
+
+  let html = `<section class="month-view" id="month-${id}">`;
+
+  // 1. PORTADA
+  html += renderPortada(id, meta, piezas);
+  html += `<div class="divider"></div>`;
+
+  // 2. CALENDARIO
+  html += renderCalendario(id, meta, piezas);
+  html += `<div class="divider"></div>`;
+
+  // 3+4. CICLOS + FICHAS
+  meta.ciclos.forEach((c,ci)=>{
+    const prevC = ci>0?meta.ciclos[ci-1]:null;
+    const nextC = ci<meta.ciclos.length-1?meta.ciclos[ci+1]:null;
+    const cicloNum = String(c.num);
+    const cicPiezas = piezas.filter(p=>parseInt((p.ciclo||"").replace(/\D/g,""),10)===parseInt(cicloNum,10));
+
+    // Ciclo portadilla
+    html += renderCicloSlide(id, meta, c, cicPiezas, prevC, nextC, !nextC, next);
+    html += `<div class="divider"></div>`;
+
+    // Fichas individuales
+    const grps = groupByGRP(cicPiezas);
+    const allOrdered = [];
+    Object.values(grps).forEach(g=>g.forEach(p=>allOrdered.push(p)));
+    let sc = 0;
+    Object.values(grps).forEach(grpPiezas=>{
+      grpPiezas.forEach((p,pi)=>{
+        sc++;
+        html += renderFicha(p, grpPiezas, pi, sc, allOrdered.length, id);
+        html += `<div class="divider"></div>`;
+      });
+    });
+  });
+
+  // 5. GRABACIONES
+  html += renderGrabaciones(id, meta);
+  html += `<div class="divider"></div>`;
+
+  // 6. MÉTRICAS
+  html += renderMetricas(id, meta);
+
+  html += `</section>`;
+  return html;
+}
+
+// ══════════════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════════════
+let ACTIVE = "abril";
+let BUILT  = {};
+
+function showMonth(id, scrollTop=true){
+  if(!BUILT[id]){
+    document.getElementById("main").innerHTML += buildMonth(id, null);
+    BUILT[id] = true;
+  }
+  document.querySelectorAll(".month-view").forEach(s=>s.classList.remove("on"));
+  const sec = document.getElementById("month-"+id);
+  if(sec) sec.classList.add("on");
+  document.querySelectorAll(".mtab").forEach(t=>{
+    t.classList.toggle("on", (t.getAttribute("onclick")||"").includes(`'${id}'`));
+  });
+  document.querySelectorAll(".dr-link").forEach(t=>{
+    t.classList.toggle("on", (t.getAttribute("onclick")||"").includes(`'${id}'`));
+  });
+  ACTIVE = id;
+  if(scrollTop) window.scrollTo(0,0);
+  // Init charts after DOM is ready
+  setTimeout(()=>{
+    const m=MONTHS_META[id]; const p=m.piezas||[];
+    initCharts(id,m,p);
+    initWeekEditing();
+    if(window.LC_METRICAS) populateMetricas(id, window.LC_METRICAS);
+  },120);
+}
+
+function goHome(){window.scrollTo(0,0);}
+function goGrab(){
+  const el = document.getElementById("grab-"+ACTIVE);
+  if(el) el.scrollIntoView({behavior:"smooth"});
+}
+function goMetrics(){
+  const el = document.getElementById("metrics-"+ACTIVE);
+  if(el) el.scrollIntoView({behavior:"smooth"});
+}
+function toggleDrawer(){
+  document.getElementById("drawer").classList.toggle("open");
+}
+
+// ══════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════
+// ── EXTERNAL LINKS MANAGER ─────────────────────────────────────
+// Trello y Drive URLs configurables — se guardan en localStorage
+const EXT_LINKS = {
+  trello: { key:"lc-trello-url", default:"https://trello.com", label:"Trello" },
+  drive:  { key:"lc-drive-url",  default:"https://drive.google.com", label:"Google Drive" },
+};
+
+function initExtLinks(){
+  Object.entries(EXT_LINKS).forEach(([id, cfg])=>{
+    const saved = localStorage.getItem(cfg.key) || cfg.default;
+    // Update nav button
+    const navBtn = document.getElementById(id === "trello" ? "trello-link" : "drive-link");
+    if(navBtn) navBtn.href = saved;
+    // Update drawer
+    const drBtn = document.getElementById("drawer-" + id);
+    if(drBtn) drBtn.href = saved;
+  });
+}
+
+function setExtLink(id){
+  const cfg = EXT_LINKS[id];
+  if(!cfg) return;
+  const current = localStorage.getItem(cfg.key) || cfg.default;
+  const newUrl = prompt(`🔗 URL de ${cfg.label}:\n(Pega el link de tu workspace)`, current);
+  if(newUrl && newUrl.trim()){
+    localStorage.setItem(cfg.key, newUrl.trim());
+    initExtLinks();
+  }
+}
+
+// Long-press or right-click on nav buttons to edit URL
+function setupExtLinkEditing(){
+  [
+    {btnId:"trello-link",  extId:"trello"},
+    {btnId:"drive-link",   extId:"drive"},
+    {btnId:"drawer-trello",extId:"trello"},
+    {btnId:"drawer-drive", extId:"drive"},
+  ].forEach(({btnId, extId})=>{
+    const btn = document.getElementById(btnId);
+    if(!btn) return;
+    let pressTimer;
+    // Long press (mobile)
+    btn.addEventListener("touchstart",()=>{ pressTimer=setTimeout(()=>setExtLink(extId),700); },{passive:true});
+    btn.addEventListener("touchend",()=>clearTimeout(pressTimer));
+    // Right click (desktop) → edit URL instead of browser context menu
+    btn.addEventListener("contextmenu",(e)=>{ e.preventDefault(); setExtLink(extId); });
+  });
+}
+
+
+// ── GLOBAL WEEK NAME EDITOR ─────────────────────────────────────
+// Called via dblclick on .cal-wk-lbl elements (set by renderCalendario)
+window.LC_WEEK_NAMES = {};
+
+function initWeekEditing(){
+  document.querySelectorAll('.cal-wk-lbl').forEach(function(lbl){
+    const mid   = lbl.getAttribute('data-month');
+    const widx  = parseInt(lbl.getAttribute('data-widx'));
+    const nameEl = lbl.querySelector('.wkl-name');
+    if(!mid || isNaN(widx) || !nameEl) return;
+    lbl.addEventListener('dblclick', function(e){
+      e.preventDefault();
+      const storageKey = 'lc-weeknames-' + mid;
+      const saved = JSON.parse(localStorage.getItem(storageKey)||'null');
+      const cur = (saved && saved[widx]) || nameEl.textContent;
+      const inp = document.createElement('input');
+      inp.value = cur;
+      inp.style.cssText='width:100%;background:rgba(107,33,214,.35);border:1px solid #8B45E8;border-radius:4px;color:#fff;font-size:.6rem;font-family:Nunito,sans-serif;padding:3px 5px;outline:none;';
+      nameEl.replaceWith(inp);
+      inp.focus(); inp.select();
+      function save(){
+        const all = JSON.parse(localStorage.getItem(storageKey)||'null') || [];
+        all[widx] = inp.value || cur;
+        localStorage.setItem(storageKey, JSON.stringify(all));
+        if(!window.LC_WEEK_NAMES[mid]) window.LC_WEEK_NAMES[mid] = [];
+        window.LC_WEEK_NAMES[mid][widx] = inp.value || cur;
+        const sp = document.createElement('span');
+        sp.className = 'wkl-name';
+        sp.textContent = inp.value || cur;
+        inp.replaceWith(sp);
+      }
+      inp.addEventListener('blur', save);
+      inp.addEventListener('keydown', function(ev){
+        if(ev.key==='Enter') save();
+        if(ev.key==='Escape'){ const sp=document.createElement('span'); sp.className='wkl-name'; sp.textContent=cur; inp.replaceWith(sp); }
+      });
+    });
+    // Load saved name on init
+    const storageKey = 'lc-weeknames-' + mid;
+    const saved = JSON.parse(localStorage.getItem(storageKey)||'null');
+    if(saved && saved[widx]){ nameEl.textContent = saved[widx]; }
+  });
+}
+
+// ── GOOGLE SHEETS DIRECT READER ─────────────────────────────────
+// Reads public Sheet directly via CSV export — no Apps Script needed
+// Requires: Sheet shared as "Anyone with link can VIEW"
+async function fetchSheetCSV(sheetName){
+  const encoded = encodeURIComponent(sheetName);
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encoded}`;
+  const res = await fetch(url);
+  if(!res.ok) throw new Error(`Error leyendo hoja "${sheetName}": ${res.status}`);
+  const text = await res.text();
+  return parseCSV(text);
+}
+
+function parseCSV(text){
+  const lines = text.split(/\r?\n/).filter(l=>l.trim());
+  return lines.map(line=>{
+    const cells = [];
+    let cur="", inQ=false;
+    for(let i=0;i<line.length;i++){
+      const ch=line[i];
+      if(ch==='"'){ if(inQ&&line[i+1]==='"'){cur+='"';i++;}else inQ=!inQ; }
+      else if(ch===','&&!inQ){ cells.push(cur.trim()); cur=""; }
+      else cur+=ch;
+    }
+    cells.push(cur.trim());
+    return cells;
+  });
+}
+
+function csvToPiezas(rows){
+  // Find header row (contains "ID Pieza" or "id")
+  let hdrIdx = rows.findIndex(r=>
+    r.some(c=>c.toLowerCase().includes("id pieza")||c.toLowerCase()==="id")
+  );
+  if(hdrIdx<0) hdrIdx=3; // default: row 4 (0-indexed: 3)
+  const headers = rows[hdrIdx].map(h=>h.toLowerCase().replace(/[^a-z \t\xc0-\xff]/gi,"").trim());
+
+  // Map header names to our field names
+  const COL_MAP = {
+    "id pieza":"id","id":"id","grupo grp":"grupo","grupo":"grupo",
+    "nombre del tema":"tema","tema":"tema",
+    "mes":"mes","ciclo":"ciclo","fase":"fase",
+    "fecha salida":"fecha","fecha":"fecha","hora":"hora",
+    "canal":"canal","formato":"formato","audiencia":"audiencia","objetivo":"objetivo",
+    "copy  guión":"copy","copy guión":"copy","copy":"copy",
+    "caption":"caption","cta":"cta","estado":"estado",
+    "ajustes solicitados":"ajustes","ajustes":"ajustes",
+    "responsable":"responsable","link drive":"linkDrive","link":"linkDrive","notas":"notas",
+  };
+  const colIdx = {};
+  headers.forEach((h,i)=>{
+    // Try exact match first, then partial
+    if(COL_MAP[h]) colIdx[COL_MAP[h]]=i;
+    else {
+      Object.entries(COL_MAP).forEach(([k,v])=>{
+        if(!colIdx[v] && h.includes(k.split(" ")[0])) colIdx[v]=i;
+      });
+    }
+  });
+
+  const piezas=[];
+  for(let i=hdrIdx+1;i<rows.length;i++){
+    const row=rows[i];
+    if(!row[colIdx["id"]||0]) continue;
+    const p={};
+    Object.entries(colIdx).forEach(([field,ci])=>{ p[field]=(row[ci]||"").trim(); });
+    if(p.id) piezas.push(p);
+  }
+  return piezas;
+}
+
+function csvToGrabaciones(rows){
+  let hdrIdx=rows.findIndex(r=>r.some(c=>c.toLowerCase().includes("sesión")||c.toLowerCase().includes("sesion")));
+  if(hdrIdx<0) hdrIdx=1;
+  const hdrs=rows[hdrIdx].map(h=>h.toLowerCase());
+  const find=(k)=>hdrs.findIndex(h=>h.includes(k));
+  const iMes=find("mes"),iFec=find("fecha"),iSes=find("sesión")||find("sesion")||find("nombre"),
+        iTipo=find("tipo"),iEnc=find("encargado"),iEnt=find("entrega"),iEst=find("estado");
+  const grabs=[];
+  for(let i=hdrIdx+1;i<rows.length;i++){
+    const r=rows[i];
+    if(!r[iFec]) continue;
+    grabs.push({
+      mes:r[iMes]||"",fecha:r[iFec]||"",sesion:r[iSes]||"",
+      tipo:r[iTipo]||"",encargado:r[iEnc]||"",entrega:r[iEnt]||"",
+      estado:r[iEst]||"Pendiente",
+    });
+  }
+  return grabs;
+}
+
+// ── INIT ─────────────────────────────────────────────────────────
+async function init(){
+  const dot = document.getElementById("sdot");
+  const lbl = document.getElementById("slbl");
+
+  // Always build Abril immediately with embedded data
+  document.getElementById("main").innerHTML = buildMonth("abril", null);
+  BUILT["abril"] = true;
+  document.getElementById("month-abril").classList.add("on");
+  window.LC_METRICAS = {
+    instagram:[{mes:"Abril",seguidores:5350,alcance:12400,impresiones:38000,engagement:"4.2%"}],
+    facebook: [{mes:"Abril",seguidores:468, alcance:2100, impresiones:8900, engagement:"1.8%"}],
+    youtube:  [{mes:"Abril",suscriptores:1240,vistas:3800,horas_vistas:420,watch_time:"2:45"}],
+    whatsapp: [{mes:"Abril",contactos:320,mensajes_enviados:280,tasa_apertura:"91%",respuestas:45}],
+    mail:     [{mes:"Abril",suscriptores:240,enviados:238,abiertos:"34%",clics:"6%",bajas:2}],
+  };
+  setTimeout(()=>{
+    initCharts("abril",MONTHS_META["abril"],MONTHS_META["abril"].piezas||[]);
+    initWeekEditing();
+    populateMetricas("abril",window.LC_METRICAS);
+  },200);
+
+  // ── Conectar con Apps Script ──────────────────────────────────
+  const API_URL = "https://script.google.com/macros/s/AKfycbxhI41MJBYIApD2VDaHmv-fCJu0RfUkxSJocs1ujTBFHBasrFKFdvnQVpAyWJIT3l8E-w/exec";
+
+  if(!isReady){
+    dot.className="sync-dot ok";
+    lbl.textContent="Datos locales · instala la API para sincronizar";
+    return;
+  }
+
+  try{
+    lbl.textContent="Conectando…";
+    const res  = await fetch(API_URL);
+    if(!res.ok) throw new Error("HTTP "+res.status);
+    const json = await res.json();
+    if(json.status!=="ok") throw new Error(json.message||"Error en la API");
+    dot.className="sync-dot ok";
+    lbl.textContent="Sincronizado · "+new Date(json.updated).toLocaleTimeString("es-CO",{hour:"2-digit",minute:"2-digit"});
+    window.LC_METRICAS = json.metricas || window.LC_METRICAS;
+    _rebuildWithData(json.data||[], json.grabaciones||[]);
+  }catch(err){
+    dot.className="sync-dot err";
+    lbl.textContent="Error: "+err.message.substring(0,40);
+    console.error("API error:", err);
+  }
+}
+
+function _rebuildWithData(piezas, grabs){
+  // Rebuild Abril with live data
+  const el=document.getElementById("month-abril");
+  if(el) el.remove();
+  BUILT["abril"]=false;
+  // Inject grabaciones into meta
+  if(grabs.length>0){
+    const grabAbril=grabs.filter(g=>(g.mes||"").toLowerCase()==="abril");
+    if(grabAbril.length>0) MONTHS_META.abril.grabaciones=grabAbril;
+  }
+  showMonth("abril",false);
+  setTimeout(()=>{
+    MONTH_ORDER.forEach(mid=>{
+      if(BUILT[mid]&&window.LC_METRICAS) populateMetricas(mid,window.LC_METRICAS);
+    });
+  },400);
+}
+
+init();
+// Initialize external links (Trello, Drive) after DOM ready
+setTimeout(()=>{ initExtLinks(); setupExtLinkEditing(); }, 200);
+</script>
+</body>
+</html>
