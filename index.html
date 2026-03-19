@@ -1827,8 +1827,7 @@ async function init(){
   },200);
 
   // ── Conectar con Apps Script ──────────────────────────────────
-  const API_URL = "https://script.google.com/macros/s/AKfycbxhI41MJBYIApD2VDaHmv-fCJu0RfUkxSJocs1ujTBFHBasrFKFdvnQVpAyWJIT3l8E-w/exec";
-
+  const isReady = API_URL && API_URL !== "PEGA_URL_AQUI";
   if(!isReady){
     dot.className="sync-dot ok";
     lbl.textContent="Datos locales · instala la API para sincronizar";
