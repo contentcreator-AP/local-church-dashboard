@@ -407,7 +407,7 @@ main{padding-top:calc(var(--nav-h) + var(--sub-h));}
   <button class="nav-link nl-metrics" onclick="goMetrics()">📈 Métricas</button>
   <div class="sync-pill">
     <div class="sync-dot wait" id="sdot"></div>
-    <span id="slbl">Conectando…</span>
+    <span id="slbl">Esperando Sheet ID…</span>
   </div>
   <div class="ham" id="ham" onclick="toggleDrawer()">
     <span></span><span></span><span></span>
@@ -1516,75 +1516,6 @@ async function syncFromSheet(sheetId){
   if(foundRows && foundName){
     const piezas=csvToPiezas(foundRows);
     MONTHS_META.abril.piezas=piezas;
-
-    // ── Sync otros meses + Grabaciones + Métricas en paralelo
-    (async()=>{
-      const pub = PUB_KEY;
-      const base = `https://docs.google.com/spreadsheets/d/e/${pub}/pub?output=csv&gid=`;
-      const MGIDS = {"mayo": 804464204, "junio": 1480501652, "julio": 925897179, "agosto": 1291713398, "septiembre": 1049610183, "octubre": 1101962404, "noviembre": 1823568121, "diciembre": 196070214};
-      for(const [mid, gid] of Object.entries(MGIDS)){
-        try{
-          const res=await fetch(base+gid,{cache:"no-store"});
-          const text=await res.text();
-          if(text.trim().length>20&&!text.trim().startsWith("<!")){
-            const p=csvToPiezas(parseCSV(text));
-            if(p.length>0){
-              MONTHS_META[mid].piezas=p;
-              const el=document.getElementById("month-"+mid);
-              if(el){el.remove();BUILT[mid]=false;}
-              console.log("✅",mid,p.length,"piezas");
-            }
-          }
-        }catch(e){console.warn(mid,e.message);}
-      }
-      try{
-        const res=await fetch(base+417621751,{cache:"no-store"});
-        const text=await res.text();
-        if(text.trim().length>20&&!text.trim().startsWith("<!")){
-          const rows=parseCSV(text);
-          const hi=rows.findIndex(r=>r.some(c=>/mes|fecha/i.test(c)));
-          if(hi>=0){
-            const grabs=rows.slice(hi+1).filter(r=>(r[1]||"").trim()).map(r=>{
-              return {mes:(r[0]||"").trim(),fecha:(r[1]||"").trim(),
-                sesion:(r[2]||"").trim(),tipo:(r[3]||"").trim(),
-                encargado:(r[4]||"").trim(),entrega:(r[5]||"").trim(),
-                estado:(r[6]||"Pendiente").trim(),linkDrive:(r[7]||"").trim()};
-            });
-            Object.keys(MONTHS_META).forEach(mid=>{
-              const label=(MONTHS_META[mid].label||"").toLowerCase();
-              MONTHS_META[mid].grabaciones=grabs.filter(g=>{
-                const gm=(g.mes||"").toLowerCase();
-                return gm.includes(mid)||label.includes(gm);
-              });
-            });
-            console.log("✅ Grabaciones:",grabs.length);
-          }
-        }
-      }catch(e){console.warn("Grabaciones:",e.message);}
-      try{
-        const res=await fetch(base+1153647020,{cache:"no-store"});
-        const text=await res.text();
-        if(text.trim().length>20&&!text.trim().startsWith("<!")){
-          const rows=parseCSV(text);
-          const hi=rows.findIndex(r=>r.some(c=>/mes|seguidores/i.test(c)));
-          if(hi>=0){
-            rows.slice(hi+1).forEach(r=>{
-              const mes=(r[0]||"").toLowerCase().trim();
-              const mid=Object.keys(MONTHS_META).find(m=>mes.includes(m)||m.includes(mes));
-              if(mid&&MONTHS_META[mid]){
-                if(!MONTHS_META[mid].metricas)MONTHS_META[mid].metricas={};
-                Object.assign(MONTHS_META[mid].metricas,{
-                  seguidores_ig:(r[1]||"").trim(),alcance:(r[2]||"").trim(),
-                  seguidores_fb:(r[3]||"").trim(),subs_yt:(r[4]||"").trim(),
-                  engagement:(r[5]||"").trim()
-                });
-              }
-            });
-            console.log("✅ Métricas ok");
-          }
-        }
-      }catch(e){console.warn("Métricas:",e.message);}
-    })();
     const el=document.getElementById("month-abril"); if(el) el.remove();
     BUILT["abril"]=false;
     showMonth("abril",false);
