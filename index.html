@@ -2,1718 +2,999 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Local Church · Parrilla Abril 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parrilla Influencia 2026 — Local Church</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 :root{
-  /* Brand purple */
-  --v:#6B21D6;--vl:#8B45E8;--vd:#4C1597;--vp:#EDE9FE;
-  /* Accent */
-  --y:#7C3AED;--yd:#5B21B6;
-  /* Light theme surfaces */
-  --dark:#FFFFFF;          /* page background */
-  --card:#F8F6FF;          /* card surface */
-  --card2:#F0EBFF;         /* card hover / alt */
-  /* Borders */
-  --brd:rgba(107,33,214,.14);--brd2:rgba(107,33,214,.30);
-  /* Text */
-  --w:#1A0A2E;             /* primary text — very dark purple */
-  --gray:#4B3B6B;          /* secondary text */
-  --gd:#7C6FA0;            /* muted text */
-  /* Status */
-  --grn:#059669;--org:#EA580C;--red:#DC2626;--sky:#0284C7;
-  --nav-h:54px;--sub-h:42px;
+  --v950:#1e0a3c;--v900:#2d1457;--v800:#3d1e72;--v700:#512a96;--v600:#6b38b8;
+  --v500:#8b5cf6;--v400:#a78bfa;--v300:#c4b5fd;--v200:#ddd6fe;--v100:#ede9fe;--v50:#f5f3ff;
+  --b700:#8c7a6b;--b400:#d9ccbd;--b300:#e8dfd4;--b200:#f0e9e0;--b100:#f7f2ec;--b50:#faf7f4;
+  --white:#fff;--black:#0f0a1a;--text:#2c2620;--muted:#8c7a6b;
+  --bg:var(--b50);--surface:var(--white);--border:var(--b300);
+  --accent:var(--v600);
+  --ig:#E1306C;--yt:#FF0000;--fb:#1877F2;--tt:#111111;--wa:#25D366;
+  --sp:#1DB954;--em:#EA4335;--wb:#4F46E5;--pc:#9333EA;--ot:#78716C;
 }
-*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
-body{font-family:'Nunito',sans-serif;background:#FFFFFF;color:var(--w);min-height:100vh;overflow-x:hidden;}
-::-webkit-scrollbar{width:4px;height:4px;}
-::-webkit-scrollbar-track{background:#f3f0ff;}
-::-webkit-scrollbar-thumb{background:#c4b5fd;border-radius:2px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+button,a{font-family:'Montserrat',sans-serif;}
 
-/* NAV */
-.topnav{position:fixed;top:0;left:0;right:0;z-index:500;height:var(--nav-h);
-  background:rgba(255,255,255,.97);border-bottom:1px solid var(--brd);backdrop-filter:blur(16px);
-  display:flex;align-items:center;gap:8px;padding:0 16px;
-  box-shadow:0 1px 12px rgba(107,33,214,.08);}
-.nav-logo{display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:900;font-size:.95rem;
-  color:var(--v);white-space:nowrap;text-decoration:none;flex-shrink:0;margin-right:4px;}
-.nav-logo-mark{width:26px;height:26px;border-radius:6px;background:var(--v);
-  display:grid;place-items:center;flex-shrink:0;}
-.nav-logo-mark svg{width:14px;height:14px;fill:white;}
-.nav-link{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:7px;
-  font-size:.68rem;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0;
-  transition:opacity .18s;border:1px solid transparent;font-family:'Nunito',sans-serif;cursor:pointer;}
-.nav-link svg{width:12px;height:12px;fill:currentColor;flex-shrink:0;}
-.nav-link:hover{opacity:.75;}
-.nl-sheet{background:rgba(5,150,105,.1);color:#065F46;border-color:rgba(5,150,105,.25);}
-.nl-trello{background:rgba(0,82,204,.1);color:#1D4ED8;border-color:rgba(0,82,204,.25);}
-.nl-drive{background:rgba(234,88,12,.1);color:#9A3412;border-color:rgba(234,88,12,.25);}
-.nl-grab{background:var(--v);color:#fff;border-color:var(--vd);}
-.nl-metrics{background:rgba(5,150,105,.1);color:#065F46;border-color:rgba(5,150,105,.25);}
-.sync-pill{display:flex;align-items:center;gap:5px;font-size:.62rem;
-  font-family:'DM Mono',monospace;color:var(--gd);flex-shrink:0;margin-left:auto;}
-.sync-dot{width:5px;height:5px;border-radius:50%;background:#7C3AED;animation:blink 1.5s infinite;}
-.sync-dot.ok{background:var(--grn);animation:none;box-shadow:0 0 5px rgba(5,150,105,.4);}
-.sync-dot.err{background:var(--red);animation:none;}
-.sync-dot.wait{background:#7C3AED;animation:blink 1.5s infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-.ham{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:5px;flex-shrink:0;}
-.ham span{width:19px;height:2px;background:var(--gray);border-radius:1px;}
+/* SIDEBAR */
+.sb{position:fixed;top:0;left:0;width:220px;height:100vh;background:var(--v950);display:flex;flex-direction:column;z-index:200;overflow-y:auto;box-shadow:4px 0 24px rgba(30,10,60,.3);}
+.sb::-webkit-scrollbar{width:3px;}.sb::-webkit-scrollbar-thumb{background:var(--v800);}
+.logo{padding:24px 18px 16px;border-bottom:1px solid rgba(255,255,255,.07);}
+.logo-n{font-size:15px;font-weight:900;color:var(--v300);}.logo-n em{color:var(--white);font-style:normal;font-weight:400;}
+.logo-s{font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--v700);margin-top:4px;}
+.ns{padding:12px 0 4px;}
+.nl{font-size:8.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--v700);padding:0 16px;margin-bottom:4px;display:block;}
+.ni{display:flex;align-items:center;gap:8px;width:100%;padding:9px 16px;color:rgba(196,181,253,.65);background:none;border:none;font-size:12.5px;font-weight:500;text-decoration:none;transition:all .18s;text-align:left;cursor:pointer;position:relative;}
+.ni::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:0;background:var(--v400);transition:height .18s;border-radius:0 2px 2px 0;}
+.ni:hover{color:var(--white);background:rgba(139,92,246,.1);}.ni:hover::before,.ni.on::before{height:60%;}
+.ni.on{color:var(--v300);background:rgba(139,92,246,.15);}
+.ico{font-size:13px;width:14px;text-align:center;flex-shrink:0;}
+.mgr{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:6px 10px 14px;}
+.mb{padding:8px 4px;border-radius:8px;border:1px solid rgba(139,92,246,.2);background:none;color:var(--v400);font-size:11px;font-weight:600;transition:all .18s;text-align:center;cursor:pointer;}
+.mb:hover{border-color:var(--v400);color:var(--v300);background:rgba(139,92,246,.1);}
+.mb.on{background:var(--v600);color:var(--white);border-color:var(--v600);}
 
-/* SUBNAV */
-.subnav{position:fixed;top:var(--nav-h);left:0;right:0;z-index:400;height:var(--sub-h);
-  background:rgba(255,255,255,.97);border-bottom:1px solid var(--brd);backdrop-filter:blur(12px);
-  display:flex;align-items:center;padding:0 14px;gap:2px;overflow-x:auto;scrollbar-width:none;
-  box-shadow:0 1px 8px rgba(107,33,214,.05);}
-.subnav::-webkit-scrollbar{display:none;}
-.mtab{padding:4px 12px;border-radius:20px;font-size:.68rem;font-weight:700;cursor:pointer;
-  border:1px solid transparent;color:var(--gd);white-space:nowrap;flex-shrink:0;
-  transition:all .18s;text-decoration:none;}
-.mtab:hover{color:var(--v);border-color:var(--brd2);}
-.mtab.on{background:var(--v);color:#fff;border-color:var(--vd);}
+/* MAIN */
+.main{margin-left:220px;min-height:100vh;}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(250,247,244,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 22px;display:flex;align-items:center;justify-content:space-between;}
+.tb-t{font-size:15px;font-weight:800;}.tb-t span{color:var(--accent);}
+.tb-r{display:flex;align-items:center;gap:7px;}
+.pill{display:flex;align-items:center;gap:6px;padding:5px 11px;border-radius:20px;background:var(--b100);border:1px solid var(--border);font-size:11px;color:var(--muted);font-weight:500;}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;transition:background .4s;}
+.tbtn{padding:7px 13px;border-radius:8px;border:none;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;}
+.tbtn.p{background:var(--accent);color:var(--white);}.tbtn.p:hover{background:var(--v700);}
+.tbtn.g{background:var(--v900);color:var(--white);}.tbtn.g:hover{background:var(--v800);}
 
-/* DRAWER */
-.drawer{display:none;position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
-  background:rgba(255,255,255,.98);z-index:450;padding:18px;overflow-y:auto;
-  flex-direction:column;gap:5px;}
-.drawer.open{display:flex;}
-.dr-sec{font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--gd);font-family:'DM Mono',monospace;margin:12px 0 5px;}
-.dr-link{padding:11px 15px;border-radius:9px;background:var(--card);border:1px solid var(--brd);
-  color:var(--w);text-decoration:none;font-size:.82rem;font-weight:600;transition:all .18s;}
-.dr-link:hover,.dr-link.on{border-color:var(--v);background:var(--vp);color:var(--v);}
+/* PANELS */
+.panel{display:none;padding:20px 22px;}.panel.on{display:block;}
 
-/* SETUP BANNER */
-.setup-banner{background:#F5F3FF;border:1px solid rgba(107,33,214,.25);
-  border-radius:12px;padding:18px 22px;margin:20px;display:flex;flex-wrap:wrap;
-  gap:14px;align-items:flex-start;}
-.sb-title{font-size:.9rem;font-weight:800;color:var(--v);margin-bottom:6px;}
-.sb-text{font-size:.75rem;color:var(--gray);line-height:1.7;}
-.sb-input{flex:1;min-width:260px;background:#fff;border:1.5px solid var(--brd2);
-  border-radius:8px;color:var(--w);font-size:.8rem;padding:9px 13px;
-  font-family:'Nunito',sans-serif;outline:none;transition:border-color .2s;}
-.sb-input:focus{border-color:var(--v);}
-.sb-input::placeholder{color:var(--gd);}
-.sb-btn{background:var(--v);color:#fff;border:none;border-radius:8px;padding:9px 18px;
-  font-size:.78rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;
-  transition:background .18s;white-space:nowrap;}
-.sb-btn:hover{background:var(--vl);}
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--v950),var(--v800) 55%,var(--v600));border-radius:16px;padding:32px 38px;margin-bottom:18px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-70px;right:-70px;width:300px;height:300px;background:radial-gradient(circle,rgba(196,181,253,.18),transparent 65%);border-radius:50%;}
+.hero-b{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;background:rgba(196,181,253,.14);border:1px solid rgba(196,181,253,.3);color:var(--v300);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:11px;}
+.hero-m{font-size:46px;font-weight:900;color:var(--white);line-height:1;letter-spacing:-1px;}
+.hero-m span{color:var(--v300);}
 
-main{padding-top:calc(var(--nav-h) + var(--sub-h));}
-.month-view{display:none;}
-.month-view.on{display:block;}
-.divider{height:1px;background:var(--brd);}
+/* CALENDAR SECTION */
+.cal-wrap{display:grid;grid-template-columns:1fr 270px;gap:16px;align-items:start;}
+.cal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.cal-h{font-size:18px;font-weight:800;color:var(--black);}
+.cal-nav{display:flex;gap:4px;}
+.cal-nav button{width:30px;height:30px;border-radius:7px;border:1px solid var(--border);background:var(--surface);font-size:14px;cursor:pointer;transition:all .15s;}
+.cal-nav button:hover{background:var(--accent);color:var(--white);border-color:var(--accent);}
+.cg{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+.dow{text-align:center;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:4px 0;}
+.cday{min-height:80px;border-radius:9px;border:1px solid var(--border);background:var(--surface);padding:5px;transition:border-color .15s;}
+.cday:hover{border-color:var(--v400);}
+.cday.oth{background:var(--b100);opacity:.4;}
+.cday.tod{border:2px solid var(--accent);}
+.dnum{font-size:10px;font-weight:700;color:var(--muted);margin-bottom:2px;}
+.tod .dnum{color:var(--accent);}
+.chip{display:block;width:100%;text-align:left;border:none;padding:2px 4px;border-radius:4px;font-size:9px;font-weight:600;cursor:pointer;line-height:1.3;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:all .15s;}
+.chip:hover{opacity:.85;transform:scale(1.02);}
+/* canal colors */
+.c-ig{background:#fce4ed;color:var(--ig);}.c-yt{background:#ffe5e5;color:var(--yt);}
+.c-fb{background:#e7f0fd;color:var(--fb);}.c-tt{background:#e8e8e8;color:#333;}
+.c-wa{background:#e5f9ed;color:var(--wa);}.c-sp{background:#e5f7ec;color:var(--sp);}
+.c-em{background:#fde8e6;color:var(--em);}.c-wb{background:#ede9fe;color:var(--wb);}
+.c-pc{background:#f3e8ff;color:var(--pc);}.c-ot{background:var(--b200);color:var(--ot);}
+/* selected chip */
+.chip.sel{outline:2px solid currentColor;outline-offset:1px;font-weight:800;}
 
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:8px;
-  font-size:.68rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .18s;
-  border:1px solid transparent;white-space:nowrap;font-family:'Nunito',sans-serif;}
-.btn svg{width:11px;height:11px;fill:currentColor;}
-.btn-v{background:var(--v);color:#fff;border-color:var(--vd);}
-.btn-v:hover{background:var(--vl);}
-.btn-g{background:#fff;color:var(--gray);border-color:var(--brd2);}
-.btn-g:hover{color:var(--v);border-color:var(--v);}
-.btn-drive{background:rgba(5,150,105,.08);color:#065F46;border:1px solid rgba(5,150,105,.25);}
-.btn-drive:hover{background:rgba(5,150,105,.15);}
-.btn-gcal{background:rgba(2,132,199,.08);color:#0369A1;border:1px solid rgba(2,132,199,.25);}
-.btn-gcal:hover{background:rgba(2,132,199,.15);}
-.btn-dl{background:rgba(107,33,214,.08);color:var(--v);border:1px solid rgba(107,33,214,.2);}
-.btn-dl:hover{background:rgba(107,33,214,.15);}
+/* CHART BOX */
+.cbox{background:var(--surface);border-radius:12px;border:1px solid var(--border);padding:16px;position:sticky;top:62px;}
+.cbox h3{font-size:12px;font-weight:800;margin-bottom:12px;}
+.chleg{margin-top:11px;}
+.chrow{display:flex;align-items:center;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--b100);font-size:10.5px;}
+.chd{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-right:6px;}
+.chn{display:flex;align-items:center;flex:1;font-weight:500;}
+.chc{font-weight:800;}
 
-/* TYPOGRAPHY */
-.label{font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gd);}
-.label.y{color:var(--v);}
-.label.v{color:var(--v);}
-.sec-title{font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--gd);font-family:'DM Mono',monospace;border-bottom:1px solid var(--brd);padding-bottom:7px;}
-.sec-hdr{display:flex;align-items:flex-start;justify-content:space-between;
-  margin-bottom:22px;gap:14px;flex-wrap:wrap;}
-.sec-big{font-size:1.35rem;font-weight:800;margin-top:3px;color:var(--w);}
-.hdr-btns{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
+/* SLIDE PANEL — aparece debajo del calendario */
+.slide-panel{margin-top:16px;background:var(--surface);border-radius:14px;border:1px solid var(--v200);overflow:hidden;animation:slideIn .25s ease;}
+@keyframes slideIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* PORTADA */
-.portada{display:grid;grid-template-columns:1fr 1fr;min-height:90vh;border-bottom:1px solid var(--brd);}
-.portada-l{padding:52px 48px;display:flex;flex-direction:column;justify-content:space-between;
-  border-right:1px solid var(--brd);position:relative;overflow:hidden;background:#F5F3FF;}
-.portada-l::after{content:'';position:absolute;bottom:-80px;left:-80px;width:360px;height:360px;
-  border-radius:50%;background:radial-gradient(circle,rgba(107,33,214,.1) 0%,transparent 68%);pointer-events:none;}
-.portada-tag{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
-.portada-tag::before{content:'';width:20px;height:2px;background:var(--v);border-radius:1px;}
-.month-name{font-size:clamp(3.2rem,9vw,6.5rem);font-weight:900;line-height:.88;
-  letter-spacing:-.05em;color:var(--v);white-space:nowrap;}
-.month-year{font-size:.75rem;font-weight:700;color:var(--vl);margin-top:10px;
-  letter-spacing:.18em;text-transform:uppercase;font-family:'DM Mono',monospace;}
-.portada-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--brd);
-  border:1px solid var(--brd);border-radius:12px;overflow:hidden;margin-top:28px;}
-.pstat{padding:14px 18px;background:#fff;}
-.pstat-n{font-size:1.9rem;font-weight:900;color:var(--v);font-family:'DM Mono',monospace;line-height:1;}
-.pstat-l{font-size:.56rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gd);margin-top:3px;}
-.portada-r{padding:52px 48px;display:flex;flex-direction:column;gap:20px;background:#fff;}
-.ciclo-nav-list{display:flex;flex-direction:column;gap:3px;}
-.ciclo-nav-btn{display:grid;grid-template-columns:62px 1fr auto;align-items:center;gap:10px;
-  padding:10px 13px;border-radius:9px;background:#F8F6FF;border:1px solid var(--brd);
-  text-decoration:none;color:inherit;cursor:pointer;transition:all .18s;}
-.ciclo-nav-btn:hover{border-color:var(--v);background:#EDE9FE;}
-.cn-num{font-size:.62rem;font-weight:700;color:var(--v);font-family:'DM Mono',monospace;}
-.cn-name{font-size:.78rem;font-weight:700;color:var(--w);}
-.cn-dates{font-size:.58rem;color:var(--gd);font-family:'DM Mono',monospace;}
-.tag-pills{display:flex;flex-wrap:wrap;gap:5px;}
-.tpill{padding:3px 9px;border-radius:20px;font-size:.62rem;font-weight:700;
-  background:rgba(107,33,214,.08);border:1px solid rgba(107,33,214,.2);color:var(--v);}
-.tpill.y{background:rgba(107,33,214,.15);border-color:var(--v);color:var(--v);}
+/* slide header */
+.slide-hdr{background:linear-gradient(135deg,var(--v950),var(--v800));padding:20px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.slide-id{font-size:11px;font-weight:800;color:var(--v300);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.slide-nombre{font-size:18px;font-weight:900;color:var(--white);line-height:1.2;}
+.slide-close{background:rgba(255,255,255,.1);border:none;color:var(--white);width:30px;height:30px;border-radius:8px;font-size:18px;cursor:pointer;flex-shrink:0;transition:background .15s;}
+.slide-close:hover{background:rgba(255,255,255,.2);}
+/* slide nav */
+.slide-nav{display:flex;align-items:center;gap:8px;padding:10px 24px;background:rgba(30,10,60,.04);border-bottom:1px solid var(--v200);}
+.slide-nav-btn{padding:5px 12px;border-radius:7px;border:1px solid var(--v200);background:var(--surface);font-size:11px;font-weight:600;cursor:pointer;transition:all .15s;color:var(--text);}
+.slide-nav-btn:hover{background:var(--accent);color:var(--white);border-color:var(--accent);}
+.slide-nav-btn:disabled{opacity:.3;pointer-events:none;}
+.slide-cnt{font-size:11px;color:var(--muted);font-weight:500;margin-left:auto;}
+/* slide body */
+.slide-body{display:grid;grid-template-columns:1fr 240px;gap:0;}
+.slide-left{padding:20px 24px;}
+.slide-right{padding:20px 18px;border-left:1px solid var(--v100);background:var(--v50);}
+/* field grid */
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--v200);border-radius:10px;overflow:hidden;margin-bottom:14px;}
+.ff{background:var(--white);padding:11px 13px;}
+.ff.s2{grid-column:1/-1;}
+.ffl{font-size:7.5px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:3px;}
+.ffv{font-size:12.5px;font-weight:500;color:var(--black);line-height:1.4;}
+.ffv.date{font-size:14px;font-weight:800;color:var(--accent);}
+.ffv.copy{font-size:12px;line-height:1.6;font-weight:400;}
+.cpill{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;color:var(--white);font-size:11px;font-weight:700;margin:1px 2px 1px 0;}
+/* estado */
+.est-title{font-size:8.5px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:7px;}
+.est-val{font-size:20px;font-weight:900;color:var(--black);margin-bottom:12px;}
+.sopt{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:7px;font-size:12px;font-weight:500;cursor:pointer;transition:background .15s;margin-bottom:2px;}
+.sopt:hover{background:var(--v100);}.sopt.cur{color:var(--accent);font-weight:800;}
+.srad{width:14px;height:14px;border-radius:50%;border:2px solid var(--b400);flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.srad.on{border-color:var(--accent);background:var(--accent);}
+.srad.on::after{content:'';width:4px;height:4px;border-radius:50%;background:var(--white);}
+.info-row{display:flex;gap:7px;font-size:11.5px;margin-bottom:7px;align-items:flex-start;}
+.info-row:last-child{margin-bottom:0;}
+/* drive btn */
+.dbtn{display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border-radius:8px;background:var(--accent);color:var(--white);font-size:11.5px;font-weight:700;text-decoration:none;transition:all .18s;border:none;cursor:pointer;margin-top:10px;}
+.dbtn:hover{background:var(--v700);}.dbtn.dis{background:var(--b200);color:var(--muted);pointer-events:none;}
+/* ajuste */
+.ajbox{background:#fff7ed;border-radius:8px;padding:11px;border:1px solid #fed7aa;margin-bottom:10px;}
+.ajbox-l{font-size:7.5px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#c2410c;margin-bottom:3px;}
 
-/* CALENDAR */
-.cal-section{display:grid;grid-template-columns:1fr 210px;border-bottom:1px solid var(--brd);}
-.cal-main{padding:38px 30px;border-right:1px solid var(--brd);}
-.cal{display:grid;grid-template-columns:88px repeat(7,1fr);gap:1px;
-  background:var(--brd);border:1px solid var(--brd);border-radius:11px;overflow:hidden;}
-.cal-dh{background:var(--v);padding:6px 5px;font-size:.53rem;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;color:#fff;
-  font-family:'DM Mono',monospace;text-align:center;}
-.cal-wk-lbl{background:#EDE9FE;border-right:1px solid var(--brd);
-  padding:7px 8px;display:flex;flex-direction:column;justify-content:center;gap:3px;
-  cursor:pointer;text-decoration:none;color:inherit;transition:background .18s;min-height:70px;}
-.cal-wk-lbl:hover{background:#DDD6FE;}
-.wkl-num{font-size:.56rem;font-weight:800;color:var(--v);font-family:'DM Mono',monospace;}
-.wkl-fase{font-size:.5rem;color:var(--gd);font-weight:600;}
-.wkl-name{font-size:.6rem;font-weight:700;color:var(--w);line-height:1.3;word-break:break-word;}
-.cal-day{background:#fff;padding:6px 5px;min-height:70px;}
-.cal-day.other-month{background:#FAFAFA;}
-.cal-dn{font-size:.6rem;font-family:'DM Mono',monospace;color:var(--gd);margin-bottom:3px;display:block;}
-.cal-pill{display:block;padding:1px 4px;border-radius:3px;font-size:.52rem;font-weight:700;
-  margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
-.cp-ig{background:#C13584;color:#fff;}
-.cp-fb{background:#1877F2;color:#fff;}
-.cp-yt{background:#CC0000;color:#fff;}
-.cp-tk{background:#161617;color:#69C9D0;outline:1px solid #69C9D0;}
-.cp-sp{background:#1DB954;color:#fff;}
-.cp-wa{background:#128C7E;color:#fff;}
-.cp-ml{background:#4F46E5;color:#fff;}
-.cp-ex{background:#0E7490;color:#fff;}
-.cp-or{background:#EA580C;color:#fff;}
-.cp-pan{background:#7C3AED;color:#fff;}
-.cal-legend{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;align-items:center;}
-.cal-sidebar{padding:28px 18px;display:flex;flex-direction:column;gap:7px;background:#FAFAFA;}
-.cal-sidebar .sec-title{font-size:.54rem;}
-.ciclo-side-btn{padding:9px 11px;border-radius:8px;background:#fff;border:1px solid var(--brd);
-  cursor:pointer;text-decoration:none;color:inherit;transition:all .18s;display:block;}
-.ciclo-side-btn:hover{border-color:var(--v);background:#EDE9FE;}
-.csb-num{font-size:.56rem;font-weight:700;color:var(--v);font-family:'DM Mono',monospace;}
-.csb-name{font-size:.7rem;font-weight:700;color:var(--w);margin-top:2px;}
-.csb-fase{font-size:.58rem;color:var(--gd);margin-top:1px;}
+/* GRABACION */
+.stitle{font-size:18px;font-weight:900;margin-bottom:14px;}
+.back{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:8px;background:var(--surface);border:1px solid var(--border);font-size:11.5px;font-weight:600;color:var(--text);cursor:pointer;transition:all .15s;margin-bottom:16px;}
+.back:hover{background:var(--accent);color:var(--white);border-color:var(--accent);}
+.twrap{overflow-x:auto;border-radius:11px;border:1px solid var(--border);}
+.dt{width:100%;border-collapse:collapse;background:var(--surface);font-size:11.5px;}
+.dt th{background:var(--v900);color:var(--white);padding:10px 12px;text-align:left;font-size:8.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;white-space:nowrap;}
+.dt td{padding:9px 12px;border-bottom:1px solid var(--b100);vertical-align:middle;}
+.dt tr:last-child td{border-bottom:none;}.dt tr:hover td{background:var(--v50);}
+.gcbtn{display:inline-flex;align-items:center;gap:4px;padding:5px 9px;background:#4285F4;color:var(--white);border-radius:6px;font-size:9.5px;font-weight:700;text-decoration:none;border:none;cursor:pointer;white-space:nowrap;}
+.gcbtn:hover{background:#357ABD;}
+.sch{display:inline-flex;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;}
+.s-pub{background:#dcfce7;color:#166534;}.s-pend{background:#fef9c3;color:#854d0e;}
+.s-rev{background:#dbeafe;color:#1d4ed8;}.s-apr{background:var(--v100);color:var(--v700);}
+.s-ajus{background:#fee2e2;color:#991b1b;}
 
-/* CICLO SLIDE */
-.ciclo-slide{display:grid;grid-template-columns:1fr 2fr;min-height:72vh;border-bottom:1px solid var(--brd);}
-.ciclo-left{padding:48px 42px;border-right:1px solid var(--brd);display:flex;flex-direction:column;justify-content:space-between;background:#F5F3FF;}
-.ciclo-big{font-size:clamp(4rem,11vw,8.5rem);font-weight:900;line-height:.82;
-  color:rgba(107,33,214,.1);letter-spacing:-.08em;font-family:'DM Mono',monospace;}
-.ciclo-title{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:900;line-height:1.1;margin-top:10px;}
-.ciclo-title span{color:var(--v);}
-.ciclo-meta{margin-top:14px;display:flex;flex-direction:column;gap:5px;}
-.ciclo-meta-row{display:flex;align-items:flex-start;gap:7px;font-size:.78rem;color:var(--gd);}
-.ciclo-meta-row strong{color:var(--gray);font-weight:600;}
-.ciclo-btns-row{margin-top:18px;display:flex;gap:6px;flex-wrap:wrap;}
-.ciclo-right{padding:38px 34px;background:#fff;}
-.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:9px;margin-top:16px;}
-.product-card{background:#F8F6FF;border:1px solid var(--brd);border-radius:9px;padding:13px;
-  cursor:pointer;transition:all .18s;text-decoration:none;color:inherit;}
-.product-card:hover{border-color:var(--v);background:#EDE9FE;transform:translateY(-1px);}
-.pc-id{font-size:.6rem;font-weight:700;color:var(--v);font-family:'DM Mono',monospace;}
-.pc-tema{font-size:.72rem;font-weight:700;color:var(--w);margin-top:3px;line-height:1.3;}
-.pc-meta{display:flex;align-items:center;gap:5px;margin-top:7px;flex-wrap:wrap;}
-.pc-date{font-size:.56rem;color:var(--gd);font-family:'DM Mono',monospace;}
-.pc-estado{display:flex;align-items:center;gap:3px;margin-top:5px;}
-.estado-bar{display:flex;gap:2px;}
-.eb{width:13px;height:3px;border-radius:2px;background:rgba(107,33,214,.15);}
-.eb.done{background:var(--v);}
-.eb.now{background:#7C3AED;}
+/* METRICAS */
+.mg{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:12px;margin-bottom:18px;}
+.mcard{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:16px;}
+.mnet{display:flex;align-items:center;gap:6px;margin-bottom:9px;}
+.mndot{width:9px;height:9px;border-radius:50%;}
+.mnnm{font-size:12px;font-weight:700;}
+.mrow{margin-top:6px;}
+.mrow-l{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
+.mrow-v{font-size:13px;font-weight:700;}
+.ch2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.chc{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:16px;}
+.chc h3{font-size:12px;font-weight:800;margin-bottom:11px;}
+.fr{display:flex;align-items:center;gap:7px;margin-bottom:14px;flex-wrap:wrap;}
+.fbtn{padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:var(--surface);font-size:10.5px;font-weight:600;cursor:pointer;transition:all .15s;color:var(--text);}
+.fbtn:hover,.fbtn.on{background:var(--accent);color:var(--white);border-color:var(--accent);}
 
-/* FORMATO TAGS */
-.fmt-tag{padding:2px 8px;border-radius:20px;font-size:.58rem;font-weight:800;text-transform:uppercase;}
-.fmt-post{background:rgba(107,33,214,.12);color:#5B21B6;border:1px solid rgba(107,33,214,.25);}
-.fmt-reel{background:rgba(234,88,12,.1);color:#9A3412;border:1px solid rgba(234,88,12,.25);}
-.fmt-historia{background:rgba(5,150,105,.1);color:#065F46;border:1px solid rgba(5,150,105,.25);}
-.fmt-mail{background:rgba(79,70,229,.1);color:#3730A3;border:1px solid rgba(79,70,229,.25);}
-.fmt-video{background:rgba(202,138,4,.1);color:#92400E;border:1px solid rgba(202,138,4,.25);}
-.fmt-stories{background:rgba(5,150,105,.1);color:#065F46;border:1px solid rgba(5,150,105,.25);}
-.fmt-carrusel{background:rgba(234,88,12,.1);color:#9A3412;border:1px solid rgba(234,88,12,.25);}
-.fmt-pauta{background:rgba(2,132,199,.1);color:#0369A1;border:1px solid rgba(2,132,199,.25);}
-.fmt-transmision{background:rgba(185,28,28,.1);color:#991B1B;border:1px solid rgba(185,28,28,.25);}
+/* MISC */
+.ld{display:flex;align-items:center;justify-content:center;padding:50px;color:var(--muted);gap:10px;font-size:13px;}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid var(--b200);border-top-color:var(--accent);animation:sp .7s linear infinite;flex-shrink:0;}
+@keyframes sp{to{transform:rotate(360deg);}}
+.empty{text-align:center;padding:40px 20px;color:var(--muted);}
+.ham{display:none;position:fixed;top:11px;left:11px;z-index:300;width:35px;height:35px;border-radius:8px;background:var(--v900);border:none;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:4px;}
+.ham span{display:block;width:15px;height:2px;background:var(--white);border-radius:2px;}
+.ovl{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:190;}
 
-/* CANAL TAGS */
-.canal-tag{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;
-  font-size:11px;font-weight:600;background:rgba(107,33,214,.08);border:1px solid var(--brd);color:var(--v);}
-.ct-ig{background:#C13584;color:#fff;}
-.ct-fb{background:#1877F2;color:#fff;}
-.ct-yt{background:#CC0000;color:#fff;}
-.ct-tk{background:#1A1A1A;color:#69C9D0;outline:1px solid #69C9D0;}
-.ct-sp{background:#1DB954;color:#fff;}
-.ct-wa{background:#128C7E;color:#fff;}
-.ct-ml{background:#4F46E5;color:#fff;}
-.ct-pa{background:#7C3AED;color:#fff;}
-.ct-wb{background:#0284C7;color:#fff;}
-.canales-wrap{display:flex;gap:4px;flex-wrap:wrap;}
-
-/* FICHA SLIDE */
-.ficha-slide{min-height:100vh;padding:60px;border-top:1px solid var(--brd);display:flex;flex-direction:column;}
-.ficha-slide-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:9px;}
-.ficha-slide-lbl{font-size:.58rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--vl);font-family:'DM Mono',monospace;}
-.ficha-count{font-size:.62rem;color:var(--gd);font-family:'DM Mono',monospace;}
-.ficha-layout{display:grid;grid-template-columns:1fr 280px;gap:18px;margin-top:18px;}
-.ficha-card{background:var(--card);border:1px solid var(--brd);border-radius:14px;overflow:hidden;}
-.ficha-topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;
-  background:rgba(107,33,214,.12);border-bottom:1px solid var(--brd);}
-.ficha-np{font-size:.72rem;font-weight:800;color:var(--vl);font-family:'DM Mono',monospace;}
-.ficha-topbar-r{display:flex;align-items:center;gap:7px;}
-.ficha-body{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--brd);}
-.fc{padding:14px 18px;border-bottom:1px solid var(--brd);border-right:1px solid var(--brd);}
-.fc:nth-child(even){border-right:none;}
-.fc.wide{grid-column:1/-1;border-right:none;}
-.fc-lbl{font-size:.55rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--gd);margin-bottom:6px;}
-.fc-val{font-size:.82rem;color:var(--gray);line-height:1.5;}
-.fc-val.copy,.fc-val.cap{font-size:.78rem;line-height:1.7;white-space:pre-wrap;}
-.fc-val.date{font-family:'DM Mono',monospace;color:var(--vl);}
-.fc-val.ajuste{color:var(--y);font-size:.78rem;}
-.img-zone{height:160px;border-top:1px solid var(--brd);display:flex;align-items:center;
-  justify-content:center;background:rgba(107,33,214,.05);}
-.img-zone-inner{text-align:center;color:var(--gd);}
-.ficha-side{display:flex;flex-direction:column;gap:12px;}
-.proceso-card{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:16px;}
-.proceso-steps{display:flex;flex-direction:column;gap:7px;margin-top:12px;}
-.ps{display:flex;align-items:center;gap:9px;font-size:.72rem;color:var(--gd);padding:5px 0;}
-.ps-icon{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:.6rem;flex-shrink:0;background:rgba(107,33,214,.18);border:1px solid var(--brd);}
-.ps.done .ps-icon{background:var(--grn);border-color:var(--grn);color:#fff;}
-.ps.now .ps-icon{background:var(--v);border-color:var(--vd);color:#fff;}
-.ps.pend .ps-icon{background:#EDE9FE;}
-.ps-txt{color:var(--gd);}
-.ps-txt.now{color:var(--v);font-weight:700;}
-.ps.done .ps-txt{color:var(--gray);}
-
-/* GRABACIONES */
-.grab-section{padding:52px 48px;border-bottom:1px solid var(--brd);background:#fff;}
-.grab-table{width:100%;border-collapse:collapse;margin-top:16px;}
-.grab-table th{background:#F5F3FF;padding:9px 13px;font-size:.6rem;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--v);text-align:left;
-  border-bottom:2px solid var(--brd);}
-.grab-table td{padding:10px 13px;font-size:.75rem;border-bottom:1px solid var(--brd);
-  color:var(--gray);vertical-align:middle;}
-.grab-table tr:hover td{background:#F5F3FF;}
-.tipo-grab{display:inline-flex;align-items:center;padding:2px 9px;border-radius:20px;font-size:.6rem;font-weight:700;}
-.tipo-grab{background:rgba(107,33,214,.1);color:#5B21B6;border:1px solid rgba(107,33,214,.2);}
-.tipo-vivo{background:rgba(185,28,28,.1);color:#991B1B;border:1px solid rgba(185,28,28,.2);}
-.tipo-pre{background:rgba(202,138,4,.1);color:#92400E;border:1px solid rgba(202,138,4,.2);}
-.tipo-edit{background:rgba(5,150,105,.1);color:#065F46;border:1px solid rgba(5,150,105,.2);}
-
-/* METRICS */
-.metrics-section{padding:52px 48px;border-bottom:1px solid var(--brd);background:#fff;}
-.canal-tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:22px;}
-.canal-tab{padding:5px 14px;border-radius:20px;font-size:.65rem;font-weight:700;
-  cursor:pointer;border:1px solid var(--brd);color:var(--gd);white-space:nowrap;
-  transition:all .18s;font-family:'Nunito',sans-serif;}
-.canal-tab:hover{color:var(--v);border-color:var(--v);}
-.canal-tab.on{color:#fff;}
-.canal-tab.on.ct-ig{background:#C13584;border-color:#C13584;}
-.canal-tab.on.ct-fb{background:#1877F2;border-color:#1877F2;}
-.canal-tab.on.ct-yt{background:#CC0000;border-color:#CC0000;}
-.canal-tab.on.ct-wa{background:#128C7E;border-color:#128C7E;}
-.canal-tab.on.ct-ml{background:#4F46E5;border-color:#4F46E5;}
-.canal-tab.on.ct-all{background:var(--v);border-color:var(--vd);}
-.canal-panel{display:none;}
-.canal-panel.on{display:block;}
-.canal-stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:16px;}
-.cstat{background:#F8F6FF;border:1.5px solid var(--brd);border-radius:10px;padding:14px;}
-.cstat-n{font-size:1.4rem;font-weight:900;font-family:'DM Mono',monospace;line-height:1;}
-.cstat-l{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gd);margin-top:4px;}
-.cstat-note{font-size:.58rem;color:var(--gd);margin-top:12px;font-style:italic;line-height:1.5;}
-.metrics-update-tip{font-size:.68rem;color:var(--gray);margin-top:10px;background:#F5F3FF;
-  border:1px solid var(--brd);border-radius:8px;padding:10px 14px;
-  display:flex;align-items:flex-start;gap:8px;}
-.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
-.chart-card{background:#F8F6FF;border:1.5px solid var(--brd);border-radius:12px;padding:18px;}
-.chart-card.wide{grid-column:1/-1;}
-.chart-title{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--gd);margin-bottom:12px;}
-.chart-wrap{height:180px;position:relative;}
-
-/* KPI BOARD */
-.kpi-board{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:20px 0;}
-.kpi-card{background:#F8F6FF;border:1.5px solid var(--brd);border-radius:12px;padding:16px;}
-.kpi-card.on-track{border-color:rgba(5,150,105,.35);}
-.kpi-card.warning{border-color:rgba(202,138,4,.35);}
-.kpi-num{font-size:1.6rem;font-weight:900;font-family:'DM Mono',monospace;color:var(--v);}
-.kpi-label{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gd);margin-top:4px;}
-.kpi-meta{font-size:.68rem;color:var(--gd);margin-top:6px;}
-.kpi-bar{height:3px;border-radius:2px;background:rgba(107,33,214,.12);margin-top:8px;overflow:hidden;}
-.kpi-bar-fill{height:100%;background:var(--v);border-radius:2px;}
-
-/* RESPONSIVE */
-@media(max-width:960px){
-  .portada{grid-template-columns:1fr;}
-  .portada-l{border-right:none;border-bottom:1px solid var(--brd);padding:38px 24px;}
-  .portada-r{padding:30px 24px;}
-  .cal-section{grid-template-columns:1fr;}
-  .cal-sidebar{display:none;}
-  .ciclo-slide{grid-template-columns:1fr;}
-  .ciclo-left{border-right:none;border-bottom:1px solid var(--brd);padding:34px 22px;}
-  .ciclo-right{padding:26px 22px;}
-  .ficha-layout{grid-template-columns:1fr;}
-  .ficha-side{margin-top:16px;}
-  .metrics-grid{grid-template-columns:1fr 1fr;}
-  .charts-grid{grid-template-columns:1fr;}
-}
-@media(max-width:600px){
-  :root{--nav-h:48px;--sub-h:38px;}
-  .ham{display:flex;}
-  .nav-link,.nl-metrics,.sync-pill{display:none;}
-  .portada-l,.portada-r,.ficha-slide,.cal-main,
-  .grab-section,.metrics-section,.ciclo-right{padding:22px 16px;}
-  .ciclo-left{padding:26px 18px;}
-  .ficha-body{grid-template-columns:1fr;}
-  .products-grid{grid-template-columns:1fr 1fr;}
-  .month-name{font-size:clamp(2.4rem,13vw,3.5rem);}
-}
+@media(max-width:1060px){.cal-wrap{grid-template-columns:1fr;}.cbox{position:static;}.slide-body{grid-template-columns:1fr;}}
+@media(max-width:960px){.sb{transform:translateX(-100%);transition:transform .3s;}.sb.open{transform:translateX(0);}.main{margin-left:0;}.ham{display:flex;}.ovl.show{display:block;}.ch2{grid-template-columns:1fr;}.panel{padding:14px;}.topbar{padding:10px 14px 10px 52px;}}
+@media(max-width:640px){.hero-m{font-size:32px;}.slide-body{grid-template-columns:1fr;}.fg{grid-template-columns:1fr;}.ff.s2{grid-column:auto;}}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="topnav">
-  <div class="nav-logo" onclick="goHome()">
-    <div class="nav-logo-mark">
-      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+<button class="ham" id="hamBtn"><span></span><span></span><span></span></button>
+<div class="ovl" id="ovl"></div>
+
+<!-- SIDEBAR -->
+<aside class="sb" id="sb">
+  <div class="logo">
+    <div class="logo-n">Local<em> Church</em></div>
+    <div class="logo-s">Parrilla Influencia 2026</div>
+  </div>
+  <div class="ns">
+    <span class="nl">Herramientas</span>
+    <a class="ni" href="https://docs.google.com/spreadsheets/d/1OJ8DvdBymCVMtphoNTtJ0Z7RtKs50CZ6sPPHLB45j1o/edit" target="_blank"><span class="ico">📊</span>Google Sheets</a>
+    <a class="ni" href="https://trello.com/invite/b/6877d1bd45f819eb3bb24869/ATTI77e4df05b7e08040e75308e1814befbc181414F6/local-church-influencia" target="_blank"><span class="ico">📋</span>Trello</a>
+    <a class="ni" href="https://drive.google.com/drive/folders/1pgAxK9xSsnPArk5hx7d-QcUEottoBwGK" target="_blank"><span class="ico">📁</span>Google Drive</a>
+    <button class="ni" onclick="showPanel('grabacion')"><span class="ico">🎬</span>Plan Grabaciones</button>
+    <button class="ni" onclick="showPanel('metricas')"><span class="ico">📈</span>Métricas</button>
+  </div>
+  <div class="ns">
+    <span class="nl">Meses 2026</span>
+    <div class="mgr" id="mGrid"></div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+  <header class="topbar">
+    <div class="tb-t">Parrilla <span>Influencia</span></div>
+    <div class="tb-r">
+      <div class="pill"><div class="dot" id="dot"></div><span id="stxt">Conectando…</span></div>
+      <button class="tbtn g" onclick="showSetup()">⚙</button>
+      <button class="tbtn g" onclick="showDebug()">🔍</button>
+      <button class="tbtn p" onclick="loadData()">↻ Actualizar</button>
     </div>
-    Local Church
-  </div>
-  <a id="nav-sheet" href="https://docs.google.com/spreadsheets/d/1s2ax4z5GqIIcO1TRYr6jjGZX7lFgLlH3/edit" target="_blank" class="nav-link nl-sheet">
-    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-    Google Sheet
-  </a>
-  <a id="nav-trello" href="https://trello.com/invite/b/6877d1bd45f819eb3bb24869/ATTI77e4df05b7e08040e75308e1814befbc181414F6/local-church-influencia" target="_blank" class="nav-link nl-trello"
-     title="Clic derecho para cambiar URL">
-    <svg viewBox="0 0 24 24"><path d="M21 3H3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM10.5 17h-6V7h6v10zm9-5h-6V7h6v5z"/></svg>
-    Trello
-  </a>
-  <a id="nav-drive" href="https://drive.google.com/drive/folders/1pgAxK9xSsnPArk5hx7d-QcUEottoBwGK" target="_blank" class="nav-link nl-drive"
-     title="Clic derecho para cambiar URL">
-    <svg viewBox="0 0 24 24"><path d="M7.71 3.5 1.15 15l3.43 6 6.56-11.5zm1.13 0h7.02L22.85 15h-7.02zm-5.01 13 2.68 4.5h13.97L17.81 16.5z"/></svg>
-    Drive
-  </a>
-  <button class="nav-link nl-grab" onclick="goGrab()">📹 Grabaciones</button>
-  <button class="nav-link nl-metrics" onclick="goMetrics()">📈 Métricas</button>
-  <div class="sync-pill">
-    <div class="sync-dot wait" id="sdot"></div>
-    <span id="slbl">Esperando Sheet ID…</span>
-  </div>
-  <div class="ham" id="ham" onclick="toggleDrawer()">
-    <span></span><span></span><span></span>
-  </div>
-</nav>
+  </header>
 
-<!-- SUBNAV -->
-<nav class="subnav">
-  <a class="mtab on" onclick="showMonth('abril');return false;" href="#">Abril 2026</a>
-  <a class="mtab" onclick="showMonth('mayo');return false;" href="#">Mayo</a>
-  <a class="mtab" onclick="showMonth('junio');return false;" href="#">Junio</a>
-  <a class="mtab" onclick="showMonth('julio');return false;" href="#">Julio</a>
-  <a class="mtab" onclick="showMonth('agosto');return false;" href="#">Agosto</a>
-  <a class="mtab" onclick="showMonth('septiembre');return false;" href="#">Sep</a>
-  <a class="mtab" onclick="showMonth('octubre');return false;" href="#">Oct</a>
-  <a class="mtab" onclick="showMonth('noviembre');return false;" href="#">Nov</a>
-  <a class="mtab" onclick="showMonth('diciembre');return false;" href="#">Dic</a>
-</nav>
+  <!-- PORTADA + CALENDARIO -->
+  <section class="panel on" id="panel-main">
+    <div class="hero">
+      <div class="hero-b">2026</div>
+      <div class="hero-m" id="heroM">Selecciona<span> un mes</span></div>
+    </div>
 
-<!-- DRAWER MOBILE -->
-<div class="drawer" id="drawer">
-  <div class="dr-sec">Meses 2026</div>
-  <a class="dr-link on" onclick="showMonth('abril');toggleDrawer()" href="#">Abril 2026</a>
-  <a class="dr-link" onclick="showMonth('mayo');toggleDrawer()" href="#">Mayo 2026</a>
-  <a class="dr-link" onclick="showMonth('junio');toggleDrawer()" href="#">Junio 2026</a>
-  <a class="dr-sec" style="margin-top:10px">Herramientas</a>
-  <a class="dr-link" id="drawer-sheet" href="https://docs.google.com/spreadsheets/d/1s2ax4z5GqIIcO1TRYr6jjGZX7lFgLlH3/edit" target="_blank">📊 Google Sheet</a>
-  <a class="dr-link" id="drawer-trello" href="https://trello.com/invite/b/6877d1bd45f819eb3bb24869/ATTI77e4df05b7e08040e75308e1814befbc181414F6/local-church-influencia" target="_blank">🗂 Trello</a>
-  <a class="dr-link" id="drawer-drive" href="https://drive.google.com/drive/folders/1pgAxK9xSsnPArk5hx7d-QcUEottoBwGK" target="_blank">📁 Google Drive</a>
-  <a class="dr-link" onclick="goGrab();toggleDrawer()" href="#">📹 Plan de Grabación</a>
-  <a class="dr-link" onclick="goMetrics();toggleDrawer()" href="#">📈 Métricas</a>
-</div>
+    <!-- Calendario con slide integrado -->
+    <div class="cal-wrap">
+      <div>
+        <div class="cal-top">
+          <div class="cal-h" id="calH">Calendario</div>
+          <div class="cal-nav">
+            <button onclick="shiftM(-1)">‹</button>
+            <button onclick="shiftM(1)">›</button>
+          </div>
+        </div>
+        <div class="cg" id="calG"></div>
 
-<main id="main"></main>
+        <!-- SLIDE — aparece aquí debajo del calendario -->
+        <div id="slideWrap"></div>
+      </div>
+
+      <div>
+        <div class="cbox">
+          <h3>Contenidos por canal</h3>
+          <canvas id="chChart" height="190"></canvas>
+          <div class="chleg" id="chLeg"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRABACION -->
+  <section class="panel" id="panel-grabacion">
+    <button class="back" onclick="showPanel('main')">← Inicio</button>
+    <div class="stitle">🎬 Plan de Grabaciones</div>
+    <div id="grabWrap"><div class="ld"><div class="spin"></div>Cargando…</div></div>
+  </section>
+
+  <!-- METRICAS -->
+  <section class="panel" id="panel-metricas">
+    <button class="back" onclick="showPanel('main')">← Inicio</button>
+    <div class="stitle">📈 Métricas de Redes Sociales</div>
+    <div class="fr" id="mFilt"></div>
+    <div class="mg" id="mGrid2"><div class="ld"><div class="spin"></div>Cargando…</div></div>
+    <div class="ch2">
+      <div class="chc"><h3>Por Estado</h3><canvas id="cSt"></canvas></div>
+      <div class="chc"><h3>Por Responsable</h3><canvas id="cRe"></canvas></div>
+    </div>
+    <div class="ch2">
+      <div class="chc"><h3>Por Canal</h3><canvas id="cCa"></canvas></div>
+      <div class="chc"><h3>Por Ciclo</h3><canvas id="cCi"></canvas></div>
+    </div>
+  </section>
+</main>
 
 <script>
-// ═══════════════════════════════════════════════════════════════════
-// CONFIGURACIÓN — PASO 1 DE 1 PARA EL CLIENTE
-// ═══════════════════════════════════════════════════════════════════
-// El cliente sólo necesita pegar el ID de su Google Sheet aquí abajo
-// El ID está en la URL del Sheet: docs.google.com/spreadsheets/d/ >> ID << /edit
-// El Sheet debe estar compartido como "Cualquier persona con el enlace puede ver"
-// ═══════════════════════════════════════════════════════════════════
-let SHEET_ID  = localStorage.getItem("lc-sheet-id")  || "1s2ax4z5GqIIcO1TRYr6jjGZX7lFgLlH3";
-// Clave de publicación (/e/CLAVE/pub) — se obtiene de Archivo → Publicar en la web
-const PUB_KEY = localStorage.getItem("lc-pub-key") || "2PACX-1vSo6mNPGWdEnSrhtyx_z2MhmJu_fCUydKudQ3XatX20cJEXEfCAELfRIKx7bblOWSztImTO9xWgSEZZ";
-// ═══════════════════════════════════════════════════════════════════
+/* ════════════════════════════════════════════════════
+   CONFIG
+════════════════════════════════════════════════════ */
+let API_URL = localStorage.getItem('lc_api_url') || null;
 
-const ESTADO_STEPS = ["Pendiente","En revisión","Revisado","Ajustado","Aprobado"];
-const MONTH_ORDER  = ["abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
-
-// ── Fases del ciclo ───────────────────────────────────────────────
-const FASES_LC = [
-  {id:"vitrina",    label:"Vitrina / Experiencias",    color:"rgba(139,69,232,.85)", icon:"🏛"},
-  {id:"quienes",    label:"¿Quiénes Somos?",           color:"rgba(245,200,66,.85)", icon:"🌟"},
-  {id:"academia",   label:"Crecer en tu fe / Academia", color:"rgba(56,189,248,.85)", icon:"🎓"},
-  {id:"conecta",    label:"Local Conecta",              color:"rgba(52,211,153,.85)", icon:"🤝"},
-  {id:"casa",       label:"Local en Casa",              color:"rgba(249,115,22,.85)", icon:"🏠"},
-  {id:"voluntarios",label:"Voluntarios",                color:"rgba(244,114,182,.85)",icon:"🙌"},
-];
-function faseMeta(f){
-  const s=(f||"").toLowerCase();
-  if(s.includes("vitrina")||s.includes("experiencia")) return FASES_LC[0];
-  if(s.includes("quién")||s.includes("somos"))         return FASES_LC[1];
-  if(s.includes("academ")||s.includes("crecer"))        return FASES_LC[2];
-  if(s.includes("conecta"))                             return FASES_LC[3];
-  if(s.includes("casa"))                                return FASES_LC[4];
-  if(s.includes("voluntar"))                            return FASES_LC[5];
-  return {id:"gen",label:f,color:"rgba(139,69,232,.85)",icon:"📌"};
-}
-
-// ── Canal helpers ─────────────────────────────────────────────────
-const CANAL_CLASS={instagram:"ct-ig",facebook:"ct-fb",youtube:"ct-yt",tiktok:"ct-tk",
-  spotify:"ct-sp",whatsapp:"ct-wa","whatsapp controlado":"ct-wa",mail:"ct-ml",
-  pantallas:"ct-pa",web:"ct-wb",app:"ct-wb","instagram / facebook":"ct-ig",
-  "facebook / instagram":"ct-fb","youtube / facebook":"ct-yt",email:"ct-ml"};
-const CANAL_CAL={instagram:"cp-ig",facebook:"cp-fb",youtube:"cp-yt",tiktok:"cp-tk",
-  spotify:"cp-sp",whatsapp:"cp-wa",mail:"cp-ml",email:"cp-ml",pantallas:"cp-pan",
-  experiencia:"cp-ex","local en casa":"cp-or","instagram / facebook":"cp-ig",
-  "facebook / instagram":"cp-fb"};
-const CANAL_ICON={instagram:"📸",facebook:"👤",youtube:"▶️",tiktok:"🎵",spotify:"🎧",
-  whatsapp:"💬","whatsapp controlado":"💬",mail:"✉️",email:"✉️",pantallas:"🖥",web:"🌐",app:"📱"};
-function cKey(c){return(c||"").toLowerCase().split("·")[0].split(",")[0].trim();}
-function cClass(c){return CANAL_CLASS[cKey(c)]||"ct-wb";}
-function cCal(c){return CANAL_CAL[cKey(c)]||"cp-ex";}
-function cIcon(c){return CANAL_ICON[cKey(c)]||"📡";}
-
-// ── Formato helpers ───────────────────────────────────────────────
-function fmtClass(f){
-  const s=(f||"").toLowerCase();
-  if(s.includes("reel"))       return "fmt-reel";
-  if(s.includes("stories")||s.includes("historia")) return "fmt-stories";
-  if(s.includes("carrusel"))   return "fmt-carrusel";
-  if(s.includes("mail")||s.includes("email")) return "fmt-mail";
-  if(s.includes("transmisión")||s.includes("en vivo")||s.includes("live")) return "fmt-transmision";
-  if(s.includes("pauta"))      return "fmt-pauta";
-  if(s.includes("video"))      return "fmt-video";
-  if(s.includes("post"))       return "fmt-post";
-  return "fmt-post";
-}
-function fmtIcon(f){
-  const m={"reel":"🎬","stories":"📱","historia":"📱","carrusel":"📸","mail":"✉️",
-    "email":"✉️","transmisión":"📺","pauta":"📣","video":"📹","post":"🖼"};
-  const k=(f||"").toLowerCase().split(" ")[0].split("/")[0].trim();
-  return m[k]||"📄";
-}
-
-// ── Estado helpers ────────────────────────────────────────────────
-function estadoIdx(e){return Math.max(0,ESTADO_STEPS.indexOf(e));}
-function renderProceso(estado){
-  const idx=estadoIdx(estado);
-  return ESTADO_STEPS.map((l,i)=>{
-    const cls=i<idx?"done":i===idx?"now":"pend";
-    const icon=i<idx?"✓":i===idx?"→":"○";
-    return `<div class="ps ${cls}"><div class="ps-icon ${cls}">${icon}</div><div class="ps-txt${i===idx?" now":""}">${l}</div></div>`;
-  }).join("");
-}
-function renderEstadoBar(estado,total=4){
-  const idx=estadoIdx(estado);
-  return Array.from({length:total},(_,i)=>`<div class="eb ${i<idx?"done":i===idx?"now":""}"></div>`).join("");
-}
-
-// ── Estado color ──────────────────────────────────────────────────
-function estadoColor(e){
-  const m={"Aprobado":"#059669","En revisión":"#B45309","Revisado":"#0369A1","Ajustado":"#EA580C","Pendiente":"#7C6FA0"};
-  return m[e]||"#7C6FA0";
-}
-
-// ══════════════════════════════════════════════════════════════════
-// DATOS EMBEBIDOS — ABRIL 2026
-// Generados a partir del Excel Local_Church_Parrilla_Abril_2026.xlsx
-// Se sobreescriben automáticamente cuando hay un Google Sheet conectado
-// ══════════════════════════════════════════════════════════════════
-const ABRIL_PIEZAS = [
-  // CICLO 1 — Semana 1 (30 Mar – 5 Abr) — Domingo Resurrección
-  {id:"ABR-C1-01",ciclo:"1",grupo:"G01",tema:"Countdown Resurrección – Reel IG/FB",fecha:"30/03",canal:"Instagram / Facebook",formato:"Reel",fase:"F2 – Vitrina",audiencia:"Asistentes esporádicos / Externos",objetivo:"Generar registros para experiencia presencial del 5 Abr",copy:"🔴 ¿Vas a estar este domingo? Resurrección en Local Church. Regístrate ahora.",cta:"Registro experiencia",kpi:"Registros web/app",responsable:"Carolina",estado:"Pendiente"},
-  {id:"ABR-C1-02",ciclo:"1",grupo:"G01",tema:"Presentación Local Church – Post institucional",fecha:"31/03",canal:"Instagram / Facebook",formato:"Post estático",fase:"F1 – ¿Quiénes somos?",audiencia:"Audiencia nueva / Desconocidos",objetivo:"Dar a conocer la identidad de Local Church a nuevas audiencias",copy:"¿Qué es Local Church? Una comunidad que camina junta hacia la transformación espiritual.",cta:"Link web 'Soy nuevo'",kpi:"CTR web",responsable:"Andrea",estado:"Pendiente"},
-  {id:"ABR-C1-03",ciclo:"1",grupo:"G02",tema:"Recordatorio interno equipo voluntarios",fecha:"01/04",canal:"Email + WhatsApp",formato:"Mail",fase:"F2 – Vitrina",audiencia:"Voluntarios / Staff",objetivo:"Alinear equipo para el domingo de Resurrección",copy:"📩 INTERNO: Recordatorio equipo voluntarios domingo – logística, horario, código de vestimenta y oración previa.",cta:"Confirmar asistencia",kpi:"Respuesta/apertura email",responsable:"Carolina",estado:"Pendiente"},
-  {id:"ABR-C1-04",ciclo:"1",grupo:"G01",tema:"Clip testimonio pre-Resurrección – TikTok/IG",fecha:"02/04",canal:"Instagram / TikTok",formato:"Reel",fase:"F1 – ¿Quiénes somos?",audiencia:"Cristianos que no asisten a Local",objetivo:"Despertar interés y convocatoria a través de testimonio real",copy:"¿Qué pasó en mi vida después de Pascua? Testimonio real del campus (30s).",cta:"Invitar a un amigo este domingo",kpi:"Alcance + shares",responsable:"Juan Pablo",estado:"Pendiente"},
-  {id:"ABR-C1-05",ciclo:"1",grupo:"G01",tema:"Convocatoria final Resurrección – Horarios",fecha:"03/04",canal:"Instagram / Facebook / Web",formato:"Post estático",fase:"F2 – Vitrina",audiencia:"Audiencia general",objetivo:"Cerrar registros para experiencia presencial",copy:"📍 ¡Celebremos juntos! Domingo de Resurrección. Horarios Bogotá / Sogamoso / Online. ¡Regístrate!",cta:"Registro experiencia",kpi:"Registros",responsable:"Carolina",estado:"Pendiente"},
-  {id:"ABR-C1-06",ciclo:"1",grupo:"G01",tema:"Recordatorio final – Stories countdown",fecha:"04/04",canal:"Instagram",formato:"Stories",fase:"F2 – Vitrina",audiencia:"Audiencia general",objetivo:"Último empuje de registros antes del domingo",copy:"⏰ ¡Mañana! ¿Ya te registraste? Countdown sticker + poll ¿Vas presencial u online?",cta:"Registro app/web",kpi:"Registros",responsable:"Carolina",estado:"Pendiente"},
-  {id:"ABR-C1-07",ciclo:"1",grupo:"G03",tema:"Transmisión en vivo Domingo Resurrección",fecha:"05/04",canal:"YouTube / Facebook / Instagram",formato:"Transmisión",fase:"F2 – Vitrina",audiencia:"Asistentes + audiencia online",objetivo:"Transmisión en vivo y cobertura del domingo de Resurrección",copy:"🎙️ EN VIVO: Domingo de Resurrección – Andrey Molina (Bogotá) + Yury Garcia (Sogamoso) + Online.",cta:"Assessment espiritual post-charla",kpi:"Asistencia real + vistas en vivo",responsable:"Juan Pablo",estado:"Pendiente"},
-
-  // CICLO 2 — Semana 2 (6–12 Abr) — Post Resurrección + Online
-  {id:"ABR-C2-01",ciclo:"2",grupo:"G04",tema:"Flujo post-experiencia Resurrección – Email",fecha:"06/04",canal:"Email",formato:"Mail",fase:"F4 – Local Conecta",audiencia:"Asistentes nuevos del domingo 5",objetivo:"Activar assessment y comunicar siguiente paso",copy:"📧 Gracias por estar en Resurrección – tu siguiente paso → link Assessment espiritual + info Local en Casa / Academia.",cta:"Completar Assessment",kpi:"Assessment realizados",responsable:"Carolina",estado:"Pendiente"},
-  {id:"ABR-C2-02",ciclo:"2",grupo:"G05",tema:"Infografía 4 etapas transformación – Academia",fecha:"07/04",canal:"Instagram / Facebook",formato:"Post estático",fase:"F3 – Academia",audiencia:"Asistentes recurrentes / Etapa 3-4",objetivo:"Posicionar Academia como ruta de crecimiento",copy:"📖 ¿Qué significa crecer espiritualmente? Las 4 etapas: Conociendo → Cerca → Creciendo → Centrado en Jesús.",cta:"Conoce tu etapa – Assessment",kpi:"Clics assessment",responsable:"Andrea",estado:"Pendiente"},
-  {id:"ABR-C2-03",ciclo:"2",grupo:"G05",tema:"Clip highlight Domingo Resurrección – Reel",fecha:"08/04",canal:"Instagram / TikTok",formato:"Reel",fase:"F1 – ¿Quiénes somos?",audiencia:"Audiencia general",objetivo:"Viralizar momento impactante de la charla",copy:"🎬 Clip highlight Domingo Resurrección – momento impactante de la charla (30-45s) + texto clave en pantalla.",cta:"Ver charla completa en YouTube",kpi:"Vistas YouTube + CTR",responsable:"Juan Pablo",estado:"Pendiente"},
-  {id:"ABR-C2-04",ciclo:"2",grupo:"G06",tema:"Post Local en Casa – Comunidad",fecha:"09/04",canal:"Instagram / WhatsApp",formato:"Post estático",fase:"F5 – Local en Casa",audiencia:"Asistentes + comunidad existente",objetivo:"Aumentar participación en grupos Local en Casa",copy:"🏠 ¿Ya tienes tu grupo? Así se vive Local en Casa... Foto real de un grupo + testimonio host.",cta:"Unirse a Local en Casa",kpi:"Clics / nuevos inscritos",responsable:"Andrea",estado:"Pendiente"},
-  {id:"ABR-C2-05",ciclo:"2",grupo:"G01",tema:"Pauta conversión – Online 12 Abr",fecha:"10/04",canal:"Facebook / Instagram (pauta)",formato:"Pauta",fase:"F2 – Vitrina",audiencia:"Audiencia nueva / Externos",objetivo:"Generar registros para experiencia online del 12 Abr",copy:"📣 Próximo domingo en Local – ¿Listo para seguir creciendo? Únete online este 12 de abril.",cta:"Registro experiencia online",kpi:"Registros (meta pauta)",responsable:"Carolina",estado:"Pendiente"},
-  {id:"ABR-C2-06",ciclo:"2",grupo:"G01",tema:"Recordatorio online domingo 12 – Stories",fecha:"11/04",canal:"Instagram",formato:"Stories",fase:"F2 – Vitrina",audiencia:"Audiencia general",objetivo:"Último empuje para experiencia online del 12",copy:"⏰ ¿Te unes mañana desde casa? Experiencia online este domingo 12 + horario + link.",cta:"Registro online",kpi:"Registros",responsable:"Carolina",estado:"Pendiente"},
-  {id:"ABR-C2-07",ciclo:"2",grupo:"G03",tema:"Transmisión Online – Isabel de Arcila",fecha:"12/04",canal:"YouTube / Facebook",formato:"Transmisión",fase:"F2 – Vitrina",audiencia:"Audiencia online",objetivo:"Transmisión online y cobertura de experiencia Isabel de Arcila",copy:"🎙️ ONLINE: Isabel de Arcila – Tema Libre. Cobertura en stories + bienvenida digital.",cta:"Assessment post-charla online",kpi:"Asistencias online + vistas",responsable:"Juan Pablo",estado:"Pendiente"},
-
-  // CICLO 3 — Semana 3 (13–19 Abr) — Proceso Crecimiento Espiritual
-  {id:"ABR-C3-01",ciclo:"3",grupo:"G04",tema:"Flujo post-online 12 Abr – Email",fecha:"13/04",canal:"Email",formato:"Mail",fase:"F4 – Local Conecta",audiencia:"Asistentes nuevos online del 12",objetivo:"Activar siguiente paso post-charla online",copy:"📧 Gracias por conectarte – ¿cuál es tu siguiente paso? → Assessment + invitación a Local Conecta (espacio virtual cada 15 días).",cta:"Agendar Local Conecta",kpi:"Registros Local Conecta",responsable:"Carolina",estado:"Pendiente"},
-  {id:"ABR-C3-02",ciclo:"3",grupo:"G05",tema:"Teaser Academia – Módulo Sígueme",fecha:"14/04",canal:"Instagram / YouTube Shorts",formato:"Reel",fase:"F3 – Academia",audiencia:"Etapa 3 / Etapa 4 – en proceso",objetivo:"Activar descargas de app y módulos de Academia",copy:"🎓 Módulo Sígueme – ¿qué aprenderás? Clip de 45s con Andrey Molina. CTA: descarga la app y avanza.",cta:"Descargar app / iniciar módulo",kpi:"Descargas app + módulos iniciados",responsable:"Juan Pablo",estado:"Pendiente"},
-  {id:"ABR-C3-03",ciclo:"3",grupo:"G07",tema:"Carrusel cultura Local – Valores ADN",fecha:"15/04",canal:"Instagram / Facebook",formato:"Carrusel",fase:"F1 – ¿Quiénes somos?",audiencia:"Audiencia general",objetivo:"Comunicar cultura y ADN de Local Church",copy:"💜 Amar · Empoderar · Excelencia · Disfrute – así somos en Local. Carrusel visual con cada valor.",cta:"Conocer más / seguir perfil",kpi:"Engagement + nuevos seguidores",responsable:"Andrea",estado:"Pendiente"},
-  {id:"ABR-C3-04",ciclo:"3",grupo:"G08",tema:"Post Voluntarios – Testimonio coordinador",fecha:"16/04",canal:"Instagram / WhatsApp",formato:"Post estático",fase:"F6 – Voluntarios",audiencia:"Voluntarios actuales / potenciales",objetivo:"Convocar nuevos voluntarios y celebrar el servicio",copy:"🙌 ¿Te gustaría servir? Así se vive el voluntariado en Local – testimonio de coordinador de equipo.",cta:"Solicitar info voluntariado",kpi:"Formularios voluntariado",responsable:"Andrea",estado:"Pendiente"},
-  {id:"ABR-C3-05",ciclo:"3",grupo:"G01",tema:"Pauta presencial 19 Abr – Bogotá/Sogamoso",fecha:"17/04",canal:"Facebook / Instagram (pauta)",formato:"Pauta",fase:"F2 – Vitrina",audiencia:"Audiencia externa / Nuevos",objetivo:"Generar registros geolocalizado Bogotá + Sogamoso",copy:"📣 Este domingo en Local – Proceso de Crecimiento Espiritual. ¡Regístrate!",cta:"Registro experiencia",kpi:"Registros (meta pauta)",responsable:"Carolina",estado:"Pendiente"},
-  {id:"ABR-C3-06",ciclo:"3",grupo:"G01",tema:"Countdown domingo 19 – Stories",fecha:"18/04",canal:"Instagram",formato:"Stories",fase:"F2 – Vitrina",audiencia:"Audiencia general",objetivo:"Último empuje de registros",copy:"⏰ ¡Última llamada! Domingo 19 – Proceso de Crecimiento Espiritual con Andrey Molina.",cta:"Registro",kpi:"Registros",responsable:"Carolina",estado:"Pendiente"},
-  {id:"ABR-C3-07",ciclo:"3",grupo:"G03",tema:"Cobertura en vivo – Proceso Crecimiento Espiritual",fecha:"19/04",canal:"Instagram Stories / YouTube",formato:"Transmisión",fase:"F2 – Vitrina",audiencia:"Asistentes + audiencia digital",objetivo:"Cobertura presencial Bogotá + stories highlights",copy:"🎙️ PRESENCIAL: Andrey Molina (Bogotá) – Proceso de Crecimiento Espiritual. Cobertura stories.",cta:"Assessment espiritual",kpi:"Asistencia real + assessment",responsable:"Juan Pablo",estado:"Pendiente"},
-
-  // CICLO 4 — Semana 4 (20–26 Abr) — Local en Casa
-  {id:"ABR-C4-01",ciclo:"4",grupo:"G04",tema:"Flujo post-experiencia 19 Abr – Email",fecha:"20/04",canal:"Email",formato:"Mail",fase:"F4 – Local Conecta",audiencia:"Asistentes del 19 (nuevos)",objetivo:"Guiar hacia el siguiente paso del proceso",copy:"📧 Tu proceso continúa – ¿cuál es tu próximo paso? → 3 opciones: Assessment / Local en Casa / Academia.",cta:"Elegir siguiente paso",kpi:"Clics CTA por ambiente",responsable:"Carolina",estado:"Pendiente"},
-  {id:"ABR-C4-02",ciclo:"4",grupo:"G06",tema:"¿Qué es Local en Casa? – Video dinámico",fecha:"21/04",canal:"Instagram / TikTok",formato:"Reel",fase:"F5 – Local en Casa",audiencia:"Comunidad existente + nuevos",objetivo:"Comunicar el valor de los grupos Local en Casa",copy:"🏠 ¿Qué es Local en Casa? Video dinámico 30s mostrando un grupo real: oración, charla, comunidad.",cta:"Unirse a grupo / contactar host",kpi:"Solicitudes ingreso grupos",responsable:"Juan Pablo",estado:"Pendiente"},
-  {id:"ABR-C4-03",ciclo:"4",grupo:"G05",tema:"Carrusel módulos por etapa – Academia",fecha:"22/04",canal:"Instagram / Facebook",formato:"Carrusel",fase:"F3 – Academia",audiencia:"Etapas 2-3-4",objetivo:"Activar módulos de Academia por etapa del proceso",copy:"📚 Conoce los módulos de tu etapa – carrusel visual con los módulos por etapa de transformación.",cta:"Descargar app / iniciar módulo",kpi:"Módulos iniciados",responsable:"Andrea",estado:"Pendiente"},
-  {id:"ABR-C4-04",ciclo:"4",grupo:"G09",tema:"Testimonio transformación real – Post inspiracional",fecha:"23/04",canal:"Instagram / Facebook",formato:"Post estático",fase:"F1 – ¿Quiénes somos?",audiencia:"Audiencia general",objetivo:"Amplificar historias de transformación y generar shares",copy:"✨ Historia real de crecimiento espiritual en Local – '¿Cómo cambió mi vida el proceso?' (persona real).",cta:"Compartir + tag a un amigo",kpi:"Shares + reach",responsable:"Andrea",estado:"Pendiente"},
-  {id:"ABR-C4-05",ciclo:"4",grupo:"G06",tema:"Pauta Local en Casa – domingo 26",fecha:"24/04",canal:"Facebook / Instagram (pauta)",formato:"Pauta",fase:"F5 – Local en Casa",audiencia:"Potenciales nuevos miembros",objetivo:"Convocar a Local en Casa del 26 de Abril",copy:"📣 Este domingo: Local en Casa – Crecimiento Espiritual con Andrey Molina. ¿No tienes grupo? Únete online.",cta:"Registro Local en Casa",kpi:"Registros LEC",responsable:"Carolina",estado:"Pendiente"},
-  {id:"ABR-C4-06",ciclo:"4",grupo:"G06",tema:"Recordatorio hosts – Material Local en Casa",fecha:"25/04",canal:"Instagram / WhatsApp",formato:"Stories",fase:"F5 – Local en Casa",audiencia:"Comunidad + grupos activos",objetivo:"Activar hosts para Local en Casa del domingo",copy:"🏠 ¿Ya coordinaste tu grupo de Local en Casa para mañana? Recordatorio para hosts.",cta:"Confirmar grupo activo",kpi:"Activación hosts",responsable:"Carolina",estado:"Pendiente"},
-  {id:"ABR-C4-07",ciclo:"4",grupo:"G06",tema:"Cobertura + flujo Local en Casa 26 Abr",fecha:"26/04",canal:"Instagram Stories / Email",formato:"Transmisión",fase:"F5 – Local en Casa",audiencia:"Grupos Local en Casa + asistentes",objetivo:"Cobertura y seguimiento de Local en Casa",copy:"🏠 LOCAL EN CASA: Andrey Molina – Crecimiento Espiritual. Fotos/stories de grupos activos.",cta:"Assessment + próxima experiencia",kpi:"Grupos activos + assessment",responsable:"Juan Pablo / Carolina",estado:"Pendiente"},
-];
-
-// ── KPIs Ecosistema Abril ─────────────────────────────────────────
-const ABRIL_KPIS = [
-  {label:"Assessments espirituales",meta:70,real:0,ambiente:"Local Conecta"},
-  {label:"Personas activas ecosistema",meta:85,real:0,ambiente:"Local Conecta"},
-  {label:"Asistentes constantes LEC",meta:20,real:0,ambiente:"Local en Casa"},
-  {label:"Hosts activos",meta:3,real:0,ambiente:"Local en Casa"},
-  {label:"Módulos Academia Etapa 4",meta:17,real:0,ambiente:"Academia"},
-  {label:"Coordinadores voluntarios",meta:3,real:0,ambiente:"Voluntarios"},
-];
-
-// ── Grabaciones ───────────────────────────────────────────────────
-const ABRIL_GRAB = [
-  {fecha:"05/04/2026",sesion:"Grabación post-Resurrección",tipo:"Grabación",encargado:"Equipo Audiovisual",entrega:"06/04/2026",estado:"Pendiente"},
-  {fecha:"12/04/2026",sesion:"Online Isabel de Arcila – Tema Libre",tipo:"En Vivo",encargado:"Andrey Molina / Juan Pablo",entrega:"12/04/2026",estado:"Pendiente"},
-  {fecha:"17/04/2026",sesion:"Pre-producción Reel Bautizos",tipo:"Pre-producción",encargado:"Equipo Audiovisual",entrega:"18/04/2026",estado:"Pendiente"},
-  {fecha:"19/04/2026",sesion:"Presencial PCE – Proceso Crecimiento Espiritual",tipo:"Grabación",encargado:"Juan Pablo",entrega:"20/04/2026",estado:"Pendiente"},
-  {fecha:"26/04/2026",sesion:"Local en Casa – Crecimiento Espiritual",tipo:"Grabación",encargado:"Equipo Audiovisual",entrega:"27/04/2026",estado:"Pendiente"},
-];
-
-// ── Métricas iniciales (se sobreescriben desde Sheet) ────────────
-window.LC_METRICAS = {
-  instagram:[{mes:"Abril",seguidores:5350,alcance:12400,impresiones:38000,engagement:"4.2%"}],
-  facebook: [{mes:"Abril",seguidores:468, alcance:2100, impresiones:8900, engagement:"1.8%"}],
-  youtube:  [{mes:"Abril",suscriptores:1240,vistas:3800,horas_vistas:420,watch_time:"2:45"}],
-  whatsapp: [{mes:"Abril",contactos:320,mensajes_enviados:280,tasa_apertura:"91%",respuestas:45}],
-  mail:     [{mes:"Abril",suscriptores:240,enviados:238,abiertos:"34%",clics:"6%",bajas:2}],
+const MONTHS = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const SHOW_M = [4,5,6,7,8,9,10,11,12];
+const STATUSES = ['Pendiente','En revisión','Revisado','Ajustado','Aprobado'];
+const MESES_ES = {
+  enero:1,febrero:2,marzo:3,abril:4,mayo:5,junio:6,
+  julio:7,agosto:8,septiembre:9,octubre:10,noviembre:11,diciembre:12,
+  ene:1,feb:2,mar:3,abr:4,jun:6,jul:7,ago:8,sep:9,oct:10,nov:11,dic:12,
 };
+const CH_COL={instagram:'#E1306C',reels:'#E1306C',stories:'#C13584',youtube:'#FF0000',shorts:'#FF0000',facebook:'#1877F2',tiktok:'#111111',whatsapp:'#25D366',spotify:'#1DB954',podcast:'#9333EA',email:'#EA4335',correo:'#EA4335',web:'#4F46E5',blog:'#4F46E5',otro:'#78716C'};
 
-// ── Metadatos del mes ─────────────────────────────────────────────
-const MONTHS_META = {
-  abril:{
-    label:"Abril", num:"04", year:2026,
-    serie:"Domingo Resurrección · Proceso Crecimiento Espiritual · Local en Casa",
-    fases:["Vitrina","Experiencias","Local Conecta","Academia","Local en Casa"],
-    predicadores:["Andrey Molina","Yury Garcia","Isabel de Arcila"],
-    startDay:3, totalDays:30,
-    ciclos:[
-      {num:1,sem:"30 MAR–05 ABR",fase:"F2 – Vitrina",tema:"Domingo Resurrección",audiencia:"Campus Bogotá + Sogamoso + Online"},
-      {num:2,sem:"06–12 ABR",    fase:"F4 – Local Conecta",tema:"Post-Resurrección · Online Isabel",audiencia:"Nuevos asistentes + comunidad"},
-      {num:3,sem:"13–19 ABR",    fase:"F2 – Vitrina",tema:"Proceso Crecimiento Espiritual",audiencia:"Comunidad activa + nuevos"},
-      {num:4,sem:"20–26 ABR",    fase:"F5 – Local en Casa",tema:"Local en Casa · Crecimiento",audiencia:"Grupos existentes + nuevos"},
-    ],
-    actividades:{
-      "5": [{e:"Dom. Resurrección · Presencial + Online",c:"Experiencia"}],
-      "6": [{e:"Flujo email post-experiencia",c:"Mail"}],
-      "8": [{e:"Academia – Infografía etapas",c:"Instagram"}],
-      "12":[{e:"Online · Isabel de Arcila",c:"YouTube"}],
-      "13":[{e:"Flujo email post-online",c:"Mail"}],
-      "14":[{e:"Teaser Academia – Módulo Sígueme",c:"YouTube"}],
-      "19":[{e:"PCE Presencial · Bogotá",c:"Experiencia"}],
-      "20":[{e:"Flujo email post-PCE",c:"Mail"}],
-      "21":[{e:"Reel ¿Qué es Local en Casa?",c:"Instagram"}],
-      "26":[{e:"Local en Casa – Crecimiento",c:"YouTube"}],
-    },
-    grabaciones: ABRIL_GRAB,
-    piezas: ABRIL_PIEZAS,
-    kpis: ABRIL_KPIS,
-    metricas:{
-      barData:{
-        labels:["Ciclo 1","Ciclo 2","Ciclo 3","Ciclo 4"],
-        aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[7,7,7,7]
-      },
-      lineData:{
-        labels:["S1","S2","S3","S4"],
-        alcance:[12400,0,0,0],engagement:[4.2,0,0,0]
+/* ════════════════════════════════════════════════════
+   STATE
+════════════════════════════════════════════════════ */
+// Parrilla — guardamos exactamente como viene de la API
+// + índice de columnas detectado al cargar
+let P = {
+  rows: [],     // filas originales
+  hdrs: [],     // headers originales ['Mes','ID Pieza','Canal',...]
+  idx:  {},     // mapa nombre→índice: {'Mes':0,'ID Pieza':1,...}
+};
+let G = { rows:[], hdrs:[], idx:{} };  // Grabación
+let M = { rows:[], hdrs:[], idx:{} };  // Métricas
+
+let curMonth = 4, curYear = 2026, curPanel = 'main';
+let selIdx   = -1;   // índice de la pieza seleccionada en el slide
+let dayList  = [];   // lista de índices del día seleccionado
+let dayListI = 0;
+let charts   = {}, chChartInst = null, metFiltro = null;
+
+/* ════════════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', () => { buildMonthGrid(); loadData(); });
+
+function buildMonthGrid() {
+  document.getElementById('mGrid').innerHTML = SHOW_M.map((m,i) =>
+    `<button class="mb ${m===curMonth?'on':''}" onclick="selMonth(${m},this)">${MONTHS[m-1].slice(0,3).toUpperCase()}</button>`
+  ).join('');
+}
+function selMonth(m, btn) {
+  curMonth=m;
+  document.querySelectorAll('.mb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  closeSlide();
+  renderMain();
+  showPanel('main');
+}
+
+/* ════════════════════════════════════════════════════
+   LOAD DATA
+   Lógica idéntica para las 3 pestañas:
+   rows[] + hdrs[] + idx{}
+════════════════════════════════════════════════════ */
+async function loadData() {
+  if (!API_URL) { showSetup(); P.rows=makeDemo(); buildIdx(P); setStat('demo'); renderMain(); return; }
+  setStat('loading');
+  try {
+    const res  = await fetch(`${API_URL}?action=all`, {cache:'no-store'});
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+
+    if (json.parrilla?.error) throw new Error(json.parrilla.error);
+    if (!json.parrilla?.rows?.length) throw new Error('Sin datos en Parrilla');
+
+    // Guardar tal como vienen — sin transformaciones
+    P.hdrs = json.parrilla.headers || [];
+    P.rows = json.parrilla.rows;
+    buildIdx(P);
+    buildKeyCache(); // ← construir cache de headers sin asterisco
+
+    G.hdrs = json.grabacion?.headers || [];
+    G.rows = json.grabacion?.rows    || [];
+    buildIdx(G);
+
+    M.hdrs = json.metricas?.headers  || [];
+    M.rows = json.metricas?.rows     || [];
+    buildIdx(M);
+
+    // ── Log de diagnóstico ──────────────────────────
+    console.group('[LC]');
+    console.log('Headers Parrilla:', P.hdrs.join(' | '));
+    console.log('Total filas:', P.rows.length);
+    console.log('__MES__ fila 0:', P.rows[0]?.['__MES__'], '| __MES_TEXTO__:', P.rows[0]?.['__MES_TEXTO__']);
+    if (P.rows[0]) {
+      console.log('Keys fila 0:', Object.keys(P.rows[0]).join(' | '));
+      console.log('Values fila 0:', Object.values(P.rows[0]).slice(0,12).join(' | '));
+      // Test de acceso por nombre
+      console.log('g(Canal):', g(P.rows[0],'Canal'), '| g(Formato):', g(P.rows[0],'Formato'), '| g(Ciclo):', g(P.rows[0],'Ciclo'), '| g(Fecha Salida):', g(P.rows[0],'Fecha Salida'), '| g(ID Pieza):', g(P.rows[0],'ID Pieza'));
+    }
+    console.groupEnd();
+
+    setStat('ok', `✓ ${P.rows.length} registros · ${hhm()}`);
+    localStorage.setItem('lc_api_url', API_URL);
+  } catch(err) {
+    console.warn('[LC] Error:', err);
+    P.rows=makeDemo(); P.hdrs=Object.keys(P.rows[0]||{}).filter(k=>!k.startsWith('_'));
+    buildIdx(P); buildKeyCache(); G.rows=[]; M.rows=[];
+    setStat('error', err.message);
+  }
+  renderMain();
+  if (curPanel==='grabacion') renderGrabacion();
+  if (curPanel==='metricas')  renderMetricas();
+}
+
+// Construye índice nombre→columna para acceso rápido
+function buildIdx(src) {
+  src.idx = {};
+  src.hdrs.forEach((h, i) => { src.idx[h] = i; });
+}
+
+/* ════════════════════════════════════════════════════
+   FIELD ACCESS
+   Los headers del Sheet pueden tener asterisco: 'Canal *', 'Formato *'
+   g(row, 'Canal') debe encontrar 'Canal *' también
+════════════════════════════════════════════════════ */
+// Cache de mapeo nombre→key real, se reconstruye al cargar datos
+let _keyCache = {};
+function buildKeyCache() {
+  _keyCache = {};
+  P.hdrs.forEach(h => {
+    // Guardar el header limpio (sin asterisco, trim) → header original
+    const clean = h.trim().replace(/\s*\*\s*$/, '').trim().toLowerCase();
+    _keyCache[clean] = h;
+    // También sin tildes
+    const noTilde = clean.replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u');
+    _keyCache[noTilde] = h;
+  });
+}
+
+function g(row, ...names) {
+  for (const name of names) {
+    if (!name) continue;
+    // 1. Clave exacta
+    const v1 = row[name];
+    if (v1 !== undefined && v1 !== null && String(v1).trim() !== '') return String(v1).trim();
+    // 2. Buscar en cache (sin asterisco, case-insensitive, sin tildes)
+    const nameClean = name.trim().toLowerCase()
+      .replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u');
+    const realKey = _keyCache[nameClean];
+    if (realKey) {
+      const v2 = row[realKey];
+      if (v2 !== undefined && v2 !== null && String(v2).trim() !== '') return String(v2).trim();
+    }
+    // 3. Buscar directo en todas las keys del row (fuzzy)
+    for (const k of Object.keys(row)) {
+      if (k.startsWith('__')) continue;
+      const kc = k.trim().replace(/\s*\*\s*$/, '').trim().toLowerCase()
+        .replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u');
+      if (kc === nameClean) {
+        const v3 = row[k];
+        if (v3 !== undefined && v3 !== null && String(v3).trim() !== '') return String(v3).trim();
       }
     }
-  },
-  mayo:{label:"Mayo",num:"05",year:2026,startDay:6,totalDays:31,
-    serie:"¿Cómo sobrellevar momentos difíciles?",fases:["Vitrina"],predicadores:["Paula Arcila","Isabel de Arcila","Andrey Molina"],
-    ciclos:[{num:1,sem:"04–10 MAY",fase:"F2 – Vitrina",tema:"Cómo sobrellevar momentos difíciles",audiencia:"Campus Bogotá"},{num:2,sem:"11–17 MAY",fase:"F2 – Vitrina",tema:"Cómo sobrellevar momentos difíciles",audiencia:"Campus Bogotá"},{num:3,sem:"18–24 MAY",fase:"F5 – Local en Casa",tema:"Momentos difíciles · LEC",audiencia:"Grupos"},{num:4,sem:"25–31 MAY",fase:"F2 – Vitrina",tema:"Elecciones / Online · Tema Libre",audiencia:"Online"}],
-    actividades:{"3":[{e:"Exp. Presencial – Paula Arcila",c:"Experiencia"}],"10":[{e:"Online – Paula Arcila",c:"YouTube"}],"17":[{e:"Exp. Presencial – Isabel de Arcila",c:"Experiencia"}],"24":[{e:"Local en Casa – Dedicación",c:"Experiencia"}],"31":[{e:"Elecciones / Online – Yuri Garcia",c:"YouTube"}]},
-    grabaciones:[],piezas:[],kpis:[],metricas:{barData:{labels:["C1","C2","C3","C4"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[7,7,7,7]},lineData:{labels:["S1","S2","S3","S4"],alcance:[0,0,0,0],engagement:[0,0,0,0]}}},
-  junio:{label:"Junio",num:"06",year:2026,startDay:2,totalDays:30,serie:"Integrar la fe",fases:["Vitrina"],predicadores:["Andrey Molina","Yury Garcia"],ciclos:[{num:1,sem:"01–07 JUN",fase:"F2 – Vitrina",tema:"Integrar la fe",audiencia:"Campus"},{num:2,sem:"08–14 JUN",fase:"F2 – Vitrina",tema:"Integrar la fe",audiencia:"Campus"},{num:3,sem:"15–21 JUN",fase:"F5 – Local en Casa",tema:"Integrar la fe – LEC",audiencia:"Grupos"},{num:4,sem:"22–28 JUN",fase:"F2 – Vitrina",tema:"Integrar la fe – Cierre",audiencia:"Campus"}],actividades:{"14":[{e:"Exp. Presencial · Matrimonio Felipe y Daniela",c:"Experiencia"}],"21":[{e:"Local en Casa",c:"Experiencia"}],"28":[{e:"Exp. Presencial – Dedicación",c:"Experiencia"}]},grabaciones:[],piezas:[],kpis:[],metricas:{barData:{labels:["C1","C2","C3","C4"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[7,7,7,7]},lineData:{labels:["S1","S2","S3","S4"],alcance:[0,0,0,0],engagement:[0,0,0,0]}}},
-,
-  julio:{label:"Julio",num:"07",year:2026,startDay:4,totalDays:31,
-    serie:"Por definir",fases:["Vitrina"],predicadores:["Andrey Molina","Yury Garcia"],
-    ciclos:[{num:1,sem:"29 JUN–05 JUL",fase:"F2 – Vitrina",tema:"Por definir",audiencia:"Campus"},{num:2,sem:"06–12 JUL",fase:"F2 – Vitrina",tema:"Por definir",audiencia:"Campus"},{num:3,sem:"13–19 JUL",fase:"F5 – Local en Casa",tema:"Local en Casa",audiencia:"Grupos"},{num:4,sem:"20–26 JUL",fase:"F2 – Vitrina",tema:"Por definir",audiencia:"Campus"}],
-    actividades:{"12":[{e:"Exp. Presencial",c:"Experiencia"}],"19":[{e:"Local en Casa",c:"Experiencia"}],"26":[{e:"Exp. Presencial",c:"Experiencia"}]},
-    grabaciones:[],piezas:[],kpis:[],metricas:{barData:{labels:["C1","C2","C3","C4"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[7,7,7,7]},lineData:{labels:["S1","S2","S3","S4"],alcance:[0,0,0,0],engagement:[0,0,0,0]}}},
-  agosto:{label:"Agosto",num:"08",year:2026,startDay:7,totalDays:31,
-    serie:"Hábitos que transforman",fases:["Vitrina"],predicadores:["Andrey Molina","Yury Garcia"],
-    ciclos:[{num:1,sem:"27 JUL–02 AGO",fase:"F2 – Vitrina",tema:"Hábitos que transforman",audiencia:"Campus"},{num:2,sem:"03–09 AGO",fase:"F2 – Vitrina",tema:"Hábitos que transforman",audiencia:"Campus"},{num:3,sem:"10–16 AGO",fase:"F5 – Local en Casa",tema:"Hábitos – LEC",audiencia:"Grupos"},{num:4,sem:"17–23 AGO",fase:"F2 – Vitrina",tema:"Hábitos – Cierre",audiencia:"Campus"}],
-    actividades:{"9":[{e:"Exp. Presencial",c:"Experiencia"}],"16":[{e:"Local en Casa",c:"Experiencia"}],"23":[{e:"Exp. Presencial · Hábitos",c:"Experiencia"}]},
-    grabaciones:[],piezas:[],kpis:[],metricas:{barData:{labels:["C1","C2","C3","C4"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[7,7,7,7]},lineData:{labels:["S1","S2","S3","S4"],alcance:[0,0,0,0],engagement:[0,0,0,0]}}},
-  septiembre:{label:"Septiembre",num:"09",year:2026,startDay:2,totalDays:30,
-    serie:"Por definir",fases:["Vitrina"],predicadores:["Andrey Molina","Yury Garcia"],
-    ciclos:[{num:1,sem:"31 AGO–06 SEP",fase:"F2 – Vitrina",tema:"Por definir",audiencia:"Campus"},{num:2,sem:"07–13 SEP",fase:"F2 – Vitrina",tema:"Por definir",audiencia:"Campus"},{num:3,sem:"14–20 SEP",fase:"F5 – Local en Casa",tema:"Local en Casa",audiencia:"Grupos"},{num:4,sem:"21–27 SEP",fase:"F2 – Vitrina",tema:"Por definir",audiencia:"Campus"}],
-    actividades:{"6":[{e:"Exp. Presencial",c:"Experiencia"}],"13":[{e:"Local en Casa",c:"Experiencia"}],"20":[{e:"Exp. Presencial",c:"Experiencia"}]},
-    grabaciones:[],piezas:[],kpis:[],metricas:{barData:{labels:["C1","C2","C3","C4"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[7,7,7,7]},lineData:{labels:["S1","S2","S3","S4"],alcance:[0,0,0,0],engagement:[0,0,0,0]}}},
-  octubre:{label:"Octubre",num:"10",year:2026,startDay:5,totalDays:31,
-    serie:"Roles y Familia",fases:["Vitrina"],predicadores:["Andrey Molina","Yury Garcia"],
-    ciclos:[{num:1,sem:"28 SEP–04 OCT",fase:"F2 – Vitrina",tema:"Roles y Familia",audiencia:"Campus"},{num:2,sem:"05–11 OCT",fase:"F2 – Vitrina",tema:"Roles y Familia",audiencia:"Campus"},{num:3,sem:"12–18 OCT",fase:"F5 – Local en Casa",tema:"Roles y Familia – LEC",audiencia:"Grupos"},{num:4,sem:"19–25 OCT",fase:"F2 – Vitrina",tema:"Dedicación",audiencia:"Campus"}],
-    actividades:{"4":[{e:"Exp. Presencial · Roles y Familia",c:"Experiencia"}],"11":[{e:"Local en Casa",c:"Experiencia"}],"18":[{e:"Exp. Presencial · Dedicación",c:"Experiencia"}]},
-    grabaciones:[],piezas:[],kpis:[],metricas:{barData:{labels:["C1","C2","C3","C4"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[7,7,7,7]},lineData:{labels:["S1","S2","S3","S4"],alcance:[0,0,0,0],engagement:[0,0,0,0]}}},
-  noviembre:{label:"Noviembre",num:"11",year:2026,startDay:1,totalDays:30,
-    serie:"Verdad grabada",fases:["Vitrina"],predicadores:["Andrey Molina","Yury Garcia"],
-    ciclos:[{num:1,sem:"26 OCT–01 NOV",fase:"F2 – Vitrina",tema:"Verdad grabada",audiencia:"Campus"},{num:2,sem:"02–08 NOV",fase:"F2 – Vitrina",tema:"Verdad grabada",audiencia:"Campus"},{num:3,sem:"09–15 NOV",fase:"F5 – Local en Casa",tema:"Verdad – LEC · Bautizos",audiencia:"Grupos"},{num:4,sem:"16–22 NOV",fase:"F2 – Vitrina",tema:"Verdad grabada – Cierre",audiencia:"Campus"}],
-    actividades:{"1":[{e:"Exp. Presencial",c:"Experiencia"}],"8":[{e:"Local en Casa",c:"Experiencia"}],"15":[{e:"Exp. Presencial · Bautizos",c:"Experiencia"}]},
-    grabaciones:[],piezas:[],kpis:[],metricas:{barData:{labels:["C1","C2","C3","C4"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[7,7,7,7]},lineData:{labels:["S1","S2","S3","S4"],alcance:[0,0,0,0],engagement:[0,0,0,0]}}},
-  diciembre:{label:"Diciembre",num:"12",year:2026,startDay:4,totalDays:31,
-    serie:"Navidad · Obra de Navidad",fases:["Vitrina"],predicadores:["Andrey Molina","Yury Garcia"],
-    ciclos:[{num:1,sem:"30 NOV–06 DIC",fase:"F2 – Vitrina",tema:"Navidad",audiencia:"Campus"},{num:2,sem:"07–13 DIC",fase:"F2 – Vitrina",tema:"Navidad",audiencia:"Campus"},{num:3,sem:"14–20 DIC",fase:"F5 – Local en Casa",tema:"Obra de Navidad",audiencia:"Comunidad"},{num:4,sem:"21–27 DIC",fase:"F2 – Vitrina",tema:"Navidad – Cierre",audiencia:"Campus"}],
-    actividades:{"6":[{e:"Local en Casa",c:"Experiencia"}],"19":[{e:"Obra de Navidad",c:"Experiencia"}]},
-    grabaciones:[],piezas:[],kpis:[],metricas:{barData:{labels:["C1","C2","C3","C4"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[7,7,7,7]},lineData:{labels:["S1","S2","S3","S4"],alcance:[0,0,0,0],engagement:[0,0,0,0]}}}
-};
-// Meses futuros vacíos
-["julio","agosto","septiembre","octubre","noviembre","diciembre"].forEach(m=>{
-  const META={julio:{n:"07",d:31,s:4,serie:"Necesidad de integrar fe"},agosto:{n:"08",d:31,s:7,serie:"Hábitos"},septiembre:{n:"09",d:30,s:2,serie:"Hábitos"},octubre:{n:"10",d:31,s:5,serie:"Roles y familia"},noviembre:{n:"11",d:30,s:2,serie:"Verdad grabada en la mente"},diciembre:{n:"12",d:31,s:4,serie:"Navidad"}};
-  const mm=META[m];
-  MONTHS_META[m]={label:m.charAt(0).toUpperCase()+m.slice(1),num:mm.n,year:2026,
-    startDay:mm.s,totalDays:mm.d,serie:mm.serie,fases:["Vitrina"],predicadores:["Andrey Molina"],
-    ciclos:[{num:1,sem:"Semana 1",fase:"F2 – Vitrina",tema:mm.serie,audiencia:"Campus"},{num:2,sem:"Semana 2",fase:"F2 – Vitrina",tema:mm.serie,audiencia:"Campus"},{num:3,sem:"Semana 3",fase:"F2 – Vitrina",tema:mm.serie,audiencia:"Campus"},{num:4,sem:"Semana 4",fase:"F5 – Local en Casa",tema:mm.serie+" – LEC",audiencia:"Grupos"}],
-    actividades:{},grabaciones:[],piezas:[],kpis:[],
-    metricas:{barData:{labels:["C1","C2","C3","C4"],aprobadas:[0,0,0,0],revision:[0,0,0,0],pendientes:[0,0,0,0]},lineData:{labels:["S1","S2","S3","S4"],alcance:[0,0,0,0],engagement:[0,0,0,0]}}};
-});
-
-// ══════════════════════════════════════════════════════════════════
-// RENDER FUNCTIONS
-// ══════════════════════════════════════════════════════════════════
-
-// ── PORTADA ───────────────────────────────────────────────────────
-function renderPortada(id, meta, piezas){
-  const total=piezas.length;
-  const aprobadas=piezas.filter(p=>p.estado==="Aprobado").length;
-  const enProceso=piezas.filter(p=>["En revisión","Revisado","Ajustado"].includes(p.estado)).length;
-  const pendientes=piezas.filter(p=>p.estado==="Pendiente").length;
-  const canales=[...new Set(piezas.map(p=>p.canal.split("/")[0].trim()))].slice(0,4);
-  return `
-  <section id="portada-${id}" class="portada">
-    <div class="portada-l">
-      <div>
-        <div class="portada-tag"><div class="label">Plan de Contenidos · Local Church</div></div>
-        <div class="month-name">${meta.label}</div>
-        <div class="month-year">${meta.year} · Parrilla de Comunicaciones</div>
-        <div style="margin-top:18px;font-size:.78rem;color:var(--gd);line-height:1.7">${meta.serie}</div>
-        <div class="tag-pills" style="margin-top:12px">
-          ${meta.predicadores.map(p=>`<span class="tpill">${p}</span>`).join("")}
-          ${meta.fases.map(f=>`<span class="tpill y">${f}</span>`).join("")}
-        </div>
-      </div>
-      <div class="portada-stats">
-        <div class="pstat"><div class="pstat-n">${total}</div><div class="pstat-l">Piezas totales</div></div>
-        <div class="pstat"><div class="pstat-n">${aprobadas}</div><div class="pstat-l">Aprobadas</div></div>
-        <div class="pstat"><div class="pstat-n">${enProceso}</div><div class="pstat-l">En proceso</div></div>
-        <div class="pstat"><div class="pstat-n">${pendientes}</div><div class="pstat-l">Pendientes</div></div>
-      </div>
-    </div>
-    <div class="portada-r">
-      <div>
-        <div class="sec-title">Ciclos del mes</div>
-        <div class="ciclo-nav-list" style="margin-top:14px">
-          ${meta.ciclos.map(c=>`
-          <a href="#ciclo-${id}-${c.num}" class="ciclo-nav-btn">
-            <div class="cn-num">CICLO ${String(c.num).padStart(2,"0")}</div>
-            <div><div class="cn-name">${c.tema}</div><div class="cn-dates">${c.sem}</div></div>
-            <div class="label">${c.fase}</div>
-          </a>`).join("")}
-        </div>
-      </div>
-      ${meta.kpis&&meta.kpis.length>0?`
-      <div>
-        <div class="sec-title">KPIs Ecosistema · Abril</div>
-        <div class="kpi-board" style="margin-top:12px">
-          ${meta.kpis.map(k=>`
-          <div class="kpi-card">
-            <div class="kpi-num">${k.real||0}<span style="font-size:.9rem;color:var(--gd)">/${k.meta}</span></div>
-            <div class="kpi-label">${k.label}</div>
-            <div class="kpi-meta" style="font-size:.6rem">${k.ambiente}</div>
-            <div class="kpi-bar"><div class="kpi-bar-fill" style="width:${k.meta?Math.min(100,Math.round((k.real||0)/k.meta*100)):0}%"></div></div>
-          </div>`).join("")}
-        </div>
-      </div>`:""}
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <a href="#cal-${id}" class="btn btn-v">Ver calendario →</a>
-        <button class="btn btn-g" onclick="goGrab()">📹 Grabaciones</button>
-        <button class="btn btn-g" onclick="goMetrics()">📈 Métricas</button>
-      </div>
-    </div>
-  </section>`;
+  }
+  return '';
 }
 
-// ── CALENDARIO ────────────────────────────────────────────────────
-function renderCalendario(id, meta, piezas){
-  const DAYS=["LUN","MAR","MIÉ","JUE","VIE","SÁB","DOM"];
-  const {startDay,totalDays,ciclos,actividades}=meta;
-  const actMap=actividades||{};
-  const pizMap={};
-  piezas.forEach(p=>{
-    const d=parseInt((p.fecha||"").split("/")[0]);
-    if(!isNaN(d)){if(!pizMap[d])pizMap[d]=[];pizMap[d].push(p);}
+/* ════════════════════════════════════════════════════
+   MES — usa __MES__ que Apps Script ya calculó
+════════════════════════════════════════════════════ */
+function parseMes(s) {
+  if (!s && s!==0) return 0;
+  const t=String(s).trim().toLowerCase().replace(/á/g,'a').replace(/é/g,'e').replace(/í/g,'i').replace(/ó/g,'o').replace(/ú/g,'u');
+  if (MESES_ES[t]) return MESES_ES[t];
+  const n=parseInt(t); if(n>=1&&n<=12) return n;
+  for(const[k,v] of Object.entries(MESES_ES)) if(k.length>2&&t.includes(k)) return v;
+  return 0;
+}
+
+function rowMes(r) {
+  const m1 = parseInt(r['__MES__']);
+  if (m1>=1&&m1<=12) return m1;
+  return parseMes(r['__MES_TEXTO__'] || g(r,'Mes') || '');
+}
+
+function mRows() { return P.rows.filter(r => rowMes(r) === curMonth); }
+
+function rowDay(r) {
+  const f = g(r,'Fecha Salida','Fecha Salida *','Fecha','fecha salida');
+  if (!f) return 0;
+  const s = String(f).trim();
+  if (s.includes('/')) { const p=s.split('/'); return parseInt(p[0])||0; }
+  if (s.includes('-')) { const p=s.split('-'); return parseInt(parseInt(p[0])>31?p[2]:p[0])||0; }
+  return 0;
+}
+
+function rowCanal(r) {
+  return g(r,'Canal','Canal *','canal') || '';
+}
+
+function chKey(c) {
+  const v=(c||'').toLowerCase().replace(/[\s·,\/]+/g,'');
+  if(v.includes('instagram')||v.includes('reels')||v.includes('stories')) return 'ig';
+  if(v.includes('youtube')||v.includes('shorts')) return 'yt';
+  if(v.includes('facebook')) return 'fb';
+  if(v.includes('tiktok'))   return 'tt';
+  if(v.includes('whatsapp')) return 'wa';
+  if(v.includes('spotify'))  return 'sp';
+  if(v.includes('podcast'))  return 'pc';
+  if(v.includes('email')||v.includes('correo')) return 'em';
+  if(v.includes('web')||v.includes('blog'))     return 'wb';
+  return 'ot';
+}
+function chColor(c) {
+  const v=(c||'').toLowerCase().replace(/\s+/g,'');
+  for(const[k,col] of Object.entries(CH_COL)) if(v.includes(k)) return col;
+  return '#78716C';
+}
+function stClass(s){const v=(s||'').toLowerCase();return v==='publicado'?'s-pub':v.includes('revisión')||v==='revisado'?'s-rev':v==='aprobado'?'s-apr':v==='ajustado'?'s-ajus':'s-pend';}
+
+/* ════════════════════════════════════════════════════
+   RENDER MAIN (portada + calendario)
+════════════════════════════════════════════════════ */
+function renderMain() {
+  const mn = MONTHS[curMonth-1];
+  document.getElementById('heroM').innerHTML = `${mn.slice(0,-2)}<span>${mn.slice(-2)}</span>`;
+  renderCalendar();
+}
+
+/* ════════════════════════════════════════════════════
+   CALENDAR
+════════════════════════════════════════════════════ */
+function renderCalendar() {
+  const mn    = MONTHS[curMonth-1];
+  document.getElementById('calH').textContent = `${mn} ${curYear}`;
+
+  const rows  = mRows();
+  const byDay = {};
+  rows.forEach((r, idx) => {
+    const d = rowDay(r);
+    if (d>=1&&d<=31) { if(!byDay[d]) byDay[d]=[]; byDay[d].push({r, idx: P.rows.indexOf(r)}); }
   });
-  let cal=`<div class="cal" style="grid-template-columns:auto repeat(7,1fr)">`;
-  cal+=`<div class="cal-dh" style="border-radius:8px 0 0 0"></div>`;
-  DAYS.forEach((d,i)=>cal+=`<div class="cal-dh"${i===6?' style="border-radius:0 8px 0 0"':''}>${d}</div>`);
-  for(let w=0;w<4;w++){
-    const c=ciclos[w]||{num:w+1,fase:"",tema:""};
-    cal+=`<a href="#ciclo-${id}-${c.num}" class="cal-wk-lbl" data-month="${id}" data-widx="${w}"
-      title="Doble clic para editar · Clic para ir al ciclo">
-      <span class="wkl-num">C·${String(c.num).padStart(2,"0")}</span>
-      <span class="wkl-fase">${c.fase}</span>
-      <span class="wkl-name">${c.tema}</span>
-    </a>`;
-    for(let dd=0;dd<7;dd++){
-      const day=w*7+dd-startDay+1;
-      const valid=day>=1&&day<=totalDays;
-      cal+=`<div class="cal-day${!valid?" other-month":""}">`;
-      if(valid){
-        cal+=`<span class="cal-dn">${day}</span>`;
-        (actMap[String(day)]||[]).forEach(a=>cal+=`<span class="cal-pill ${cCal(a.c)}">${a.e.substring(0,20)}</span>`);
-        (pizMap[day]||[]).slice(0,2).forEach(p=>cal+=`<span class="cal-pill ${cCal(p.canal)}">${(p.tema||"").split("–")[0].trim().substring(0,16)}</span>`);
-      }
-      cal+=`</div>`;
-    }
-  }
-  cal+=`</div>`;
-  const channels=[{l:"Instagram",cl:"cp-ig"},{l:"Facebook",cl:"cp-fb"},{l:"YouTube",cl:"cp-yt"},{l:"TikTok",cl:"cp-tk"},{l:"WhatsApp",cl:"cp-wa"},{l:"Mail",cl:"cp-ml"},{l:"Experiencia",cl:"cp-ex"},{l:"Local en Casa",cl:"cp-or"},{l:"Pantallas",cl:"cp-pan"}];
-  const next=MONTH_ORDER[MONTH_ORDER.indexOf(id)+1];
-  return `
-  <section id="cal-${id}" class="cal-section">
-    <div class="cal-main">
-      <div class="sec-hdr">
-        <div><div class="label v">Calendario mensual</div><div class="sec-big">${meta.label} ${meta.year}</div></div>
-        <div class="hdr-btns">
-          <a href="#portada-${id}" class="btn btn-g">↑ Portada</a>
-          ${next&&MONTHS_META[next]?`<button class="btn btn-v" onclick="showMonth('${next}')">${MONTHS_META[next].label} →</button>`:""}
-        </div>
-      </div>
-      ${cal}
-      <div style="margin-top:6px;font-size:.6rem;color:var(--gd);text-align:right">💡 <strong style="color:var(--gray)">Doble clic</strong> en el nombre de semana para editarlo</div>
-      <div class="cal-legend">
-        ${channels.map(ch=>`<span class="cal-pill ${ch.cl}" style="font-size:.58rem;padding:2px 8px;border-radius:4px">${ch.l}</span>`).join("")}
-      </div>
-    </div>
-    <div class="cal-sidebar">
-      <div class="sec-title">Ciclos</div>
-      ${ciclos.map(c=>`
-      <a href="#ciclo-${id}-${c.num}" class="ciclo-side-btn">
-        <div class="csb-num">CICLO ${String(c.num).padStart(2,"0")}</div>
-        <div class="csb-name">${c.tema}</div>
-        <div class="csb-fase">${c.fase} · ${c.sem}</div>
-      </a>`).join("")}
-      <div style="margin-top:8px;display:flex;flex-direction:column;gap:5px">
-        <button class="btn btn-g" style="font-size:.65rem;width:100%;justify-content:center" onclick="goGrab()">📹 Grabaciones</button>
-        <button class="btn btn-g" style="font-size:.65rem;width:100%;justify-content:center" onclick="goMetrics()">📈 Métricas</button>
-      </div>
-    </div>
-  </section>`;
-}
 
-// ── CICLO SLIDE ───────────────────────────────────────────────────
-function renderCicloSlide(id,meta,c,cicPiezas,prev,next,isLast,nextMid){
-  const ap=cicPiezas.filter(p=>p.estado==="Aprobado").length;
-  const ep=cicPiezas.filter(p=>["En revisión","Revisado","Ajustado"].includes(p.estado)).length;
-  const pn=cicPiezas.filter(p=>p.estado==="Pendiente").length;
-  const total=cicPiezas.length;
-  return `
-  <section id="ciclo-${id}-${c.num}" class="ciclo-slide">
-    <div class="ciclo-left">
-      <div>
-        <div class="label y">Ciclo ${String(c.num).padStart(2,"0")} · ${meta.label} 2026</div>
-        <div class="ciclo-big">${String(c.num).padStart(2,"0")}</div>
-        <div class="ciclo-title">${c.fase.split("–")[1]||c.fase}<br/><span>${c.tema}</span></div>
-        <div class="ciclo-meta">
-          <div class="ciclo-meta-row">📅 <strong>${c.sem}</strong></div>
-          <div class="ciclo-meta-row">🎯 <strong>Audiencia:</strong> ${c.audiencia}</div>
-          <div class="ciclo-meta-row">🔑 <strong>Fase:</strong> ${c.fase}</div>
-        </div>
-      </div>
-      <div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
-          ${[["Piezas",total,"#6B21D6","100%"],["Aprobadas",ap,"#059669",total?Math.round(ap/total*100)+"%":"0%"],["En proceso",ep,"#B45309",total?Math.round(ep/total*100)+"%":"0%"],["Pendientes",pn,"#7C6FA0",total?Math.round(pn/total*100)+"%":"0%"]].map(([l,n,c,w])=>`
-          <div style="background:#fff;border:1.5px solid var(--brd);border-radius:8px;padding:12px">
-            <div class="pstat-n" style="font-size:1.4rem;color:${c}">${n}</div>
-            <div class="pstat-l">${l}</div>
-            <div style="height:3px;background:rgba(107,33,214,.1);border-radius:2px;margin-top:6px;overflow:hidden">
-              <div style="height:100%;width:${w};background:${c}"></div>
-            </div>
-          </div>`).join("")}
-        </div>
-        <div class="ciclo-btns-row">
-          <a href="#cal-${id}" class="btn btn-g">↑ Cal</a>
-          ${prev?`<a href="#ciclo-${id}-${prev.num}" class="btn btn-g">← C·${prev.num}</a>`:""}
-          ${next?`<a href="#ciclo-${id}-${next.num}" class="btn btn-v">C·${next.num} →</a>`:
-            nextMid&&MONTHS_META[nextMid]?`<button class="btn btn-v" onclick="showMonth('${nextMid}')">${MONTHS_META[nextMid].label} →</button>`:""}
-        </div>
-      </div>
-    </div>
-    <div class="ciclo-right">
-      <div class="label v">Productos del ciclo</div>
-      <div class="products-grid">
-        ${cicPiezas.length>0
-          ? cicPiezas.map(p=>`
-            <a href="#pieza-${p.id.replace(/\s/g,"-")}" class="product-card">
-              <div class="pc-id">${p.id}</div>
-              <div class="pc-tema">${p.tema}</div>
-              <div class="pc-meta">
-                <span class="fmt-tag ${fmtClass(p.formato)}" style="font-size:.55rem;padding:2px 6px">${p.formato}</span>
-                <span class="pc-date">${p.fecha}</span>
-              </div>
-              <div class="pc-estado">
-                <div class="estado-bar">${renderEstadoBar(p.estado)}</div>
-                <span style="font-size:.58rem;color:${estadoColor(p.estado)};margin-left:5px">${p.estado}</span>
-              </div>
-            </a>`).join("")
-          : `<div style="grid-column:1/-1;padding:28px 20px;text-align:center">
-              <div style="font-size:1.6rem;margin-bottom:10px">📋</div>
-              <div style="font-size:.82rem;font-weight:700;color:var(--gray);margin-bottom:6px">Sin piezas en este ciclo</div>
-              <div style="font-size:.72rem;color:var(--gd);line-height:1.7">Conecta tu Google Sheet para cargar las piezas automáticamente.</div>
-             </div>`}
-      </div>
-    </div>
-  </section>`;
-}
+  const first = new Date(curYear,curMonth-1,1).getDay();
+  const dim   = new Date(curYear,curMonth,0).getDate();
+  const diP   = new Date(curYear,curMonth-1,0).getDate();
+  const today = new Date();
+  const DOW   = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
 
-// ── FICHA SLIDE ───────────────────────────────────────────────────
-function renderFicha(p,grpPiezas,thisIdx,slideNum,totalSlides,id){
-  const canales=(p.canal||"").split("·").join(",").split(",").map(c=>c.trim()).filter(Boolean);
-  const cicNum=parseInt((p.ciclo||"0").replace(/\D/g,""),10);
-  // Drive download button — lee el campo linkDrive del Sheet; si está vacío muestra placeholder
-  const driveLink=p.linkDrive&&p.linkDrive.length>4?p.linkDrive:null;
-  const dlBtn=driveLink
-    ?`<a href="${driveLink}" target="_blank" class="btn btn-dl" style="flex:1;justify-content:center">
-        <svg viewBox="0 0 24 24"><path d="M12 15.5l-5-5 1.41-1.41L11 12.67V4h2v8.67l2.59-2.58L17 10.5l-5 5zM5 18h14v2H5v-2z"/></svg>
-        Descargar pieza
-      </a>`
-    :`<span class="btn btn-dl" style="flex:1;justify-content:center;opacity:.45;cursor:not-allowed" title="Pega el link de Drive en la columna linkDrive del Sheet">
-        <svg viewBox="0 0 24 24"><path d="M12 15.5l-5-5 1.41-1.41L11 12.67V4h2v8.67l2.59-2.58L17 10.5l-5 5zM5 18h14v2H5v-2z"/></svg>
-        Agregar en Sheet
-      </span>`;
-  return `
-  <section id="pieza-${p.id.replace(/\s/g,"-")}" class="ficha-slide">
-    <div class="ficha-slide-hdr">
-      <div class="ficha-slide-lbl">Ficha · Ciclo ${p.ciclo}</div>
-      <div class="hdr-btns">
-        <a href="#cal-${id}" class="btn btn-g" style="font-size:11px">↑ Calendario</a>
-        <a href="#ciclo-${id}-${cicNum}" class="btn btn-g" style="font-size:11px">↑ Ciclo ${p.ciclo}</a>
-      </div>
-      <div class="ficha-count">${slideNum} / ${totalSlides}</div>
-    </div>
-    <div class="ficha-layout">
-      <div class="ficha-card">
-        <div class="ficha-topbar">
-          <span class="ficha-np">${p.id}</span>
-          <div class="ficha-topbar-r">
-            <span class="fmt-tag ${fmtClass(p.formato)}">${fmtIcon(p.formato)} ${p.formato}</span>
-          </div>
-        </div>
-        <div class="ficha-body">
-          <div class="fc"><div class="fc-lbl">Canal</div>
-            <div class="canales-wrap">${canales.map(c=>`<span class="canal-tag ${cClass(c)}">${cIcon(c)} ${c}</span>`).join("")}</div>
-          </div>
-          <div class="fc"><div class="fc-lbl">Fecha Salida</div><div class="fc-val date">${p.fecha||"—"}</div></div>
-          <div class="fc"><div class="fc-lbl">Fase del Ciclo</div><div class="fc-val">${p.fase||"—"}</div></div>
-          <div class="fc"><div class="fc-lbl">Audiencia</div><div class="fc-val">${p.audiencia||"—"}</div></div>
-          <div class="fc"><div class="fc-lbl">Objetivo</div><div class="fc-val">${p.objetivo||"—"}</div></div>
-          <div class="fc"><div class="fc-lbl">KPI</div><div class="fc-val">${p.kpi||"—"}</div></div>
-          <div class="fc wide"><div class="fc-lbl">Idea de Contenido / Copy</div>
-            <div class="fc-val copy">${p.copy||"—"}</div>
-          </div>
-          <div class="fc"><div class="fc-lbl">CTA</div><div class="fc-val">${p.cta||"—"}</div></div>
-          <div class="fc"><div class="fc-lbl">Responsable</div><div class="fc-val">${p.responsable||"—"}</div></div>
-          ${p.ajustes?`<div class="fc wide"><div class="fc-lbl">⚠️ Ajustes solicitados</div><div class="fc-val ajuste">${p.ajustes}</div></div>`:""}
-        </div>
-        <div class="img-zone">
-          <div class="img-zone-inner">
-            <div style="font-size:2rem;margin-bottom:8px">${fmtIcon(p.formato)}</div>
-            <div style="font-size:.72rem;font-weight:600;color:var(--gray)">Pieza: ${p.id}</div>
-            <div style="font-size:.62rem;margin-top:4px;color:var(--gd)">Sube el archivo a Drive y pega el link en la columna <strong>linkDrive</strong> del Sheet</div>
-          </div>
-          ${dlBtn}
-        </div>
-      </div>
-      <div class="ficha-side">
-        <div class="proceso-card">
-          <div class="label v">Estado de la pieza</div>
-          <div style="margin-top:8px;font-size:1rem;font-weight:800;color:${estadoColor(p.estado)}">${p.estado}</div>
-          <div class="proceso-steps">${renderProceso(p.estado)}</div>
-        </div>
-        <div class="proceso-card">
-          <div class="label v">Info del ciclo</div>
-          <div style="margin-top:10px;font-size:.78rem;color:var(--gray)">
-            <div style="margin-bottom:6px">📅 <strong>Ciclo:</strong> ${p.ciclo}</div>
-            <div style="margin-bottom:6px">🏷 <strong>Grupo:</strong> ${p.grupo||"—"}</div>
-            <div>📌 <strong>Fase:</strong> ${p.fase||"—"}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>`;
-}
+  let html = DOW.map(d=>`<div class="dow">${d}</div>`).join('');
+  const cells=[];
+  for(let i=first;i>0;i--) cells.push({d:diP-i+1,c:false});
+  for(let d=1;d<=dim;d++) cells.push({d,c:true});
+  while(cells.length<42) cells.push({d:cells.length-first-dim+1,c:false});
 
-// ── HELPER: Google Calendar link ─────────────────────────────────
-function gcalUrl(titulo, fechaStr){
-  // fechaStr format: "DD/MM/YYYY" → convert to YYYYMMDD
-  const parts=(fechaStr||"").split("/");
-  let dateTag="";
-  if(parts.length===3){
-    const [d,m,y]=parts;
-    const ds=y+m.padStart(2,"0")+d.padStart(2,"0");
-    dateTag=`${ds}/${ds}`;
-  }
-  const t=encodeURIComponent(titulo||"Grabación Local Church");
-  return `https://calendar.google.com/calendar/r/eventedit?text=${t}&dates=${dateTag}&details=${encodeURIComponent("Programado desde el Dashboard Local Church")}&sf=true`;
-}
-
-// ── GRABACIONES ───────────────────────────────────────────────────
-function renderGrabaciones(id,meta){
-  const grabs=meta.grabaciones||[];
-  return `
-  <section id="grab-${id}" class="grab-section">
-    <div class="sec-hdr">
-      <div><div class="label v">Plan de grabación</div><div class="sec-big">${meta.label} 2026</div></div>
-      <a href="#portada-${id}" class="btn btn-g">↑ Portada</a>
-    </div>
-    ${grabs.length>0?`
-    <table class="grab-table">
-      <thead><tr>
-        <th>Fecha</th><th>Sesión / Producción</th><th>Tipo</th>
-        <th>Encargado</th><th>Fecha Entrega</th><th>Estado</th><th>Google Calendar</th>
-      </tr></thead>
-      <tbody>
-        ${grabs.map(g=>`<tr>
-          <td style="font-family:'DM Mono',monospace;color:var(--v);font-weight:700">${g.fecha}</td>
-          <td style="font-weight:600;color:var(--w)">${g.sesion}</td>
-          <td><span class="tipo-grab ${g.tipo==="En Vivo"?"tipo-vivo":g.tipo==="Pre-producción"?"tipo-pre":g.tipo==="Edición"?"tipo-edit":"tipo-grab"}">${g.tipo}</span></td>
-          <td style="color:var(--gray)">${g.encargado}</td>
-          <td style="font-family:'DM Mono',monospace;color:var(--gd)">${g.entrega}</td>
-          <td><span style="font-size:.7rem;font-weight:700;color:${estadoColor(g.estado)}">${g.estado}</span></td>
-          <td>
-            <a href="${gcalUrl(g.sesion, g.fecha)}" target="_blank" class="btn btn-gcal" style="font-size:.62rem;padding:4px 10px">
-              <svg viewBox="0 0 24 24" style="width:10px;height:10px;fill:currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
-              Agendar
-            </a>
-          </td>
-        </tr>`).join("")}
-      </tbody>
-    </table>`:`
-    <div style="padding:32px;text-align:center;background:#F8F6FF;border:1px solid var(--brd);border-radius:12px">
-      <div style="font-size:1.6rem;margin-bottom:8px">📹</div>
-      <div style="font-size:.82rem;font-weight:700;color:var(--gray)">Sin grabaciones programadas</div>
-      <div style="font-size:.72rem;color:var(--gd);margin-top:4px">Agrega grabaciones en la hoja <strong style="color:var(--v)">Grabaciones</strong> del Google Sheet</div>
-    </div>`}
-  </section>`;
-}
-
-// ── MÉTRICAS ──────────────────────────────────────────────────────
-function renderMetricas(id,meta){
-  const tabs=[{id:"all",label:"Resumen",cls:"ct-all"},{id:"instagram",label:"📸 Instagram",cls:"ct-ig"},{id:"facebook",label:"👤 Facebook",cls:"ct-fb"},{id:"youtube",label:"▶️ YouTube",cls:"ct-yt"},{id:"whatsapp",label:"💬 WhatsApp",cls:"ct-wa"},{id:"mail",label:"✉️ Mail",cls:"ct-ml"}];
-  return `
-  <section id="metrics-${id}" class="metrics-section">
-    <div class="sec-hdr">
-      <div><div class="label v">Métricas y KPIs por Canal</div><div class="sec-big">${meta.label} 2026</div></div>
-      <div class="hdr-btns">
-        <a href="#portada-${id}" class="btn btn-g">↑ Portada</a>
-        <button class="btn btn-drive" onclick="openSheet()">📊 Actualizar en Sheet</button>
-      </div>
-    </div>
-    <div class="canal-tabs">
-      ${tabs.map((t,i)=>`<button class="canal-tab ${t.cls}${i===0?" on":""}" onclick="switchCanalTab('${id}','${t.id}',this)">${t.label}</button>`).join("")}
-    </div>
-    <div id="cp-${id}-all" class="canal-panel on">
-      <div class="canal-stats">
-        <div class="cstat"><div class="cstat-n" id="cs-${id}-ig-seg" style="color:#C13584">—</div><div class="cstat-l">Seguidores IG</div></div>
-        <div class="cstat"><div class="cstat-n" id="cs-${id}-ig-alc" style="color:#C13584">—</div><div class="cstat-l">Alcance IG</div></div>
-        <div class="cstat"><div class="cstat-n" id="cs-${id}-fb-seg" style="color:#1877F2">—</div><div class="cstat-l">Seguidores FB</div></div>
-        <div class="cstat"><div class="cstat-n" id="cs-${id}-yt-sub" style="color:#CC0000">—</div><div class="cstat-l">Subs YouTube</div></div>
-        <div class="cstat"><div class="cstat-n" id="cs-${id}-wa-con" style="color:#128C7E">—</div><div class="cstat-l">Contactos WA</div></div>
-        <div class="cstat"><div class="cstat-n" id="cs-${id}-ml-sub" style="color:#4F46E5">—</div><div class="cstat-l">Suscriptores Mail</div></div>
-      </div>
-      <div class="charts-grid">
-        <div class="chart-card"><div class="chart-title">Estado de piezas por ciclo</div><div class="chart-wrap"><canvas id="chart-bar-${id}"></canvas></div></div>
-        <div class="chart-card"><div class="chart-title">Alcance semanal</div><div class="chart-wrap"><canvas id="chart-line-${id}"></canvas></div></div>
-        <div class="chart-card wide"><div class="chart-title">Distribución de formatos</div>
-          <div style="display:grid;grid-template-columns:180px 1fr;gap:20px;align-items:center">
-            <div class="chart-wrap" style="height:180px"><canvas id="chart-pie-${id}"></canvas></div>
-            <div id="chart-pie-legend-${id}" style="display:flex;flex-wrap:wrap;gap:8px;font-size:.7rem"></div>
-          </div>
-        </div>
-      </div>
-      <div class="metrics-update-tip">💡 <span>Actualiza los números en la hoja <strong style="color:var(--vl)">Métricas</strong> del Google Sheet al cierre de cada mes. El dashboard los mostrará automáticamente.</span></div>
-    </div>
-    <div id="cp-${id}-instagram" class="canal-panel">
-      <div class="canal-stats">
-        <div class="cstat" style="border-color:rgba(193,53,132,.35)"><div class="cstat-n" id="cs-${id}-ig-s" style="color:#C13584">—</div><div class="cstat-l">Seguidores</div></div>
-        <div class="cstat" style="border-color:rgba(193,53,132,.35)"><div class="cstat-n" id="cs-${id}-ig-a" style="color:#C13584">—</div><div class="cstat-l">Alcance</div></div>
-        <div class="cstat" style="border-color:rgba(193,53,132,.35)"><div class="cstat-n" id="cs-${id}-ig-i" style="color:#C13584">—</div><div class="cstat-l">Impresiones</div></div>
-        <div class="cstat" style="border-color:rgba(193,53,132,.35)"><div class="cstat-n" id="cs-${id}-ig-e" style="color:#C13584">—</div><div class="cstat-l">Engagement %</div></div>
-      </div>
-      <p class="cstat-note">Fuente: Meta Business Suite → Insights. Actualiza en la hoja Métricas del Sheet.</p>
-    </div>
-    <div id="cp-${id}-facebook" class="canal-panel">
-      <div class="canal-stats">
-        <div class="cstat" style="border-color:rgba(24,119,242,.35)"><div class="cstat-n" id="cs-${id}-fb-s" style="color:#1877F2">—</div><div class="cstat-l">Seguidores</div></div>
-        <div class="cstat" style="border-color:rgba(24,119,242,.35)"><div class="cstat-n" id="cs-${id}-fb-a" style="color:#1877F2">—</div><div class="cstat-l">Alcance</div></div>
-        <div class="cstat" style="border-color:rgba(24,119,242,.35)"><div class="cstat-n" id="cs-${id}-fb-i" style="color:#1877F2">—</div><div class="cstat-l">Impresiones</div></div>
-        <div class="cstat" style="border-color:rgba(24,119,242,.35)"><div class="cstat-n" id="cs-${id}-fb-e" style="color:#1877F2">—</div><div class="cstat-l">Engagement %</div></div>
-      </div>
-      <p class="cstat-note">Fuente: Meta Business Suite → Insights. Actualiza en la hoja Métricas del Sheet.</p>
-    </div>
-    <div id="cp-${id}-youtube" class="canal-panel">
-      <div class="canal-stats">
-        <div class="cstat" style="border-color:rgba(204,0,0,.35)"><div class="cstat-n" id="cs-${id}-yt-s" style="color:#CC0000">—</div><div class="cstat-l">Suscriptores</div></div>
-        <div class="cstat" style="border-color:rgba(204,0,0,.35)"><div class="cstat-n" id="cs-${id}-yt-v" style="color:#CC0000">—</div><div class="cstat-l">Vistas</div></div>
-        <div class="cstat" style="border-color:rgba(204,0,0,.35)"><div class="cstat-n" id="cs-${id}-yt-h" style="color:#CC0000">—</div><div class="cstat-l">Horas vistas</div></div>
-        <div class="cstat" style="border-color:rgba(204,0,0,.35)"><div class="cstat-n" id="cs-${id}-yt-w" style="color:#CC0000">—</div><div class="cstat-l">Watch time avg.</div></div>
-      </div>
-      <p class="cstat-note">Fuente: YouTube Studio → Análisis → Descripción general. Actualiza en la hoja Métricas del Sheet.</p>
-    </div>
-    <div id="cp-${id}-whatsapp" class="canal-panel">
-      <div class="canal-stats">
-        <div class="cstat" style="border-color:rgba(18,140,126,.35)"><div class="cstat-n" id="cs-${id}-wa-c" style="color:#128C7E">—</div><div class="cstat-l">Contactos</div></div>
-        <div class="cstat" style="border-color:rgba(18,140,126,.35)"><div class="cstat-n" id="cs-${id}-wa-m" style="color:#128C7E">—</div><div class="cstat-l">Mensajes enviados</div></div>
-        <div class="cstat" style="border-color:rgba(18,140,126,.35)"><div class="cstat-n" id="cs-${id}-wa-t" style="color:#128C7E">—</div><div class="cstat-l">Tasa apertura</div></div>
-        <div class="cstat" style="border-color:rgba(18,140,126,.35)"><div class="cstat-n" id="cs-${id}-wa-r" style="color:#128C7E">—</div><div class="cstat-l">Respuestas</div></div>
-      </div>
-      <p class="cstat-note">Fuente: WhatsApp Business → Estadísticas. Actualiza en la hoja Métricas del Sheet.</p>
-    </div>
-    <div id="cp-${id}-mail" class="canal-panel">
-      <div class="canal-stats">
-        <div class="cstat" style="border-color:rgba(79,70,229,.35)"><div class="cstat-n" id="cs-${id}-ml-s" style="color:#4F46E5">—</div><div class="cstat-l">Suscriptores</div></div>
-        <div class="cstat" style="border-color:rgba(79,70,229,.35)"><div class="cstat-n" id="cs-${id}-ml-e" style="color:#4F46E5">—</div><div class="cstat-l">Enviados</div></div>
-        <div class="cstat" style="border-color:rgba(79,70,229,.35)"><div class="cstat-n" id="cs-${id}-ml-a" style="color:#4F46E5">—</div><div class="cstat-l">Tasa apertura</div></div>
-        <div class="cstat" style="border-color:rgba(79,70,229,.35)"><div class="cstat-n" id="cs-${id}-ml-c" style="color:#4F46E5">—</div><div class="cstat-l">Tasa de clics</div></div>
-      </div>
-      <p class="cstat-note">Fuente: Mailchimp / plataforma email → Informes de campaña. Actualiza en la hoja Métricas del Sheet.</p>
-    </div>
-  </section>`;
-}
-
-// ── CHARTS ────────────────────────────────────────────────────────
-const chartsInited={};
-function initCharts(id,meta,piezas){
-  if(chartsInited[id]) return;
-  chartsInited[id]=true;
-  const m=meta.metricas;
-  Chart.defaults.color="#7C6FA0";
-  Chart.defaults.font={family:"'Nunito',sans-serif",size:10};
-  const gridOpts={
-    x:{grid:{color:"rgba(107,33,214,.08)"},ticks:{color:"#7C6FA0"}},
-    y:{grid:{color:"rgba(107,33,214,.08)"},ticks:{color:"#7C6FA0"}}
-  };
-
-  const bCtx=document.getElementById(`chart-bar-${id}`);
-  if(bCtx) new Chart(bCtx,{type:"bar",data:{labels:m.barData.labels,datasets:[
-    {label:"Aprobadas",data:m.barData.aprobadas,backgroundColor:"rgba(5,150,105,.7)",borderRadius:4},
-    {label:"En proceso",data:m.barData.revision,backgroundColor:"rgba(202,138,4,.7)",borderRadius:4},
-    {label:"Pendientes",data:m.barData.pendientes,backgroundColor:"rgba(107,33,214,.4)",borderRadius:4},
-  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"top",labels:{color:"#4B3B6B"}}},scales:gridOpts}});
-
-  const lCtx=document.getElementById(`chart-line-${id}`);
-  if(lCtx) new Chart(lCtx,{type:"line",data:{labels:m.lineData.labels,datasets:[
-    {label:"Alcance promedio",data:m.lineData.alcance,borderColor:"rgba(107,33,214,1)",backgroundColor:"rgba(107,33,214,.08)",tension:.4,fill:true,pointBackgroundColor:"rgba(107,33,214,1)"},
-    {label:"Engagement",data:m.lineData.engagement,borderColor:"rgba(5,150,105,1)",backgroundColor:"rgba(5,150,105,.06)",tension:.4,fill:true,pointBackgroundColor:"rgba(5,150,105,1)"},
-  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:"top",labels:{color:"#4B3B6B"}}},scales:gridOpts}});
-
-  const fmtCount={};
-  piezas.forEach(p=>{const f=p.formato||"Otro";fmtCount[f]=(fmtCount[f]||0)+1;});
-  const pieLabels=Object.keys(fmtCount);
-  const PIE_COLORS=["#6B21D6","#F5C842","#34D399","#F97316","#38BDF8","#F472B6","#818CF8","#A78BFA","#FCD34D"];
-  const pCtx=document.getElementById(`chart-pie-${id}`);
-  if(pCtx) new Chart(pCtx,{type:"doughnut",data:{labels:pieLabels,datasets:[{data:pieLabels.map(k=>fmtCount[k]),backgroundColor:PIE_COLORS.slice(0,pieLabels.length),borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},cutout:"68%"}});
-  const leg=document.getElementById(`chart-pie-legend-${id}`);
-  if(leg) leg.innerHTML=pieLabels.map((l,i)=>`<div style="display:flex;align-items:center;gap:5px"><div style="width:8px;height:8px;border-radius:2px;background:${PIE_COLORS[i]};flex-shrink:0"></div><span>${l} (${fmtCount[l]})</span></div>`).join("");
-}
-
-// ── POPULAT METRICAS ──────────────────────────────────────────────
-function populateMetricas(monthId,data){
-  if(!data) return;
-  const mes=MONTHS_META[monthId]?.label;
-  const fmt=v=>v?(typeof v==="number"?v.toLocaleString("es-CO"):v):"—";
-  const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=fmt(val);};
-  const ig=(data.instagram||[]).find(r=>r.mes===mes)||{};
-  set(`cs-${monthId}-ig-seg`,ig.seguidores);set(`cs-${monthId}-ig-alc`,ig.alcance);
-  set(`cs-${monthId}-ig-s`,ig.seguidores);set(`cs-${monthId}-ig-a`,ig.alcance);
-  set(`cs-${monthId}-ig-i`,ig.impresiones);set(`cs-${monthId}-ig-e`,ig.engagement);
-  const fb=(data.facebook||[]).find(r=>r.mes===mes)||{};
-  set(`cs-${monthId}-fb-seg`,fb.seguidores);set(`cs-${monthId}-fb-s`,fb.seguidores);
-  set(`cs-${monthId}-fb-a`,fb.alcance);set(`cs-${monthId}-fb-i`,fb.impresiones);set(`cs-${monthId}-fb-e`,fb.engagement);
-  const yt=(data.youtube||[]).find(r=>r.mes===mes)||{};
-  set(`cs-${monthId}-yt-sub`,yt.suscriptores);set(`cs-${monthId}-yt-s`,yt.suscriptores);
-  set(`cs-${monthId}-yt-v`,yt.vistas);set(`cs-${monthId}-yt-h`,yt.horas_vistas);set(`cs-${monthId}-yt-w`,yt.watch_time);
-  const wa=(data.whatsapp||[]).find(r=>r.mes===mes)||{};
-  set(`cs-${monthId}-wa-con`,wa.contactos);set(`cs-${monthId}-wa-c`,wa.contactos);
-  set(`cs-${monthId}-wa-m`,wa.mensajes_enviados);set(`cs-${monthId}-wa-t`,wa.tasa_apertura);set(`cs-${monthId}-wa-r`,wa.respuestas);
-  const ml=(data.mail||[]).find(r=>r.mes===mes)||{};
-  set(`cs-${monthId}-ml-sub`,ml.suscriptores);set(`cs-${monthId}-ml-s`,ml.suscriptores);
-  set(`cs-${monthId}-ml-e`,ml.enviados);set(`cs-${monthId}-ml-a`,ml.abiertos);set(`cs-${monthId}-ml-c`,ml.clics);
-}
-
-function switchCanalTab(mid,cid,el){
-  document.querySelectorAll(`[id^="cp-${mid}-"]`).forEach(p=>p.classList.remove("on"));
-  el.closest(".canal-tabs").querySelectorAll(".canal-tab").forEach(t=>t.classList.remove("on"));
-  const panel=document.getElementById(`cp-${mid}-${cid}`);
-  if(panel) panel.classList.add("on");
-  el.classList.add("on");
-}
-
-// ── BUILD MONTH ───────────────────────────────────────────────────
-function buildMonth(id,apiPiezas){
-  const meta=MONTHS_META[id];
-  const next=MONTH_ORDER[MONTH_ORDER.indexOf(id)+1];
-  let piezas=[];
-  if(apiPiezas&&apiPiezas.length>0){
-    piezas=apiPiezas.filter(p=>{const m=(p.fecha||"").split("/")[1];return m&&parseInt(m)===parseInt(meta.num);});
-  }
-  if(piezas.length===0&&meta.piezas&&meta.piezas.length>0) piezas=meta.piezas;
-
-  let html=`<section class="month-view" id="month-${id}">`;
-  html+=renderPortada(id,meta,piezas);
-  html+=`<div class="divider"></div>`;
-  html+=renderCalendario(id,meta,piezas);
-  html+=`<div class="divider"></div>`;
-  meta.ciclos.forEach((c,ci)=>{
-    const prevC=ci>0?meta.ciclos[ci-1]:null;
-    const nextC=ci<meta.ciclos.length-1?meta.ciclos[ci+1]:null;
-    const cicPiezas=piezas.filter(p=>parseInt((p.ciclo||"0").replace(/\D/g,""),10)===c.num);
-    html+=renderCicloSlide(id,meta,c,cicPiezas,prevC,nextC,!nextC,next);
-    html+=`<div class="divider"></div>`;
-    const grps={};
-    cicPiezas.forEach(p=>{const k=p.grupo||("_"+p.id);if(!grps[k])grps[k]=[];grps[k].push(p);});
-    const all=[];Object.values(grps).forEach(g=>g.forEach(p=>all.push(p)));
-    let sc=0;
-    Object.values(grps).forEach(grpPiezas=>{
-      grpPiezas.forEach((p,pi)=>{sc++;html+=renderFicha(p,grpPiezas,pi,sc,all.length,id);html+=`<div class="divider"></div>`;});
-    });
+  cells.forEach(({d,c})=>{
+    const isT = c&&d===today.getDate()&&curMonth===today.getMonth()+1&&curYear===today.getFullYear();
+    const pds  = c?(byDay[d]||[]):[];
+    const chips= pds.slice(0,3).map(({r,idx}) => {
+      const canal   = rowCanal(r);
+      const first1  = canal.split(/[·,\/]/)[0].trim();
+      const ck      = chKey(first1);
+      // Etiqueta: Nombre del Tema (primeras 20 chars) o Formato o canal
+      const nombre  = g(r,'Nombre del Tema');
+      const formato = g(r,'Formato');
+      const lbl     = nombre
+        ? nombre.slice(0,22)+(nombre.length>22?'…':'')
+        : (formato || first1 || 'Pieza');
+      const isSel   = idx === selIdx;
+      return `<button class="chip c-${ck} ${isSel?'sel':''}" onclick="openSlide(${idx})" title="${esc(nombre||formato)}">${lbl}</button>`;
+    }).join('');
+    const more = pds.length>3
+      ? `<button class="chip c-ot" onclick="openSlide(${pds[3].idx})">+${pds.length-3}</button>`
+      : '';
+    html += `<div class="cday ${!c?'oth':''} ${isT?'tod':''}"><div class="dnum">${d}</div>${chips}${more}</div>`;
   });
-  html+=renderGrabaciones(id,meta);
-  html+=`<div class="divider"></div>`;
-  html+=renderMetricas(id,meta);
-  html+=`</section>`;
-  return html;
+
+  document.getElementById('calG').innerHTML = html;
+  renderChChart(rows);
 }
 
-// ── NAVIGATION ────────────────────────────────────────────────────
-let ACTIVE="abril";
-const BUILT={};
-
-function showMonth(id,scrollTop=true){
-  if(!BUILT[id]){document.getElementById("main").innerHTML+=buildMonth(id,null);BUILT[id]=true;}
-  document.querySelectorAll(".month-view").forEach(s=>s.classList.remove("on"));
-  const sec=document.getElementById("month-"+id);
-  if(sec) sec.classList.add("on");
-  document.querySelectorAll(".mtab").forEach(t=>t.classList.toggle("on",(t.getAttribute("onclick")||"").includes(`'${id}'`)));
-  document.querySelectorAll(".dr-link").forEach(t=>t.classList.toggle("on",(t.getAttribute("onclick")||"").includes(`'${id}'`)));
-  ACTIVE=id;
-  if(scrollTop) window.scrollTo(0,0);
-  setTimeout(()=>{
-    const m=MONTHS_META[id];const p=m.piezas||[];
-    initCharts(id,m,p);initWeekEditing();
-    if(window.LC_METRICAS) populateMetricas(id,window.LC_METRICAS);
-  },120);
+function shiftM(dir) {
+  const i=SHOW_M.indexOf(curMonth),ni=i+dir;
+  if(ni<0||ni>=SHOW_M.length) return;
+  curMonth=SHOW_M[ni];
+  document.querySelectorAll('.mb').forEach((b,j)=>b.classList.toggle('on',SHOW_M[j]===curMonth));
+  closeSlide();
+  renderMain();
 }
-function goHome(){window.scrollTo(0,0);}
-function goGrab(){const el=document.getElementById("grab-"+ACTIVE);if(el)el.scrollIntoView({behavior:"smooth"});}
-function goMetrics(){const el=document.getElementById("metrics-"+ACTIVE);if(el)el.scrollIntoView({behavior:"smooth"});}
-function toggleDrawer(){document.getElementById("drawer").classList.toggle("open");}
-function openSheet(){if(SHEET_ID){window.open(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit`,"_blank");}else{promptSheetId();}}
 
-// ── WEEK EDITING ──────────────────────────────────────────────────
-window.LC_WEEK_NAMES={};
-function initWeekEditing(){
-  document.querySelectorAll('.cal-wk-lbl').forEach(lbl=>{
-    const mid=lbl.getAttribute('data-month');
-    const widx=parseInt(lbl.getAttribute('data-widx'));
-    const nameEl=lbl.querySelector('.wkl-name');
-    if(!mid||isNaN(widx)||!nameEl) return;
-    lbl.addEventListener('dblclick',e=>{
-      e.preventDefault();
-      const sKey='lc-weeknames-'+mid;
-      const saved=JSON.parse(localStorage.getItem(sKey)||'null');
-      const cur=(saved&&saved[widx])||nameEl.textContent;
-      const inp=document.createElement('input');
-      inp.value=cur;
-      inp.style.cssText='width:100%;background:rgba(107,33,214,.35);border:1px solid #8B45E8;border-radius:4px;color:#fff;font-size:.6rem;font-family:Nunito,sans-serif;padding:3px 5px;outline:none;';
-      nameEl.replaceWith(inp);inp.focus();inp.select();
-      function save(){
-        const all=JSON.parse(localStorage.getItem(sKey)||'null')||[];
-        all[widx]=inp.value||cur;localStorage.setItem(sKey,JSON.stringify(all));
-        if(!window.LC_WEEK_NAMES[mid])window.LC_WEEK_NAMES[mid]=[];
-        window.LC_WEEK_NAMES[mid][widx]=inp.value||cur;
-        const sp=document.createElement('span');sp.className='wkl-name';sp.textContent=inp.value||cur;inp.replaceWith(sp);
-      }
-      inp.addEventListener('blur',save);
-      inp.addEventListener('keydown',ev=>{if(ev.key==='Enter')save();if(ev.key==='Escape'){const sp=document.createElement('span');sp.className='wkl-name';sp.textContent=cur;inp.replaceWith(sp);}});
-      const skSaved=JSON.parse(localStorage.getItem('lc-weeknames-'+mid)||'null');
-      if(skSaved&&skSaved[widx])nameEl.textContent=skSaved[widx];
-    });
-    const sKey='lc-weeknames-'+mid;
-    const saved=JSON.parse(localStorage.getItem(sKey)||'null');
-    if(saved&&saved[widx])nameEl.textContent=saved[widx];
+function renderChChart(rows) {
+  const counts={};
+  rows.forEach(r=>{
+    const c=rowCanal(r)||'Otro';
+    c.split(/[·,]/).forEach(ch=>{const v=ch.trim();if(v)counts[v]=(counts[v]||0)+1;});
   });
-}
-
-// ── EXT LINKS ─────────────────────────────────────────────────────
-function initExtLinks(){
-  const tUrl=localStorage.getItem("lc-trello-url")||"https://trello.com/invite/b/6877d1bd45f819eb3bb24869/ATTI77e4df05b7e08040e75308e1814befbc181414F6/local-church-influencia";
-  const dUrl=localStorage.getItem("lc-drive-url")||"https://drive.google.com/drive/folders/1pgAxK9xSsnPArk5hx7d-QcUEottoBwGK";
-  ["nav-trello","drawer-trello"].forEach(id=>{const el=document.getElementById(id);if(el)el.href=tUrl;});
-  ["nav-drive","drawer-drive"].forEach(id=>{const el=document.getElementById(id);if(el)el.href=dUrl;});
-  // Sheet link
-  const sheetUrl=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit`;
-  ["nav-sheet","drawer-sheet"].forEach(id=>{const el=document.getElementById(id);if(el)el.href=sheetUrl;});
-}
-function setupExtLinks(){
-  [["nav-trello","trello","lc-trello-url","Trello"],["nav-drive","drive","lc-drive-url","Google Drive"],["drawer-trello","trello","lc-trello-url","Trello"],["drawer-drive","drive","lc-drive-url","Google Drive"]].forEach(([btnId,_,key,label])=>{
-    const btn=document.getElementById(btnId);if(!btn)return;let t;
-    btn.addEventListener("touchstart",()=>{t=setTimeout(()=>editUrl(key,label),700);},{passive:true});
-    btn.addEventListener("touchend",()=>clearTimeout(t));
-    btn.addEventListener("contextmenu",e=>{e.preventDefault();editUrl(key,label);});
+  const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+  const labels=sorted.map(([k])=>k),vals=sorted.map(([,v])=>v);
+  const bgs=labels.map(l=>chColor(l.split(/[·,]/)[0].trim())+'cc');
+  if(chChartInst)chChartInst.destroy();
+  chChartInst=new Chart(document.getElementById('chChart'),{
+    type:'doughnut',data:{labels,datasets:[{data:vals,backgroundColor:bgs,borderWidth:0}]},
+    options:{plugins:{legend:{display:false}},cutout:'65%'}
   });
-}
-function editUrl(key,label){
-  const cur=localStorage.getItem(key)||"";
-  const nu=prompt(`🔗 URL de ${label}:`,cur);
-  if(nu&&nu.trim()){localStorage.setItem(key,nu.trim());initExtLinks();}
+  document.getElementById('chLeg').innerHTML=sorted.map(([n,c],i)=>`
+    <div class="chrow"><div class="chn"><div class="chd" style="background:${bgs[i]}"></div>${n}</div><div class="chc">${c}</div></div>`).join('');
 }
 
-// ══════════════════════════════════════════════════════════════════
-// GOOGLE SHEETS READER — lectura directa via CSV export
-// No requiere Apps Script. El Sheet debe ser público (ver con enlace)
-// ══════════════════════════════════════════════════════════════════
-function parseCSV(text){
-  const lines=text.split(/\r?\n/).filter(l=>l.trim());
-  return lines.map(line=>{
-    const cells=[];let cur="",inQ=false;
-    for(let i=0;i<line.length;i++){
-      const ch=line[i];
-      if(ch==='"'){if(inQ&&line[i+1]==='"'){cur+='"';i++;}else inQ=!inQ;}
-      else if(ch===','&&!inQ){cells.push(cur.trim());cur="";}
-      else cur+=ch;
-    }
-    cells.push(cur.trim());return cells;
-  });
+/* ════════════════════════════════════════════════════
+   SLIDE — aparece debajo del calendario
+════════════════════════════════════════════════════ */
+function openSlide(idx) {
+  selIdx = idx;
+  // Construir lista del mismo mes para navegación
+  dayList = mRows().map(r => P.rows.indexOf(r)).filter(i=>i>=0);
+  dayListI = dayList.indexOf(idx);
+  if (dayListI<0) { dayList=[idx]; dayListI=0; }
+  renderSlide(idx);
+  // Re-render calendar para marcar chip seleccionado
+  renderCalendar();
+  // Scroll al slide
+  setTimeout(() => document.getElementById('slideWrap')?.scrollIntoView({behavior:'smooth',block:'nearest'}), 50);
 }
 
-async function fetchSheetCSV(sheetId, sheetName, pubKey){
-  // USA SOLO GID — único formato que funciona con /pub
-  // El parámetro gid se pasa como sheetName cuando es un número
-  const gid = parseInt(sheetName) || 0;
-  const url = `https://docs.google.com/spreadsheets/d/e/${pubKey}/pub?output=csv&gid=${gid}`;
-  return fetch(url, {cache:"no-store"})
-    .then(r => { if(!r.ok) throw new Error("HTTP "+r.status); return r.text(); })
-    .then(text => {
-      if(text.trim().length < 20 || text.trim().startsWith("<!")) throw new Error("Sin datos");
-      return parseCSV(text);
-    });
+function navSlide(dir) {
+  dayListI = Math.max(0, Math.min(dayList.length-1, dayListI+dir));
+  selIdx   = dayList[dayListI];
+  renderSlide(selIdx);
+  renderCalendar();
 }
 
-
-// ── Normaliza un encabezado: quita emojis, símbolos, espacios extra, pasa a minúsculas
-function normHdr(h){
-  return (h||"")
-    .replace(/[\u{1F300}-\u{1FFFF}]/gu,"")   // emojis
-    .replace(/[^\w\sáéíóúüñÁÉÍÓÚÜÑ]/g," ")  // símbolos → espacio
-    .replace(/\s+/g," ")
-    .toLowerCase()
-    .trim();
+function closeSlide() {
+  selIdx = -1;
+  document.getElementById('slideWrap').innerHTML = '';
+  renderCalendar();
 }
 
-// ── Tabla de sinónimos: cada campo puede tener múltiples variantes de nombre
-const COL_SYNONYMS = {
-  fecha:      ["fecha","date","dia","día","fecha salida","fecha publicacion","fecha publicación"],
-  ciclo:      ["ciclo","semana","week","ciclo semana","semana ciclo","s1","s2","s3","s4"],
-  serie:      ["serie","campaña","campaign","serie campana","serie campaña","nombre","tema","titulo","título"],
-  fase:       ["fase","phase","fase del ciclo","fase ciclo","pilar"],
-  audiencia:  ["audiencia","audience","publico","público","target"],
-  formato:    ["formato","format","tipo de contenido","tipo contenido","tipo"],
-  canal:      ["canal","channel","plataforma","platform","red","red social"],
-  idea:       ["idea","idea de contenido","copy","guion","guión","descripcion","descripción","contenido","idea contenido"],
-  cta:        ["cta","llamado a la accion","llamado a la acción","llamado accion","call to action"],
-  kpi:        ["kpi","kpis","metrica","métrica","indicador","resultado esperado"],
-  responsable:["responsable","responsables","encargado","asignado","assigned"],
-  estado:     ["estado","status","progreso","aprobacion","aprobación"],
-  linkDrive:  ["link","link drive","linkdrive","drive","archivo","url","enlace","link archivo","link de drive","link pieza"],
-};
+function renderSlide(idx) {
+  const r = P.rows[idx];
+  if (!r) return;
 
-// ── Encuentra el índice de columna para un campo dado
-function findCol(hdrsNorm, field){
-  const synonyms = COL_SYNONYMS[field] || [field];
-  // Exact match first
-  for(const syn of synonyms){
-    const idx = hdrsNorm.findIndex(h => h === syn);
-    if(idx >= 0) return idx;
-  }
-  // Partial match (contains)
-  for(const syn of synonyms){
-    const idx = hdrsNorm.findIndex(h => h.includes(syn) || syn.includes(h));
-    if(idx >= 0) return idx;
-  }
-  return -1;
-}
+  // Leer campos con g() — acceso directo por nombre de header
+  const id      = g(r,'ID Pieza')         || '—';
+  const nombre  = g(r,'Nombre del Tema')  || '—';
+  const ciclo   = g(r,'Ciclo')            || '—';
+  const fase    = g(r,'Fase')             || '—';
+  const fecha   = g(r,'Fecha Salida')     || '—';
+  const hora    = g(r,'Hora')             || '';
+  const canal   = g(r,'Canal')            || '—';
+  const formato = g(r,'Formato')          || '—';
+  const aud     = g(r,'Audiencia')        || '—';
+  const obj     = g(r,'Objetivo')         || '—';
+  const copy    = g(r,'Copy / Guión','Copy / Guion') || '—';
+  const caption = g(r,'Caption')          || '';
+  const cta     = g(r,'CTA')              || '—';
+  const estado  = g(r,'Estado')           || 'Pendiente';
+  const ajustes = g(r,'Ajustes Solicitados') || '';
+  const resp    = g(r,'Responsable')      || '—';
+  const drive   = g(r,'Link Drive')       || '';
+  const notas   = g(r,'Notas')            || '';
+  const grupo   = g(r,'Grupo (GRP)')      || '—';
+  const mes     = g(r,'Mes')              || r['__MES_TEXTO__'] || '—';
 
-// ── Parsea filas CSV → array de objetos pieza
-function csvToPiezas(rows){
-  // Busca la fila de cabecera: la primera que tenga ≥4 celdas no vacías
-  let hIdx = rows.findIndex(r => r.filter(c=>c.trim()).length >= 4);
-  if(hIdx < 0) hIdx = 0;
+  const canalFirst = canal.split(/[·,\/]/)[0].trim();
+  const canalPills = canal.split(/[·,]/).map(c=>c.trim()).filter(Boolean)
+    .map(c=>`<span class="cpill" style="background:${chColor(c)}">${c}</span>`).join('');
 
-  // Normaliza encabezados
-  const hdrsRaw  = rows[hIdx];
-  const hdrsNorm = hdrsRaw.map(normHdr);
+  const stOpts = STATUSES.map(s=>{
+    const cur=s.toLowerCase()===estado.toLowerCase();
+    return `<div class="sopt ${cur?'cur':''}"><div class="srad ${cur?'on':''}"></div>${s}</div>`;
+  }).join('');
 
-  // Detecta índices de cada campo
-  const cols = {};
-  for(const field of Object.keys(COL_SYNONYMS)){
-    cols[field] = findCol(hdrsNorm, field);
-  }
-
-  // Debug: log column mapping al síncronizar
-  console.log("📊 Sheet columnas detectadas:", hdrsRaw);
-  console.log("📊 Mapeo de campos:", cols);
-
-  const piezas=[];
-  for(let i=hIdx+1; i<rows.length; i++){
-    const r=rows[i];
-    // Saltar filas completamente vacías o de separador
-    if(r.filter(c=>c.trim()).length < 2) continue;
-
-    // Extraer ciclo número
-    const cicloRaw = cols.ciclo >= 0 ? (r[cols.ciclo]||"") : "";
-    const cicloMatch = cicloRaw.match(/\d/);
-    const cicloNum = cicloMatch ? cicloMatch[0] : "1";
-
-    // Extraer fecha: quedarse solo con la parte DD/MM o DD
-    const fechaRaw = cols.fecha >= 0 ? (r[cols.fecha]||"") : "";
-    const fechaClean = fechaRaw
-      .replace(/^(lun|mar|mié|jue|vie|sáb|dom|mon|tue|wed|thu|fri|sat|sun)[a-z]*[\s,.]*/i,"")
-      .trim()
-      .split(" ")[0];
-
-    const tema = cols.serie >= 0 ? (r[cols.serie]||"").split(/[·\-–]/)[0].trim().substring(0,60) : `Pieza ${i}`;
-
-    piezas.push({
-      id: `ABR-C${cicloNum}-${String(i).padStart(3,"0")}`,
-      ciclo: cicloNum,
-      grupo: `G${cicloNum}`,
-      tema,
-      fecha: fechaClean,
-      canal:       cols.canal       >= 0 ? r[cols.canal]       : "",
-      formato:     cols.formato     >= 0 ? r[cols.formato]      : "Post estático",
-      fase:        cols.fase        >= 0 ? r[cols.fase]         : "",
-      audiencia:   cols.audiencia   >= 0 ? r[cols.audiencia]    : "",
-      objetivo:    "",
-      copy:        cols.idea        >= 0 ? r[cols.idea]         : "",
-      cta:         cols.cta         >= 0 ? r[cols.cta]          : "",
-      kpi:         cols.kpi         >= 0 ? r[cols.kpi]          : "",
-      responsable: cols.responsable >= 0 ? r[cols.responsable]  : "",
-      estado:      cols.estado      >= 0 ? (r[cols.estado]||"Pendiente") : "Pendiente",
-      linkDrive:   cols.linkDrive   >= 0 ? r[cols.linkDrive]    : "",
-    });
-  }
-  return piezas;
-}
-
-async function syncFromSheet(sheetId){
-  const dot = document.getElementById("sdot");
-  const lbl = document.getElementById("slbl");
-  dot.className="sync-dot wait"; lbl.textContent="Sincronizando…";
-
-  const pub = PUB_KEY;
-
-  // ── Abril por GID directo
-  try{
-    const rows = await fetchSheetCSV(sheetId, "1782646183", pub);
-    const piezas = csvToPiezas(rows);
-    if(piezas.length > 0){
-      MONTHS_META.abril.piezas = piezas;
-
-      // ── Sync otros meses + Grab + Métricas en paralelo
-      const MGIDS = {"mayo":804464204,"junio":1480501652,"julio":925897179,"agosto":1291713398,"septiembre":1049610183,"octubre":1101962404,"noviembre":1823568121,"diciembre":196070214};
-      (async()=>{
-        for(const [mid,gid] of Object.entries(MGIDS)){
-          try{
-            const rows2 = await fetchSheetCSV(sheetId, String(gid), pub);
-            const p = csvToPiezas(rows2);
-            if(p.length > 0){
-              MONTHS_META[mid].piezas = p;
-              const el = document.getElementById("month-"+mid);
-              if(el){ el.remove(); BUILT[mid]=false; }
-              console.log("✅", mid, p.length, "piezas");
-            }
-          }catch(e){ console.warn(mid+":", e.message); }
-        }
-        // Grabaciones gid=417621751
-        try{
-          const rg = await fetchSheetCSV(sheetId, "417621751", pub);
-          const hi = rg.findIndex(r=>r.some(c=>/mes|fecha/i.test(c)));
-          if(hi>=0){
-            const grabs = rg.slice(hi+1).filter(r=>(r[1]||"").trim()).map(r=>
-              ({mes:(r[0]||"").trim(),fecha:(r[1]||"").trim(),sesion:(r[2]||"").trim(),
-                tipo:(r[3]||"").trim(),encargado:(r[4]||"").trim(),entrega:(r[5]||"").trim(),
-                estado:(r[6]||"Pendiente").trim(),linkDrive:(r[7]||"").trim()}));
-            Object.keys(MONTHS_META).forEach(mid=>{
-              const lb=(MONTHS_META[mid].label||"").toLowerCase();
-              MONTHS_META[mid].grabaciones=grabs.filter(g=>{const gm=(g.mes||"").toLowerCase();return gm.includes(mid)||lb.includes(gm);});
-            });
-            console.log("✅ Grabaciones:", grabs.length);
-          }
-        }catch(e){ console.warn("Grab:", e.message); }
-        // Métricas gid=1153647020
-        try{
-          const rm = await fetchSheetCSV(sheetId, "1153647020", pub);
-          const hi = rm.findIndex(r=>r.some(c=>/mes|seguidores/i.test(c)));
-          if(hi>=0){
-            rm.slice(hi+1).forEach(r=>{
-              const mes=(r[0]||"").toLowerCase().trim();
-              const mid=Object.keys(MONTHS_META).find(m=>mes.includes(m)||m.includes(mes));
-              if(mid){
-                if(!MONTHS_META[mid].metricas)MONTHS_META[mid].metricas={};
-                Object.assign(MONTHS_META[mid].metricas,{seguidores_ig:(r[1]||"").trim(),alcance:(r[2]||"").trim(),seguidores_fb:(r[3]||"").trim(),subs_yt:(r[4]||"").trim(),engagement:(r[5]||"").trim()});
-              }
-            });
-            console.log("✅ Métricas ok");
-          }
-        }catch(e){ console.warn("Met:", e.message); }
-      })();
-
-      // Rebuild Abril
-      const el = document.getElementById("month-abril"); if(el) el.remove();
-      BUILT["abril"] = false;
-      showMonth("abril", false);
-      dot.className = "sync-dot ok";
-      lbl.textContent = `✓ ${piezas.length} piezas Abril · ${new Date().toLocaleTimeString("es-CO",{hour:"2-digit",minute:"2-digit"})}`;
-    } else {
-      throw new Error("0 piezas detectadas");
-    }
-  } catch(e) {
-    dot.className = "sync-dot err";
-    lbl.textContent = "Error: " + e.message;
-    console.error("❌ Sync:", e);
-  }
-}
-
-
-// ── Panel de diagnóstico visual ────────────────────────────────────
-function removeDiagPanel(){
-  const old=document.getElementById("diag-panel"); if(old) old.remove();
-}
-
-function showDiagPanel(sheetId, results){
-  removeDiagPanel();
-  const panel=document.createElement("div");
-  panel.id="diag-panel";
-  panel.style.cssText=`
-    position:fixed;bottom:0;left:0;right:0;z-index:9999;
-    background:#fff;border-top:2px solid #6B21D6;
-    font-family:'Nunito',sans-serif;font-size:13px;color:#1A0A2E;
-    max-height:55vh;overflow-y:auto;
-    box-shadow:0 -4px 24px rgba(107,33,214,.15);
-  `;
-
-  const hdrsFound = results.map(r=>
-    `<div style="margin:6px 0;padding:8px 12px;background:#F5F3FF;border-radius:6px;border:1px solid rgba(107,33,214,.15)">
-      <strong style="color:#6B21D6">Hoja: "${r.name}"</strong>
-      ${r.piezas.length>0
-        ? `<span style="margin-left:8px;color:#059669;font-weight:700">✓ ${r.piezas.length} piezas detectadas</span>`
-        : `<span style="margin-left:8px;color:#B45309">⚠ 0 piezas</span>`}
-      <br>
-      <span style="color:#7C6FA0;font-size:11px">Encabezados: ${r.headers.filter(h=>h.trim()).slice(0,15).map(h=>`<code style="background:#EDE9FE;padding:1px 5px;border-radius:3px;margin:1px;display:inline-block">${h}</code>`).join(" ")}</span>
-    </div>`
-  ).join("") || `<div style="color:#B45309;padding:8px">No se encontró ninguna hoja accesible. Verifica que el Sheet esté publicado (ver instrucciones abajo).</div>`;
-
-  panel.innerHTML=`
-    <div style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between;
-      border-bottom:1px solid rgba(107,33,214,.1);background:#F5F3FF;">
-      <div style="font-weight:800;color:#6B21D6;font-size:14px">🔍 Diagnóstico de conexión con Google Sheet</div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <button onclick="syncFromSheet('${sheetId}')"
-          style="background:#6B21D6;color:#fff;border:none;border-radius:7px;padding:6px 14px;
-          font-size:12px;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif">
-          🔄 Reintentar
-        </button>
-        <button onclick="document.getElementById('diag-panel').remove()"
-          style="background:#F5F3FF;color:#6B21D6;border:1px solid rgba(107,33,214,.3);
-          border-radius:7px;padding:6px 12px;font-size:12px;font-weight:700;
-          cursor:pointer;font-family:'Nunito',sans-serif">✕ Cerrar</button>
+  document.getElementById('slideWrap').innerHTML = `
+  <div class="slide-panel">
+    <div class="slide-hdr">
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px;">
+          <div class="slide-id">${id}</div>
+          <span style="background:rgba(255,255,255,.15);color:var(--v300);padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;">${formato}</span>
+          ${canalFirst?`<span style="background:${chColor(canalFirst)};color:#fff;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;">${canalFirst}</span>`:''}
+          <span style="background:rgba(255,255,255,.1);color:${estado==='Publicado'?'#86efac':estado==='Aprobado'?'#c4b5fd':estado==='Pendiente'?'#fde68a':'#93c5fd'};padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;">${estado}</span>
+        </div>
+        <div class="slide-nombre">${nombre}</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;">
+          ${ciclo&&ciclo!=='—'?`<span style="color:rgba(196,181,253,.7);font-size:11px;font-weight:600;">📅 ${ciclo}</span>`:''}
+          ${fase&&fase!=='—'?`<span style="color:rgba(196,181,253,.7);font-size:11px;font-weight:600;">🏷️ ${fase}</span>`:''}
+          ${grupo&&grupo!=='—'?`<span style="color:rgba(196,181,253,.7);font-size:11px;font-weight:600;">🗂️ ${grupo}</span>`:''}
+        </div>
       </div>
+      <button class="slide-close" onclick="closeSlide()">✕</button>
     </div>
-    <div style="padding:14px 20px">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
 
-        <div>
-          <div style="font-weight:700;color:#4B3B6B;margin-bottom:8px">📋 Hojas encontradas y sus encabezados</div>
-          ${hdrsFound}
+    <div class="slide-nav">
+      <button class="slide-nav-btn" onclick="showPanel('main')">↑ Calendario</button>
+      <button class="slide-nav-btn" id="sNavP" onclick="navSlide(-1)" ${dayListI===0?'disabled':''}>‹ Anterior</button>
+      <button class="slide-nav-btn" id="sNavN" onclick="navSlide(1)"  ${dayListI===dayList.length-1?'disabled':''}>Siguiente ›</button>
+      <span class="slide-cnt">${dayListI+1} / ${dayList.length}</span>
+    </div>
+
+    <div class="slide-body">
+      <div class="slide-left">
+        ${ajustes ? `<div class="ajbox"><div class="ajbox-l">⚠ Ajustes Solicitados</div><div style="font-size:12.5px">${ajustes}</div></div>` : ''}
+
+        <div class="fg">
+          <div class="ff">
+            <div class="ffl">Canal</div>
+            <div class="ffv">${canalPills||canal}</div>
+          </div>
+          <div class="ff">
+            <div class="ffl">Fecha Salida</div>
+            <div class="ffv date">${fecha}${hora?' · '+hora:''}</div>
+          </div>
+          <div class="ff">
+            <div class="ffl">Mes</div>
+            <div class="ffv">${mes}</div>
+          </div>
+          <div class="ff">
+            <div class="ffl">Ciclo</div>
+            <div class="ffv">${ciclo}</div>
+          </div>
+          <div class="ff">
+            <div class="ffl">Fase</div>
+            <div class="ffv">${fase}</div>
+          </div>
+          <div class="ff">
+            <div class="ffl">Grupo (GRP)</div>
+            <div class="ffv">${grupo}</div>
+          </div>
+          <div class="ff s2">
+            <div class="ffl">Audiencia</div>
+            <div class="ffv">${aud}</div>
+          </div>
+          <div class="ff s2">
+            <div class="ffl">Objetivo</div>
+            <div class="ffv">${obj}</div>
+          </div>
+          <div class="ff s2">
+            <div class="ffl">Copy / Guión</div>
+            <div class="ffv copy">🔴 ${copy}</div>
+          </div>
+          ${caption?`<div class="ff s2"><div class="ffl">Caption</div><div class="ffv copy">${caption}</div></div>`:''}
+          <div class="ff">
+            <div class="ffl">CTA</div>
+            <div class="ffv">${cta}</div>
+          </div>
+          <div class="ff">
+            <div class="ffl">Responsable</div>
+            <div class="ffv">${resp}</div>
+          </div>
+          ${notas?`<div class="ff s2"><div class="ffl">Notas</div><div class="ffv">${notas}</div></div>`:''}
         </div>
 
-        <div>
-          <div style="font-weight:700;color:#4B3B6B;margin-bottom:8px">✅ Pasos para activar la sincronización</div>
-          <div style="background:#F0FDF4;border:1px solid rgba(5,150,105,.2);border-radius:8px;padding:12px;font-size:12px;line-height:1.8">
-            <strong>1. Publicar el Sheet en la web</strong><br>
-            Archivo → Compartir → Publicar en la web → Toda la hoja → Publicar<br><br>
-            <strong>2. Verificar nombre de la hoja</strong><br>
-            La pestaña debe llamarse exactamente:<br>
-            <code style="background:#EDE9FE;padding:2px 7px;border-radius:4px;font-size:11px">📅 Parrilla Abril 2026</code>
-            o simplemente
-            <code style="background:#EDE9FE;padding:2px 7px;border-radius:4px;font-size:11px">Parrilla Abril 2026</code><br><br>
-            <strong>3. Pegar nombre real de la pestaña aquí:</strong><br>
-            <input id="diag-sheet-name" placeholder="Escribe el nombre exacto de la pestaña…"
-              style="width:100%;margin-top:4px;padding:6px 10px;border:1.5px solid rgba(107,33,214,.3);
-              border-radius:6px;font-family:'Nunito',sans-serif;font-size:12px;outline:none">
-            <button onclick="syncWithCustomName('${sheetId}')"
-              style="margin-top:6px;width:100%;background:#6B21D6;color:#fff;border:none;
-              border-radius:6px;padding:7px;font-size:12px;font-weight:700;cursor:pointer;
-              font-family:'Nunito',sans-serif">
-              🔄 Sincronizar con este nombre
-            </button>
-          </div>
-
-          <div style="margin-top:12px;background:#FFF7ED;border:1px solid rgba(234,88,12,.2);border-radius:8px;padding:12px;font-size:12px;line-height:1.7">
-            <strong style="color:#9A3412">💡 El Sheet fue subido como .xlsx</strong><br>
-            Google Sheets requiere que el archivo esté en formato nativo (no .xlsx) para lectura pública CSV.<br><br>
-            <strong>Solución rápida:</strong> En el Sheet abierto →<br>
-            Archivo → Guardar como Google Sheets (no como .xlsx)<br>
-            Luego Archivo → Publicar en la web
-          </div>
+        <div style="text-align:center;padding:14px;background:var(--v50);border-radius:10px;border:1.5px dashed var(--v300);">
+          <div style="font-size:24px;margin-bottom:4px;">📁</div>
+          <div style="font-size:12px;font-weight:700;margin-bottom:3px;">Pieza: ${id}</div>
+          <div style="font-size:10.5px;color:var(--muted);margin-bottom:10px;">Archivos del producto en Google Drive</div>
+          ${drive
+            ?`<a class="dbtn" href="${drive}" target="_blank">📁 Abrir en Drive</a>`
+            :`<button class="dbtn dis" disabled>Sin link asignado</button>`}
         </div>
-
       </div>
-    </div>
-  `;
-  document.body.appendChild(panel);
-}
 
-// Sync con nombre personalizado escrito en el diagnóstico
-async function syncWithCustomName(sheetId){
-  const inp=document.getElementById("diag-sheet-name");
-  const name=(inp&&inp.value.trim())||"";
-  if(!name){ inp&&inp.focus(); return; }
-  const dot=document.getElementById("sdot");
-  const lbl=document.getElementById("slbl");
-  const pubKey=PUB_KEY||localStorage.getItem("lc-pub-key")||"";
-  dot.className="sync-dot wait"; lbl.textContent=`Buscando "${name}"…`;
-  try{
-    const rows=await fetchSheetCSV(sheetId, name, pubKey);
-    const piezas=csvToPiezas(rows);
-    if(piezas.length>0){
-      MONTHS_META.abril.piezas=piezas;
-      const el=document.getElementById("month-abril"); if(el) el.remove();
-      BUILT["abril"]=false;
-      showMonth("abril",false);
-      dot.className="sync-dot ok";
-      lbl.textContent=`✓ ${piezas.length} piezas · "${name}"`;
-      removeDiagPanel();
-    }else{
-      dot.className="sync-dot err";
-      lbl.textContent=`Hoja "${name}" encontrada pero sin piezas. Revisa encabezados.`;
-      await syncFromSheet(sheetId);
-    }
-  }catch(e){
-    dot.className="sync-dot err";
-    lbl.textContent=`Error: ${e.message.substring(0,50)}`;
-  }
-}
+      <div class="slide-right">
+        <div class="est-title">Estado de la Pieza</div>
+        <div class="est-val">${estado}</div>
+        ${stOpts}
 
-function promptSheetId(){
-  const cur=localStorage.getItem("lc-sheet-id")||"";
-  const nu=prompt(
-    "📊 CONECTAR GOOGLE SHEET\n\n"+
-    "Pega el ID de tu Google Sheet.\n"+
-    "El ID está en la URL: docs.google.com/spreadsheets/d/ >> ID << /edit\n\n"+
-    "⚠️ El Sheet debe estar compartido como:\n'Cualquier persona con el enlace puede VER'",
-    cur
-  );
-  if(nu&&nu.trim()){
-    const id=nu.trim().replace(/^https?:\/\/.+spreadsheets\/d\//,"").split("/")[0];
-    localStorage.setItem("lc-sheet-id",id);
-    SHEET_ID=id;
-    syncFromSheet(id);
-  }
-}
-
-// ── Botón de conexión rápida en el banner ──────────────────────────
-function renderSetupBanner(){
-  if(SHEET_ID) return "";
-  return `<div class="setup-banner">
-    <div style="flex:1;min-width:260px">
-      <div class="sb-title">📊 Conecta tu Google Sheet para sincronizar en tiempo real</div>
-      <div class="sb-text">
-        1. Sube el archivo <strong>Local_Church_Parrilla_Abril_2026.xlsx</strong> a Google Drive<br>
-        2. Ábrelo como Google Sheet (doble clic → "Abrir con Google Sheets")<br>
-        3. Compártelo: <strong>Cualquier persona con el enlace puede ver</strong><br>
-        4. Copia el ID de la URL y pégalo aquí abajo:<br>
-        <span style="font-family:'DM Mono',monospace;font-size:.7rem;color:var(--vl)">docs.google.com/spreadsheets/d/<strong style="color:var(--y)">[ ID AQUÍ ]</strong>/edit</span>
+        <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--v200);">
+          <div class="est-title">Info</div>
+          <div class="info-row">📅 <strong>Ciclo:</strong>&nbsp;${ciclo}</div>
+          <div class="info-row">🏷️ <strong>Fase:</strong>&nbsp;${fase}</div>
+          <div class="info-row">👤 <strong>Responsable:</strong>&nbsp;${resp}</div>
+          <div class="info-row">🎬 <strong>Formato:</strong>&nbsp;${formato}</div>
+          <div class="info-row">🎯 <strong>Audiencia:</strong>&nbsp;${aud}</div>
+        </div>
       </div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:8px;min-width:260px">
-      <input class="sb-input" id="sheet-id-inp" placeholder="Pega el ID del Sheet aquí…"
-        value="${localStorage.getItem('lc-sheet-id')||''}">
-      <button class="sb-btn" onclick="connectSheet()">🔗 Conectar Sheet</button>
     </div>
   </div>`;
 }
 
-function connectSheet(){
-  const inp=document.getElementById("sheet-id-inp");
-  if(!inp) return;
-  const raw=inp.value.trim();
-  if(!raw){alert("Por favor pega el ID del Sheet.");return;}
-  const id=raw.replace(/^https?:\/\/.+spreadsheets\/d\//,"").split("/")[0];
-  localStorage.setItem("lc-sheet-id",id);
-  SHEET_ID=id;
-  syncFromSheet(id);
-  // Remove banner
-  const b=document.getElementById("setup-banner-el");if(b)b.remove();
+/* ════════════════════════════════════════════════════
+   GRABACION
+════════════════════════════════════════════════════ */
+function renderGrabacion() {
+  const el=document.getElementById('grabWrap');
+  if (!G.rows.length){el.innerHTML=`<div class="empty"><p style="font-size:28px;margin-bottom:9px">🎬</p><p>Sin datos. Verifica el nombre de la pestaña en Code.gs</p></div>`;return;}
+  const cols=G.hdrs.filter(h=>h&&!h.startsWith('__'));
+  const dateCol =cols.find(h=>/fecha|date/i.test(h))||'';
+  const titleCol=cols.find(h=>/título|title|pieza|nombre|tema/i.test(h))||cols[0]||'';
+  const mkUrl=r=>{
+    const t=encodeURIComponent('[LC] '+(r[titleCol]||'Grabación'));
+    const d=encodeURIComponent(cols.slice(0,8).map(h=>`${h}: ${r[h]||''}`).join('\n'));
+    let dates='';const f=r[dateCol]||'';
+    if(f){const p=f.split(/[\/\-]/);if(p.length>=2){const dv=(p[0]||'').padStart(2,'0'),mv=(p[1]||'').padStart(2,'0'),yv=p.length>=3&&p[2].length===4?p[2]:curYear;dates=`&dates=${yv}${mv}${dv}/${yv}${mv}${dv}`;}}
+    return `https://calendar.google.com/calendar/r/eventedit?text=${t}&details=${d}${dates}`;
+  };
+  el.innerHTML=`<p style="font-size:11px;color:var(--muted);margin-bottom:12px">${G.rows.length} registros</p>
+    <div class="twrap"><table class="dt">
+      <thead><tr>${cols.map(h=>`<th>${h}</th>`).join('')}<th>Agendar</th></tr></thead>
+      <tbody>${G.rows.map(r=>{
+        const cells=cols.map(h=>{const v=r[h]||'—',hn=h.toUpperCase();
+          if(hn.includes('CANAL'))return`<td><span style="font-weight:700;color:${chColor(v)}">${v}</span></td>`;
+          if(hn.includes('ESTADO'))return`<td><span class="sch ${stClass(v)}">${v||'—'}</span></td>`;
+          if(hn.includes('LINK')||hn.includes('DRIVE'))return v&&v!=='—'?`<td><a href="${v}" target="_blank" style="color:var(--accent);font-weight:600">📁</a></td>`:`<td>—</td>`;
+          return`<td>${v}</td>`;}).join('');
+        return`<tr>${cells}<td><a class="gcbtn" href="${mkUrl(r)}" target="_blank">📅 Agendar</a></td></tr>`;
+      }).join('')}</tbody></table></div>`;
 }
 
-// ══════════════════════════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════════════════════════
-async function init(){
-  const dot=document.getElementById("sdot");
-  const lbl=document.getElementById("slbl");
-  const mainEl=document.getElementById("main");
-
-  // Build Abril immediately with embedded data
-  mainEl.innerHTML = buildMonth("abril",null);
-  BUILT["abril"]=true;
-  document.getElementById("month-abril").classList.add("on");
-
-  setTimeout(()=>{
-    initCharts("abril",MONTHS_META["abril"],MONTHS_META["abril"].piezas||[]);
-    initWeekEditing();
-    if(window.LC_METRICAS) populateMetricas("abril",window.LC_METRICAS);
-  },200);
-
-  initExtLinks();
-  setupExtLinks();
-
-  // Auto-sync from Google Sheet (ID pre-configurado)
-  dot.className="sync-dot wait"; lbl.textContent="Sincronizando con Sheet…";
-  await syncFromSheet(SHEET_ID);
+/* ════════════════════════════════════════════════════
+   METRICAS
+════════════════════════════════════════════════════ */
+function renderMetricas(){buildFiltros();renderMetCards();renderMetCharts();}
+function buildFiltros(){
+  const meses=[...new Set(M.rows.map(r=>r['__MES_TEXTO__']).filter(Boolean))];
+  const el=document.getElementById('mFilt');
+  if(!meses.length){el.innerHTML='';return;}
+  el.innerHTML=`<span style="font-size:11px;font-weight:700;color:var(--muted)">Mes:</span>
+    <button class="fbtn ${!metFiltro?'on':''}" onclick="setFiltro(null)">Todos</button>
+    ${meses.map(m=>`<button class="fbtn ${metFiltro===m?'on':''}" onclick="setFiltro('${m}')">${m}</button>`).join('')}`;
+}
+function setFiltro(m){metFiltro=m;renderMetCards();renderMetCharts();buildFiltros();}
+function getMet(){return metFiltro?M.rows.filter(r=>(r['__MES_TEXTO__']||'').toLowerCase()===metFiltro.toLowerCase()):M.rows;}
+function renderMetCards(){
+  const el=document.getElementById('mGrid2');const rows=getMet();
+  if(!rows.length){el.innerHTML=`<div class="empty" style="grid-column:1/-1"><p>Sin datos de métricas.</p></div>`;return;}
+  const cols=M.hdrs.filter(h=>h&&!h.startsWith('__'));
+  const redCol=cols.find(h=>/red|canal|network|social|plataforma/i.test(h));
+  if(redCol){
+    el.innerHTML=rows.map(r=>{const red=r[redCol]||'?',col=chColor(red);
+      const kpis=cols.filter(h=>h!==redCol).slice(0,4).map(h=>{const v=r[h]||'—';const isG=/crec|nuevos?|\+/i.test(h);const n=parseFloat(String(v).replace(/[.,\s%k]/gi,''));const arrow=isG&&!isNaN(n)?(n>=0?'▲ ':'▼ '):'';const color=isG&&!isNaN(n)?(n>=0?'#16a34a':'#dc2626'):col;
+        return`<div class="mrow"><div class="mrow-l">${h}</div><div class="mrow-v" style="font-size:${isG?13:18}px;color:${color}">${arrow}${v}</div></div>`;}).join('');
+      return`<div class="mcard"><div class="mnet"><div class="mndot" style="background:${col}"></div><div class="mnnm">${red}</div></div>${kpis}</div>`;}).join('');
+  } else {
+    const fr=rows[0];el.innerHTML=cols.map(h=>{const v=fr[h]||'—',col=chColor(h);return`<div class="mcard"><div class="mnet"><div class="mndot" style="background:${col}"></div><div class="mnnm">${h}</div></div><div class="mrow-v" style="font-size:18px">${v}</div></div>`;}).join('');
+  }
+}
+function renderMetCharts(){
+  const data=P.rows.filter(r=>rowMes(r)===curMonth);
+  function mk(id,type,labels,vals,colors){
+    const ctx=document.getElementById(id);if(!ctx)return;if(charts[id])charts[id].destroy();if(!labels.length)return;
+    charts[id]=new Chart(ctx,{type,data:{labels,datasets:[{data:vals,backgroundColor:colors,borderWidth:0}]},
+      options:{responsive:true,plugins:{legend:{display:type==='doughnut',position:'bottom',labels:{font:{family:'Montserrat',size:10},padding:8}}},
+        scales:type!=='doughnut'?{y:{beginAtZero:true,grid:{color:'#f0ece8'},ticks:{font:{family:'Montserrat'}}},x:{ticks:{font:{family:'Montserrat'}}}}:{}}});
+  }
+  function count(hdr){const m={};data.forEach(r=>{const v=g(r,hdr)||'—';m[v]=(m[v]||0)+1;});return m;}
+  const bySt=count('Estado');
+  mk('cSt','doughnut',Object.keys(bySt),Object.values(bySt),Object.keys(bySt).map(s=>{const v=s.toLowerCase();return v==='publicado'?'#22c55ecc':v.includes('pendiente')?'#f59e0bcc':v.includes('revisión')||v==='revisado'?'#3b82f6cc':v==='aprobado'?'#8b5cf6cc':v==='ajustado'?'#ef4444cc':'#78716ccc';}));
+  const byRe=count('Responsable');mk('cRe','bar',Object.keys(byRe),Object.values(byRe),Array(Object.keys(byRe).length).fill('#8b5cf6aa'));
+  const byCa=count('Canal');mk('cCa','doughnut',Object.keys(byCa),Object.values(byCa),Object.keys(byCa).map(c=>chColor(c.split(/[·,]/)[0].trim())+'cc'));
+  const byCi=count('Ciclo');mk('cCi','bar',Object.keys(byCi),Object.values(byCi),['#7c3aedaa','#a78bfaaa','#c4b5fdaa','#ddd6feaa','#6b38b8aa']);
 }
 
-init();
+/* ════════════════════════════════════════════════════
+   PANEL NAV
+════════════════════════════════════════════════════ */
+function showPanel(name){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.getElementById(`panel-${name}`)?.classList.add('on');
+  curPanel=name;
+  if(name==='main')      renderMain();
+  if(name==='grabacion') renderGrabacion();
+  if(name==='metricas')  renderMetricas();
+  if(window.innerWidth<960) closeSb();
+  window.scrollTo(0,0);
+}
+
+/* ════════════════════════════════════════════════════
+   SYNC STATUS
+════════════════════════════════════════════════════ */
+function setStat(s,txt){
+  const dot=document.getElementById('dot'),t=document.getElementById('stxt');
+  const m={loading:['#f59e0b','Sincronizando…'],ok:['#22c55e',txt],demo:['#a855f7','Datos demo'],error:['#ef4444',String(txt).slice(0,55)]};
+  const[c,text]=m[s]||['#78716C','—'];dot.style.background=c;t.textContent=text;
+}
+const hhm=()=>new Date().toLocaleTimeString('es-CO',{hour:'2-digit',minute:'2-digit'});
+
+/* ════════════════════════════════════════════════════
+   SETUP MODAL
+════════════════════════════════════════════════════ */
+function showSetup(){
+  if(document.getElementById('sModal')) return;
+  const m=document.createElement('div');m.id='sModal';
+  m.innerHTML=`<div style="position:fixed;inset:0;background:rgba(15,10,26,.75);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;">
+    <div style="background:#fff;border-radius:18px;padding:30px 26px;max-width:500px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.25);">
+      <div style="font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:#6b38b8;margin-bottom:7px;">Configuración API</div>
+      <div style="font-size:19px;font-weight:900;color:#1e0a3c;margin-bottom:14px;">Conecta tu Google Sheet</div>
+      <div style="background:#f5f3ff;border-radius:10px;padding:15px;margin-bottom:14px;border:1px solid #ddd6fe;">
+        <ol style="font-size:12px;color:#2d1457;line-height:1.9;padding-left:17px;font-weight:500;">
+          <li>Sheet → <b>Extensiones → Apps Script</b> → pega Code.gs</li>
+          <li>Ajusta los 3 nombres de pestaña en <code style="background:#ede9fe;padding:1px 5px;border-radius:4px">CFG</code></li>
+          <li>Corre <b>testParrilla()</b> en el editor para verificar</li>
+          <li><b>Implementar → Nueva versión</b> · Acceso: <b>Cualquier persona</b></li>
+        </ol>
+      </div>
+      <input id="aIn" type="url" placeholder="https://script.google.com/macros/s/.../exec" value="${API_URL||''}"
+        style="width:100%;padding:11px 13px;border:1.5px solid #ddd6fe;border-radius:9px;font-family:'Montserrat',sans-serif;font-size:13px;outline:none;color:#1e0a3c;margin-bottom:7px;"
+        onfocus="this.style.borderColor='#6b38b8'" onblur="this.style.borderColor='#ddd6fe'"/>
+      <div id="aMsg" style="font-size:11px;min-height:16px;margin-bottom:14px;font-weight:600;"></div>
+      <div style="display:flex;gap:8px;">
+        <button onclick="testAPI()" style="flex:1;padding:11px;background:#6b38b8;color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:800;cursor:pointer;">↻ Probar y Conectar</button>
+        <button onclick="document.getElementById('sModal').remove()" style="padding:11px 14px;background:#f4f3f0;color:#6b5b4e;border:none;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;">Cerrar</button>
+      </div>
+    </div></div>`;
+  document.body.appendChild(m);
+}
+async function testAPI(){
+  const inp=document.getElementById('aIn'),msg=document.getElementById('aMsg');
+  const url=(inp.value||'').trim();
+  if(!url){msg.style.color='#dc2626';msg.textContent='⚠ Pega la URL';return;}
+  msg.style.color='#6b38b8';msg.textContent='↻ Probando…';
+  try{
+    const res=await fetch(`${url}?action=all`,{cache:'no-store'});
+    const json=await res.json();
+    if(json.parrilla?.error) throw new Error(json.parrilla.error);
+    msg.style.color='#16a34a';
+    msg.textContent=`✓ Parrilla:${json.parrilla?.total||0} · Grab:${json.grabacion?.total||0} · Métricas:${json.metricas?.total||0}`;
+    API_URL=url;localStorage.setItem('lc_api_url',url);
+    setTimeout(()=>{document.getElementById('sModal')?.remove();loadData();},1200);
+  }catch(e){msg.style.color='#dc2626';msg.textContent='✗ '+e.message;}
+}
+
+/* ════════════════════════════════════════════════════
+   DEBUG MODAL
+════════════════════════════════════════════════════ */
+async function showDebug(){
+  document.getElementById('dModal')?.remove();
+  const m=document.createElement('div');m.id='dModal';
+  m.innerHTML=`<div style="position:fixed;inset:0;background:rgba(15,10,26,.8);z-index:9999;display:flex;align-items:flex-start;justify-content:center;padding:22px;overflow-y:auto;">
+    <div style="background:#fff;border-radius:14px;padding:24px;max-width:680px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.3);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <div style="font-size:15px;font-weight:900;color:#1e0a3c;">🔍 Diagnóstico</div>
+        <button onclick="document.getElementById('dModal').remove()" style="background:none;border:none;font-size:20px;cursor:pointer;color:#999;">✕</button>
+      </div>
+      <div id="dBody"><div class="ld"><div class="spin"></div></div></div>
+    </div></div>`;
+  document.body.appendChild(m);
+  const db=document.getElementById('dBody');
+  const r0=P.rows[0]||{};
+  db.innerHTML=`
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
+      ${[['Parrilla',P.rows.length,'#6b38b8'],['Grabación',G.rows.length,'#0369a1'],['Métricas',M.rows.length,'#16a34a']].map(([n,c,col])=>`
+        <div style="background:#f5f3ff;border-radius:9px;padding:13px;text-align:center;">
+          <div style="font-size:24px;font-weight:900;color:${col}">${c}</div>
+          <div style="font-size:11px;font-weight:700;color:var(--muted)">${n}</div>
+        </div>`).join('')}
+    </div>
+    <div style="background:#f4f3f0;border-radius:9px;padding:13px;font-size:12px;line-height:1.9;margin-bottom:12px;">
+      <b>Headers:</b> <span style="color:#6b38b8;font-weight:700">${P.hdrs.join(' · ')||'vacíos'}</span><br>
+      <b>Mes activo:</b> ${MONTHS[curMonth-1]} (${curMonth}) → <b>${mRows().length} filas</b><br>
+      <b>Meses en datos:</b> <span style="color:#6b38b8">${[...new Set(P.rows.map(r=>r['__MES_TEXTO__']).filter(Boolean))].join(', ')||'⚠ ninguno'}</span>
+    </div>
+    <div style="background:#1e0a3c;border-radius:9px;padding:13px;font-size:11px;color:#c4b5fd;font-family:monospace;white-space:pre-wrap;max-height:200px;overflow-y:auto;margin-bottom:12px;">${JSON.stringify(r0,null,2)}</div>
+    <div id="dApiWrap" style="border-top:1px solid #e8e6e1;padding-top:12px;"><div class="ld"><div class="spin"></div></div></div>`;
+
+  if(!API_URL){document.getElementById('dApiWrap').innerHTML=`<p style="color:#f59e0b;font-weight:600">⚠ API no configurada</p>`;return;}
+  try{
+    const res=await fetch(`${API_URL}?action=all`,{cache:'no-store'});
+    const json=await res.json();const p=json.parrilla;
+    document.getElementById('dApiWrap').innerHTML=`
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px;">
+        ${[['Parrilla',p],['Grabación',json.grabacion],['Métricas',json.metricas]].map(([n,d])=>`
+          <div style="background:${d?.error?'#fee2e2':'#dcfce7'};border-radius:9px;padding:11px;text-align:center;">
+            <div style="font-size:17px;font-weight:900;color:${d?.error?'#991b1b':'#166534'}">${d?.error?'✗':d?.total||0}</div>
+            <div style="font-size:10px;font-weight:700;color:${d?.error?'#991b1b':'#166534'}">${n}${d?.error?'<br><small>'+d.error.slice(0,40)+'</small>':''}</div>
+          </div>`).join('')}
+      </div>
+      <div style="background:#f4f3f0;border-radius:9px;padding:12px;font-size:11.5px;line-height:1.9;">
+        <b>Hoja:</b> ${p?.sheet||'?'} · <b>Headers:</b> <span style="color:#6b38b8">${(p?.headers||[]).join(' · ')||'vacíos'}</span><br>
+        <b>Meses API:</b> ${(p?.meses||[]).join(', ')||'⚠ ninguno'}<br>
+        <b>Sample fila 0:</b> ${JSON.stringify(p?.sample?.[0]||{})}
+      </div>
+      ${json.sheets?`<div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:5px;">${json.sheets.map(s=>`<span style="background:#f5f3ff;border:1px solid #ddd6fe;padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:600;color:#6b38b8;">${s.name}</span>`).join('')}</div>`:''}`;
+  }catch(e){document.getElementById('dApiWrap').innerHTML=`<span style="color:#dc2626">✗ ${e.message}</span>`;}
+}
+
+/* ════════════════════════════════════════════════════
+   DEMO DATA
+════════════════════════════════════════════════════ */
+function makeDemo(){
+  const can=['Instagram','YouTube','Facebook','TikTok','WhatsApp'];
+  const fmt=['Reel','Post','Historia','Video','Carrusel'];
+  const est=['Pendiente','En revisión','Revisado','Aprobado','Publicado'];
+  const res=['Carolina','Andrés','María G.','Luis P.'];
+  const fas=['Vitrina / Experiencias','¿Quiénes Somos?','Crecer en tu fe / Academia','Local Conecta','Local en Casa','Voluntarios'];
+  const rows=[];let id=1;
+  for(let m=4;m<=12;m++){
+    const dd=new Date(2026,m,0).getDate();
+    for(let d=1;d<=dd;d+=1+Math.floor(Math.random()*3)){
+      const ci='Ciclo 0'+(Math.floor((d-1)/8)%5+1);
+      rows.push({
+        '__MES__':m,'__MES_TEXTO__':MONTHS[m-1],'__ROW__':id+1,
+        'Mes':MONTHS[m-1],'ID Pieza':`NP ${m}-${String(id++).padStart(2,'0')}`,
+        'Grupo (GRP)':`GRP-${String(Math.floor(Math.random()*5)+1).padStart(2,'0')}`,
+        'Nombre del Tema':`Contenido de la semana ${Math.ceil(d/7)}`,
+        'Ciclo':ci,'Fase':fas[Math.floor(Math.random()*fas.length)],
+        'Fecha Salida':`${String(d).padStart(2,'0')}/${String(m).padStart(2,'0')}/${curYear}`,
+        'Hora':'09:00','Canal':can[Math.floor(Math.random()*can.length)],
+        'Formato':fmt[Math.floor(Math.random()*fmt.length)],'Audiencia':'Campus Bogotá',
+        'Objetivo':'Asistencia presencial',
+        'Copy / Guión':'¿Vas a estar este domingo? Únete a Local Church. Regístrate ahora.',
+        'Caption':'Caption de ejemplo. #LocalChurch','CTA':'Link en bio',
+        'Estado':est[Math.floor(Math.random()*est.length)],'Ajustes Solicitados':'',
+        'Responsable':res[Math.floor(Math.random()*res.length)],'Link Drive':'','Notas':'',
+      });
+    }
+  }
+  return rows;
+}
+
+/* ════════════════════════════════════════════════════
+   UTILS
+════════════════════════════════════════════════════ */
+function esc(s){return String(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;');}
+document.getElementById('hamBtn').addEventListener('click',()=>{document.getElementById('sb').classList.toggle('open');document.getElementById('ovl').classList.toggle('show');});
+document.getElementById('ovl').addEventListener('click',closeSb);
+function closeSb(){document.getElementById('sb').classList.remove('open');document.getElementById('ovl').classList.remove('show');}
 </script>
 </body>
 </html>
